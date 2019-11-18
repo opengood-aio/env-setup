@@ -1,0 +1,13 @@
+function install_gnused() {
+    write_info "Installing GNU Sed package..."
+    brew list gnu-sed &>/dev/null || brew install gnu-sed
+    write_success "Done!"
+    write_blank_line
+}
+
+function uninstall_gnused() {
+    write_info "Uninstalling GNU Sed package..."
+    brew uninstall gnu-sed || { write_warning "WARNING! GNU Sed is not installed and cannot be uninstalled. Continuing on."; }
+    write_success "Done!"
+    write_blank_line
+}
