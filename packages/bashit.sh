@@ -23,11 +23,6 @@ function install_bashit() {
         write_success "Done!"
         write_blank_line
 
-        write_info "Removing bash-it configuration, if previously exists..."
-        rm -Rf ${bash_it_dir}
-        write_success "Done!"
-        write_blank_line
-
         write_info "Downloading bash-it..."
         git clone https://github.com/Bash-it/bash-it ${bash_it_dir}
         write_success "Done!"
@@ -53,10 +48,10 @@ function install_bashit() {
         write_success "Done!"
         write_blank_line
 
-        write_info "Configuring Bash profile with Homebrew's sbin directory to PATH env variable..."
-        echo "# Homebrew sbin directory in PATH env variable" >> "${bash_profile}"
-        echo "'export PATH=\"/usr/local/sbin:$PATH\"'" >> "${bash_profile}"
-        printf "\n" >> "${bash_profile}"
+        write_info "Configuring Bash profile to export Homebrew's sbin directory in PATH env variable..."
+        echo "# export Homebrew sbin directory in PATH env variable" >>"${bash_profile}"
+        echo "'export PATH=\"/usr/local/sbin:$PATH\"'" >>"${bash_profile}"
+        printf "\n" >>"${bash_profile}"
         source "${bash_profile}"
         write_success "Done!"
         write_blank_line

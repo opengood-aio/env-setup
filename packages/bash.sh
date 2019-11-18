@@ -1,6 +1,6 @@
 bash=/usr/local/bin/bash
 old_bash=/bin/bash
-shells_whitelist=/etc/shells
+shells=/etc/shells
 
 function install_bash() {
     write_info "Installing Bash package..."
@@ -23,10 +23,10 @@ function install_bash() {
         write_blank_line
 
         write_info "Whitelisting new Bash installation to make it a trusted shell..."
-        write_warning "Manually add '${bash}' to '${shells_whitelist}'"
-        write_warning "Script will wait for 5 seconds before continuing to open ${shells_whitelist}' in Vim..."
+        write_warning "Manually add '${bash}' to '${shells}'"
+        write_warning "Script will wait for 5 seconds before continuing to open ${shells}' in Vim..."
         sleep 5
-        sudo vim "${shells_whitelist}"
+        sudo vim "${shells}"
         write_success "Done!"
         write_blank_line
 

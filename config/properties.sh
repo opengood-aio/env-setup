@@ -1,22 +1,14 @@
 # java properties
 default_java_version=11
-jvm_home=/Library/Java/JavaVirtualMachines
-openjdk_type=adoptopenjdk
-openjdk_search_path='${jvm_home}/${openjdk_type}-${java_version}*.jdk/Contents/Home'
-intellij_jdk_type=intellijjdk
-intellij_keystore_path='~/Library/Caches/IntelliJIdea${intellij_idea_version}/tasks/cacerts'
-
-# supported Java versions
-supported_java_versions=()
-supported_java_versions+=("8")
-supported_java_versions+=("11")
 
 # local directories
-setup_dir=${workspace_dir}/env-setup
+setup_dir="${workspace_dir}"/env-setup
 packages_dir=${setup_dir}/packages
+
 downloads_dir=~/Downloads
 library_dir=~/Library
 volumes_dir=/Volumes
+
 app_support_dir="${library_dir}/Application Support"
 caches_dir=${library_dir}/Caches
 containers_dir=${library_dir}/Containers
@@ -29,20 +21,21 @@ bash_profile=~/.bash_profile
 
 # required packages
 required_packages=()
-required_packages+=("bats")
 required_packages+=("bash")
+required_packages+=("bats")
 required_packages+=("cf")
 required_packages+=("chrome")
-required_packages+=("chromedriver")
 required_packages+=("docker")
 required_packages+=("fly")
 required_packages+=("flycut")
 required_packages+=("gnused")
+required_packages+=("go")
 required_packages+=("intellijidea")
 required_packages+=("iterm")
 required_packages+=("java")
-required_packages+=("jq")
 required_packages+=("gradle")
+required_packages+=("jq")
+required_packages+=("kotlin")
 required_packages+=("maven")
 required_packages+=("ml")
 required_packages+=("mysql")
@@ -51,10 +44,14 @@ required_packages+=("postman")
 required_packages+=("rabbitmq")
 required_packages+=("shiftit")
 required_packages+=("slack")
-required_packages+=("springboot")
 required_packages+=("sublimetext")
 required_packages+=("wget")
 required_packages+=("yq")
+
+# supported Java versions
+supported_java_versions=()
+supported_java_versions+=("8")
+supported_java_versions+=("11")
 
 # supported node packages
 supported_node_packages=()
