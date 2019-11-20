@@ -38,6 +38,14 @@ function contains_string_in_file() {
     fi
 }
 
+function create_dir() {
+    local dir="$1"
+
+    if [[ ! -d "${dir}" ]]; then
+        mkdir -p "${dir}"
+    fi
+}
+
 function file_not_empty() {
     local file="$1"
 

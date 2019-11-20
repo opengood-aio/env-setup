@@ -5,7 +5,7 @@ function install_bashit() {
 
     if [[ ! -d "${bash_it_dir}" ]]; then
         write_info "Configuring Bash with bash-it..."
-        write_info "Installing bash-it dependencies packages..."
+        write_info "Installing bash-it dependencies..."
         brew list coreutils &>/dev/null || brew install coreutils
         brew list grc &>/dev/null || brew install grc
         brew list rbenv &>/dev/null || brew install rbenv
@@ -33,7 +33,7 @@ function install_bashit() {
         write_success "Done!"
         write_blank_line
 
-        write_info "Installing Pivotal Bobby theme..."
+        write_info "Installing Pivotal Bobby Bash theme..."
         cp resources/bobby_pivotal.theme.bash ${bash_it_dir}/themes/bobby/bobby.theme.bash
         write_success "Done!"
         write_blank_line
@@ -49,9 +49,12 @@ function install_bashit() {
         write_blank_line
 
         write_info "Configuring Bash profile to export Homebrew's sbin directory in PATH env variable..."
-        echo "# export Homebrew sbin directory in PATH env variable" >>"${bash_profile}"
-        echo "'export PATH=\"/usr/local/sbin:$PATH\"'" >>"${bash_profile}"
-        printf "\n" >>"${bash_profile}"
+        cat <<EOF >>"${bash_profile}"
+# export Homebrew sbin directory in PATH env variable
+export PATH=/usr/local/sbin:\$PATH
+
+EOF
+
         source "${bash_profile}"
         write_success "Done!"
         write_blank_line
@@ -91,7 +94,7 @@ function install_bashit() {
 function uninstall_bashit() {
     write_info "Uninstalling bash-it package..."
 
-    write_info "Uninstalling bash-it dependencies packages..."
+    write_info "Uninstalling bash-it dependencies..."
     brew uninstall coreutils || { write_warning "WARNING! coreutils is not installed and cannot be uninstalled. Continuing on."; }
     brew uninstall grc || { write_warning "WARNING! grc is not installed and cannot be uninstalled. Continuing on."; }
     brew uninstall rbenv || { write_warning "WARNING! rbenv is not installed and cannot be uninstalled. Continuing on."; }
@@ -109,7 +112,7 @@ function uninstall_bashit() {
     write_success "Done!"
     write_blank_line
 
-    write_info "Removing bash-it..."
+    write_info "Uninstalling bash-it..."
     rm -Rf ${bash_it_dir}
     write_success "Done!"
     write_blank_line

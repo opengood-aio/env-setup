@@ -1,7 +1,7 @@
 src_dir="${BATS_TEST_DIRNAME}/.."
 tmp_dir="${BATS_TMPDIR}"
 
-source "${src_dir}"/config/shared-properties.sh
+source "${src_dir}"/config/properties.sh
 source "${src_dir}"/modules/colors.sh
 source "${src_dir}"/modules/commons.sh
 
@@ -11,12 +11,6 @@ setup() {
 
 teardown() {
     echo "Output: '${output}'"
-
-    test_remove_file "${gradle_build_file}"
-    test_remove_file "${gradle_properties_file}"
-    test_remove_file "${gradle_settings_file}"
-    test_remove_file "${maven_pom_file}"
-    test_remove_file "${pipeline_properties_file}"
 
     test_cd_pop
 }
@@ -38,7 +32,7 @@ function test_cd_push() {
 }
 
 function test_cd_tmp_dir() {
-    pushd "${tmp_dir}" >/dev/null || exit
+    test_cd_push "${tmp_dir}"
 }
 
 function test_contains_string() {
@@ -89,56 +83,6 @@ function test_create_file_with_contents() {
     echo "${contents}" >"${file}"
 }
 
-function test_create_gradle_files() {
-    local version="${1-1.0.0-SNAPSHOT}"
-
-    cat <<EOF >"${gradle_build_file}"
-group = 'com.gaig.cloudnative.gradle'
-EOF
-
-    cat <<EOF >"${gradle_properties_file}"
-version=${version}
-EOF
-
-    cat <<EOF >"${gradle_settings_file}"
-rootProject.name = 'gradle'
-EOF
-}
-
-function test_create_gradle_sub_project_build_file() {
-    cat <<EOF >"${gradle_build_file}"
-group = 'com.gaig.cloudnative.gradle'
-ext.name = 'sub-gradle'
-EOF
-}
-
-function test_create_maven_files() {
-    local version="${1-1.0.0-SNAPSHOT}"
-
-    cat <<EOF >"${maven_pom_file}"
-<project
-        xmlns="http://maven.apache.org/POM/4.0.0"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <groupId>com.gaig.cloudnative.maven</groupId>
-    <artifactId>maven</artifactId>
-    <version>${version}</version>
-</project>
-EOF
-}
-
-function test_create_pipeline_files() {
-    local version="${1-1.0.0-SNAPSHOT}"
-
-    cat <<EOF >"${pipeline_properties_file}"
-group=com.gaig.cloudnative.pipeline
-name=central-pipeline
-version=${version}
-release-version=$(test_replace_string "${version}" "-SNAPSHOT" "")
-EOF
-}
-
 function test_find_string_in_file() {
     local file="$1"
     local search_string="$2"
@@ -167,8 +111,19 @@ function test_find_value_in_file() {
 
 function test_get_file_contents() {
     local file="$1"
+
+    local output
     output=$(cat "${file}")
     echo "${output}"
+}
+
+function test_get_json() {
+    local object="$1"
+    local path="$2"
+
+    local json
+    json=$(echo "${object}" | jq -r "${path}")
+    echo "${json}"
 }
 
 function test_get_json_from_yaml() {

@@ -14,10 +14,10 @@ function install_osprefs() {
     write_success "Done!"
     write_blank_line
 
-    write_info "Setting fast key repeat rate..."
+    write_info "Setting fast key repeat rates..."
     write_warning "NOTE: Requires reboot to take effect"
-    defaults write "${prefs_dir}"/.GlobalPreferences KeyRepeat -int 1
-    defaults write "${prefs_dir}"/.GlobalPreferences InitialKeyRepeat -int 15
+    defaults write -g KeyRepeat -int 1
+    defaults write -g InitialKeyRepeat -int 15
     write_success "Done!"
     write_blank_line
 
@@ -66,7 +66,7 @@ function uninstall_osprefs() {
     write_success "Done!"
     write_blank_line
 
-    write_info "Resetting Photos to stop opening automatically..."
+    write_info "Resetting Photos to opening automatically..."
     defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool false
     write_success "Done!"
     write_blank_line

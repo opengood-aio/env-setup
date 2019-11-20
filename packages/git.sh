@@ -1,56 +1,62 @@
+git_hooks_dir=${workspace_dir}/git-hooks-core
+bash_it_aliases=~/.bash_it/aliases
+
 function install_git() {
     write_info "Installing Git package..."
-    
+
     if ! hash git 2>/dev/null ||
         ! hash git-together 2>/dev/null ||
         ! hash git-author 2>/dev/null ||
         ! hash vim 2>/dev/null; then
 
-        write_info "Installing Git and associated packages..."
+        write_info "Installing Git..."
         brew list git &>/dev/null || brew install git
+        write_success "Done!"
+        write_blank_line
+
+        write_info "Installing Git dependencies..."
         brew list git-together &>/dev/null || brew install git-together
         brew list git-author &>/dev/null || brew install git-author
         brew list vim &>/dev/null || brew install vim
         write_success "Done!"
         write_blank_line
 
-        write_info "Configuring global Git configurations..."
+        write_info "Setting global Git configurations..."
         git config --global core.editor /usr/local/bin/vim
         git config --global transfer.fsckobjects true
         write_success "Done!"
         write_blank_line
 
         write_info "Installing Git hooks..."
-        hooks_dir=${workspace_dir}/git-hooks-core
-
-        if [[ ! -d "${hooks_dir}" ]]; then
-            write_progress "Installing git hooks for cred-alert"
-            git clone https://github.com/pivotal-cf/git-hooks-core "${hooks_dir}"
-            git config --global --add core.hooksPath "${hooks_dir}"
+        if [[ ! -d "${git_hooks_dir}" ]]; then
+            write_progress "Installing Git hooks for cred-alert"
+            git clone https://github.com/pivotal-cf/git-hooks-core "${git_hooks_dir}"
+            git config --global --add core.hooksPath "${git_hooks_dir}"
         else
-            write_progress "Updating git hooks for cred-alert"
-            cd_push "${hooks_dir}"
+            write_progress "Updating Git hooks for cred-alert"
+            cd_push "${git_hooks_dir}"
+            git checkout .
             git pull -r
             cd_pop
         fi
         write_success "Done!"
         write_blank_line
 
+        write_info "Installing cred-alert..."
         if [[ ! -f "/usr/local/bin/cred-alert-cli" ]]; then
-            write_info "Installing cred-alert..."
             os_name=$(uname | awk '{print tolower($1)}')
             cd_push "${downloads_dir}"
             curl -o cred-alert-cli https://s3.amazonaws.com/cred-alert/cli/current-release/cred-alert-cli_${os_name}
             chmod 755 cred-alert-cli
             mv cred-alert-cli /usr/local/bin
             cd_pop
-            write_success "Done!"
-            write_blank_line
         else
             write_info "cred-alert already installed..."
         fi
+        write_success "Done!"
+        write_blank_line
 
-        write_info "Installing Git aliases..."
+        write_info "Setting Git aliases..."
         git config --global alias.gst git status
         git config --global alias.st status
         git config --global alias.di diff
@@ -76,17 +82,16 @@ function install_git() {
         write_success "Done!"
         write_blank_line
 
-        write_info "Installing bash-it aliases for Git..."
-        if [[ ! -d ~/.bash_it/aliases/enable ]]; then
-            bash_it_aliases=~/.bash_it/aliases/enable
-            mkdir ${bash_it_aliases}
-            echo "#Git" >> ${bash_it_aliases}/general.aliases.bash
-            echo "alias gst='git status'" >> ${bash_it_aliases}/general.aliases.bash
-            write_success "Done!"
-            write_blank_line
+        write_info "Setting bash-it aliases for Git..."
+        if [[ ! -d ${bash_it_aliases}/enable ]]; then
+            mkdir ${bash_it_aliases}/enable
+            echo "#Git" >>${bash_it_aliases}/general.aliases.bash
+            echo "alias gst='git status'" >>${bash_it_aliases}/general.aliases.bash
         else
-            write_info "Aliases already installed..."
+            write_info "bash-it aliases for Git already installed..."
         fi
+        write_success "Done!"
+        write_blank_line
 
         write_info "Installing Vim configuration..."
         cd_push ~/
@@ -99,14 +104,17 @@ function install_git() {
         write_blank_line
 
         write_info "Configuring Bash profile with git-together...'"
-        echo "# git-together alias" >> "${bash_profile}"
-        echo "alias git=git-together" >> "${bash_profile}"
-        printf "\n" >> "${bash_profile}"
+        cat <<EOF >>"${bash_profile}"
+# git-together alias
+alias git=git-together
+
+EOF
+
         source "${bash_profile}"
         write_success "Done!"
         write_blank_line
     else
-        write_progress "Git and associated packages are already installed"
+        write_progress "Git are already installed"
         write_success "Done!"
         write_blank_line
     fi
@@ -115,8 +123,12 @@ function install_git() {
 function uninstall_git() {
     write_info "Uninstalling Git package..."
 
-    write_info "Uninstalling Git and associated packages..."
+    write_info "Uninstalling Git..."
     brew uninstall git || { write_warning "WARNING! Git is not installed and cannot be uninstalled. Continuing on."; }
+    write_success "Done!"
+    write_blank_line
+
+    write_info "Uninstalling Git dependencies..."
     brew uninstall git-together || { write_warning "WARNING! git-together is not installed and cannot be uninstalled. Continuing on."; }
     brew uninstall git-author || { write_warning "WARNING! git-author is not installed and cannot be uninstalled. Continuing on."; }
     brew uninstall vim || { write_warning "WARNING! Vim is not installed and cannot be uninstalled. Continuing on."; }

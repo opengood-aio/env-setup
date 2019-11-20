@@ -1,70 +1,66 @@
 function load() {
-    local type="$1"
-    local dir="$2"
+    local dir="$1"
 
-    local item
-    for item in "${dir}"/*.sh; do
-        source "${item}"
-        item=$(basename -- "${item}")
-        item="${item%.*}"
-        write_progress "- Loaded ${type} '${item}'"
+    local package
+    for package in "${dir}"/*.sh; do
+        source "${package}"
+        package=$(basename -- "${package}")
+        package="${package%.*}"
+        write_progress "- Loaded package '${package}'"
     done
-    unset item
+    unset package
 }
 
 function install() {
-    local type="$1"
-    shift 1
     local array=("$@")
 
-    local function_name
-    for item in "${array[@]}"; do
-        function_name="install_${item}"
+    local package
+    for package in "${array[@]}"; do
+        local function_name="install_${package}"
         if function_exists "${function_name}"; then
             write_progress "-----------------------------------------"
-            write_progress "Installing ${type} '${item}'"
+            write_progress "Installing package '${package}'"
             write_progress "-----------------------------------------"
             write_blank_line
             eval "${function_name}"
         fi
     done
-    unset function_name
+    unset package
 }
 
 function uninstall() {
-    local type="$1"
-    shift 1
     local array=("$@")
 
-    local function_name
-    for item in "${array[@]}"; do
-        function_name="uninstall_${item}"
+    local packageß
+    for package in "${array[@]}"; do
+        local function_name="uninstall_${package}"
         if function_exists "${function_name}"; then
             write_progress "-----------------------------------------"
-            write_progress "Uninstalling ${type} '${item}'"
+            write_progress "Uninstalling package '${package}'"
             write_progress "-----------------------------------------"
             write_blank_line
             eval "${function_name}"
         fi
     done
-    unset function_name
+    unset package
 }
 
 function verify() {
-    local type="$1"
-    local dir="$2"
-    shift 2
+    local dir="$1"
+    shift 1
     local array=("$@")
 
     write_info "Packages to verify..."
     print_items_in_array "${array[@]}"
 
-    for item in "${array[@]}"; do
-        file=${dir}/${item}.sh
+    local package
+    for package in "${array[@]}"; do
+        local file=${dir}/${package}.sh
         if [[ -f ${file} ]]; then
-            write_progress "Verified ${type} '${item}' is valid and exists for install/uninstall"
+            write_progress "Verified package '${package}' is valid and exists for install/uninstall"
         else
-            write_warning "WARNING! ${type} '${item}' not found and ${type} file '${file}' does not exist, skipping ${type}"
+            write_warning "WARNING! Package '${package}' not found and package file '${file}' does not exist, skipping package"
         fi
     done
+    unset package
 }

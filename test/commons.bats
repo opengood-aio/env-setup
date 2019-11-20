@@ -2,7 +2,8 @@
 
 load test-helper
 
-file="file.txt"
+dir=dir
+file=file.txt
 
 @test "'contains_item_in_array' returns true when item contained in array" {
     array=()
@@ -59,6 +60,18 @@ file="file.txt"
     [ "${output}" = "false" ]
 
     test_remove_file "${file}"
+}
+
+@test "'create_dir' creates directory when it does not exist" {
+    run create_dir "${dir}"
+
+    exists=$(if [[ -d "${dir}" ]]; then echo true; else false; fi)
+
+    [ "${status}" -eq 0 ]
+    [ "${output}" = "" ]
+    [ "${exists}" = "true" ]
+
+    test_remove_dir "${dir}"
 }
 
 @test "'file_not_empty' returns true when contents contained in file" {
@@ -454,28 +467,6 @@ file="file.txt"
 
     [ "${status}" -eq 0 ]
     [ "${contains_msg}" = "true" ]
-}
-
-@test "'write_debug' writes debug message to standard output if debug mode is enabled" {
-    pipeline_debug_mode=true
-
-    run write_debug "Hello World!"
-
-    contains_msg=$(contains_string "${output}", "Hello World!")
-
-    [ "${status}" -eq 0 ]
-    [ "${contains_msg}" = "true" ]
-}
-
-@test "'write_debug' does not write debug message to standard output if debug mode is disabled" {
-    pipeline_debug_mode=false
-
-    run write_debug "Hello World!"
-
-    contains_msg=$(contains_string "${output}", "Hello World!")
-
-    [ "${status}" -eq 0 ]
-    [ "${contains_msg}" = "false" ]
 }
 
 @test "'write_error' writes error message to standard output" {

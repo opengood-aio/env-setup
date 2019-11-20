@@ -16,6 +16,7 @@ function install_bats() {
 function uninstall_bats() {
     write_info "Uninstalling BATS package..."
 
+    write_info "Uninstalling BATS..."
     brew uninstall bats || { write_warning "WARNING! BATS is not installed and cannot be uninstalled. Continuing on."; }
     write_success "Done!"
     write_blank_line

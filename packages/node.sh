@@ -7,17 +7,18 @@ function install_node() {
         write_success "Done!"
         write_blank_line
 
-        write_info "Installing global Node packages..."
+        write_info "Installing Node packages..."
         print_items_in_array "${supported_node_packages[@]}"
 
         npm config set strict-ssl false
 
         local package
         for package in "${supported_node_packages[@]}"; do
-            local package_installed=$(npm list -g "${package}")
+            local package_installed
+            package_installed=$(npm list -g "${package}")
 
             if [[ "$(contains_string "${package_installed}" "(empty)")" == "true" ]]; then
-                write_progress "- Installing package '${package}'"
+                write_progress "- Installing Node package '${package}'"
                 write_blank_line
                 npm install "${package}" -g
             fi
@@ -38,12 +39,11 @@ function uninstall_node() {
 
     local package
     for package in "${supported_node_packages[@]}"; do
-        local package_installed=$(npm list -g "${package}")
+        local package_installed
+        package_installed=$(npm list -g "${package}")
 
         if [[ "$(contains_string "${package_installed}" "(empty)")" == "false" ]]; then
-            write_progress "-----------------------------------------"
-            write_progress "Uninstalling global Node package '${package}'"
-            write_progress "-----------------------------------------"
+            write_progress "- Uninstalling Node package '${package}'"
             write_blank_line
             npm uninstall "${package}" -g
         fi

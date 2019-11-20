@@ -6,7 +6,7 @@ function install_bash() {
     write_info "Installing Bash package..."
 
     if [[ ! -f "${bash}" ]]; then
-        write_info "Installing latest Bash package..."
+        write_info "Installing latest Bash version..."
         brew list bash &>/dev/null || brew install bash
         write_success "Done!"
         write_blank_line
@@ -47,6 +47,7 @@ function install_bash() {
 function uninstall_bash() {
     write_info "Uninstalling Bash package..."
 
+    write_info "Uninstalling latest Bash version..."
     brew uninstall bash || { write_warning "WARNING! Bash is not installed and cannot be uninstalled. Continuing on."; }
     write_success "Done!"
     write_blank_line

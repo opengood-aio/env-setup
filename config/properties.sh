@@ -21,7 +21,6 @@ bash_profile=~/.bash_profile
 
 # required packages
 required_packages=()
-required_packages+=("bash")
 required_packages+=("bats")
 required_packages+=("cf")
 required_packages+=("chrome")
@@ -36,7 +35,6 @@ required_packages+=("java")
 required_packages+=("gradle")
 required_packages+=("jq")
 required_packages+=("kotlin")
-required_packages+=("maven")
 required_packages+=("ml")
 required_packages+=("mysql")
 required_packages+=("node")
@@ -50,7 +48,6 @@ required_packages+=("yq")
 
 # supported Java versions
 supported_java_versions=()
-supported_java_versions+=("8")
 supported_java_versions+=("11")
 
 # supported node packages
@@ -65,4 +62,5 @@ supported_setup_actions+=("uninstall")
 
 # version properties
 intellij_idea_version=2019.2
-ml_version=9.0-10
+intellij_build_version=IU-192.7142.36
+ml_version=10.0-2.1

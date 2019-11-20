@@ -9,9 +9,8 @@ source "${work_dir}"/config/properties.sh
 source "${work_dir}"/modules/colors.sh
 source "${work_dir}"/modules/commons.sh
 source "${work_dir}"/modules/io.sh
-source "${work_dir}"/modules/java.sh
+source "${work_dir}"/modules/package.sh
 source "${work_dir}"/modules/parse.sh
-source "${work_dir}"/modules/time.sh
 
 function usage() {
     write_info "Usage: ./$(basename "$0") <setup-action>"
@@ -27,7 +26,8 @@ write_info "Workstation Setup"
 write_info "*************************************************************************"
 write_blank_line
 
-if [[ $(get_array_length "$@") -lt 1 ]] || [[ "$(contains_item_in_array "-h" "$@")" == "true" ]]; then
+if [[ $(get_array_length "$@") -lt 1 ]] ||
+    [[ "$(contains_item_in_array "-h" "$@")" == "true" ]]; then
     usage
 fi
 
@@ -64,13 +64,14 @@ time {
     write_blank_line
 
     write_info "Loading installation packages..."
-    load "package" "${packages_dir}"
+    load "${packages_dir}"
     write_success "Done!"
     write_blank_line
 
     case "${action}" in
     "install")
         install_homebrew
+        install_bash
         install_bashit
         install_git
         install_ideprefs
@@ -78,19 +79,19 @@ time {
         write_info "Installing required packages..."
         print_items_in_array "${required_packages[@]}"
         write_blank_line
-        install "package" "${required_packages[@]}"
+        install "${required_packages[@]}"
         write_success "Done!"
         write_blank_line
 
         install_osprefs
 
         write_info "Verifying requested packages..."
-        verify "package" "${packages_dir}" "${args[@]}"
+        verify "${packages_dir}" "${args[@]}"
         write_success "Done!"
         write_blank_line
 
         write_info "Installing requested packages..."
-        install "package" "${args[@]}"
+        install "${args[@]}"
         write_success "Done!"
         write_blank_line
 
@@ -110,12 +111,12 @@ time {
 
     "uninstall")
         write_info "Verifying requested packages..."
-        verify "package" "${packages_dir}" "${args[@]}"
+        verify "${packages_dir}" "${args[@]}"
         write_success "Done!"
         write_blank_line
 
         write_info "Uninstalling requested packages..."
-        uninstall "package" "${args[@]}"
+        uninstall "${args[@]}"
         write_success "Done!"
         write_blank_line
 
@@ -125,13 +126,14 @@ time {
             write_info "Uninstalling required packages..."
             print_items_in_array "${required_packages[@]}"
             write_blank_line
-            uninstall "package" "${required_packages[@]}"
+            uninstall "${required_packages[@]}"
             write_success "Done!"
             write_blank_line
 
             uninstall_ideprefs
             uninstall_git
             uninstall_bashit
+            uninstall_bash
             uninstall_homebrew
         fi
         ;;
@@ -142,4 +144,4 @@ time {
     write_success "Done!"
     write_blank_line
 } 2>&1
-print_time_interval "Setup Action: ${action}"
+write_info "Setup Action: ${action}"

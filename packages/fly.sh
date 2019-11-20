@@ -2,6 +2,7 @@ function install_fly() {
     write_info "Installing Fly CLI package..."
 
     if ! hash fly 2>/dev/null; then
+        write_info "Installing Fly CLI..."
         brew list fly &>/dev/null || brew cask install fly
         write_success "Done!"
         write_blank_line
@@ -14,6 +15,8 @@ function install_fly() {
 
 function uninstall_fly() {
     write_info "Uninstalling Fly CLI package..."
+
+    write_info "Uninstalling Fly CLI..."
     brew cask uninstall fly || { write_warning "WARNING! Fly CLI is not installed and cannot be uninstalled. Continuing on."; }
     write_success "Done!"
     write_blank_line

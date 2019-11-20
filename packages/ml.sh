@@ -1,14 +1,27 @@
+ml_developer_site_uri=https://developer.marklogic.com
+
 function install_ml() {
     write_info "Installing MarkLogic package..."
 
     if [[ ! -d "${library_dir}/MarkLogic" ]]; then
         write_info "Logging into MarkLogic to get download URI..."
+
+        write_info "Enter ML email address..."
+        read -r email
+        email=$(replace_string "${email}" "@" "%40")
+        write_blank_line
+
+        write_info "Enter ML password..."
+        local password
+        password=$(read_password_input)
+        write_blank_line
+
         cd_push "${downloads_dir}"
         curl -X POST \
-            -d "email=gaibaconlab%40gmail.com&password=Yummy1!" \
+            -d "email=${email}&password=${password}" \
             --cookie cookies.txt \
             --cookie-jar cookies.txt \
-            https://developer.marklogic.com/login
+            "${ml_developer_site_uri}/login"
         write_success "Done!"
         write_blank_line
 
@@ -17,7 +30,7 @@ function install_ml() {
             -d "download=%2Fdownload%2Fbinaries%2F9.0%2FMarkLogic-${ml_version}-x86_64.dmg" \
             --cookie cookies.txt \
             --cookie-jar cookies.txt \
-            https://developer.marklogic.com/get-download-url)
+            "${ml_developer_site_uri}/get-download-url")
         local download_path=$(get_json "${json}" ".path")
         write_progress "Download path: ${download_path}"
         rm -f cookies.txt
@@ -25,7 +38,7 @@ function install_ml() {
         write_blank_line
 
         write_info "Downloading MarkLogic version '${ml_version}'..."
-        curl -o marklogic.dmg "https://developer.marklogic.com${download_path}"
+        curl -o marklogic.dmg "${ml_developer_site_uri}${download_path}"
         write_success "Done!"
         write_blank_line
 
@@ -34,7 +47,7 @@ function install_ml() {
         write_success "Done!"
         write_blank_line
 
-        write_info "Installing MarkLogic package..."
+        write_info "Installing MarkLogic..."
         open "${volumes_dir}"/MarkLogic/MarkLogic-${ml_version}-x86_64.pkg
         echo -e "Waiting for user to complete interactive installation. When done, press [ENTER]:"
         read -r complete
@@ -79,7 +92,7 @@ function uninstall_ml() {
     write_success "Done!"
     write_blank_line
 
-    write_info "Uninstalling MarkLogic data..."
+    write_info "Removing MarkLogic data..."
     sudo rm -Rf "${app_support_dir}/MarkLogic/Data"
     write_success "Done!"
     write_blank_line
