@@ -26,12 +26,14 @@ function install_ml() {
         write_blank_line
 
         write_info "Getting download URI for MarkLogic version '${ml_version}'..."
-        local json=$(curl -X POST \
+        local json
+        json=$(curl -X POST \
             -d "download=%2Fdownload%2Fbinaries%2F9.0%2FMarkLogic-${ml_version}-x86_64.dmg" \
             --cookie cookies.txt \
             --cookie-jar cookies.txt \
             "${ml_developer_site_uri}/get-download-url")
-        local download_path=$(get_json "${json}" ".path")
+        local download_path
+        download_path=$(get_json "${json}" ".path")
         write_progress "Download path: ${download_path}"
         rm -f cookies.txt
         write_success "Done!"

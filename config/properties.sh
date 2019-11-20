@@ -29,12 +29,12 @@ required_packages+=("fly")
 required_packages+=("flycut")
 required_packages+=("gnused")
 required_packages+=("go")
-required_packages+=("intellijidea")
 required_packages+=("iterm")
 required_packages+=("java")
 required_packages+=("gradle")
-required_packages+=("jq")
 required_packages+=("kotlin")
+required_packages+=("jq")
+required_packages+=("intellijidea")
 required_packages+=("ml")
 required_packages+=("mysql")
 required_packages+=("node")
@@ -61,6 +61,4 @@ supported_setup_actions+=("update")
 supported_setup_actions+=("uninstall")
 
 # version properties
-intellij_idea_version=2019.2
-intellij_build_version=IU-192.7142.36
 ml_version=10.0-2.1

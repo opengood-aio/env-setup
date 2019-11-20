@@ -1,8 +1,5 @@
-intellij_idea_product_dir=IntelliJIdea${intellij_idea_version}
-intellij_idea_cache_dir="${caches_dir}/${intellij_idea_product_dir}"
-intellij_idea_logs_dir="${logs_dir}/${intellij_idea_product_dir}"
-intellij_idea_plugins_dir="${app_support_dir}/${intellij_idea_product_dir}"
-intellij_idea_prefs_dir="${prefs_dir}/${intellij_idea_product_dir}"
+intellij_idea_product_code=IIU
+intellij_idea_releases_api_base_uri=https://data.services.jetbrains.com/products/releases
 intellij_idea_plugins_api_base_uri=https://plugins.jetbrains.com/pluginManager
 
 function install_intellijidea() {
@@ -14,6 +11,7 @@ function install_intellijidea() {
         write_success "Done!"
         write_blank_line
 
+        get_intellijidea_product_info
         install_intellijidea_plugins
         install_intellijidea_settings
         write_success "Done!"
@@ -34,6 +32,8 @@ function install_intellijidea() {
 
 function uninstall_intellijidea() {
     write_info "Uninstalling IntelliJ IDEA package..."
+
+    get_intellijidea_product_info
 
     write_info "Uninstalling IntelliJ IDEA..."
     brew cask uninstall intellij-idea || { write_warning "WARNING! IntelliJ IDEA is not installed and cannot be uninstalled. Continuing on."; }
@@ -66,10 +66,30 @@ function download_intellijidea_plugin() {
     local id="$2"
     local file="$3"
 
-    local uri="${intellij_idea_plugins_api_base_uri}?action=download&id=${id}&build=${intellij_build_version}"
+    local uri="${intellij_idea_plugins_api_base_uri}?action=download&id=${id}&build=${intellij_idea_build}"
 
     write_progress "Downloading IntelliJ IDEA plugin '${name}' from '${uri}'..."
     curl -o "${file}" "${uri}"
+    write_success "Done!"
+    write_blank_line
+}
+
+function get_intellijidea_product_info() {
+    write_info "Obtaining product information for latest version of IntelliJ IDEA..."
+
+    local json
+    json=$(curl -s "${intellij_idea_releases_api_base_uri}?code=${intellij_idea_product_code}&latest=true&type=release")
+
+    intellij_idea_version=$(get_json "${json}" ".${intellij_idea_product_code}[0].majorVersion")
+    intellij_idea_build_version=$(get_json "${json}" ".${intellij_idea_product_code}[0].build")
+    intellij_idea_build="IU-${intellij_idea_build_version}"
+
+    intellij_idea_product_dir=IntelliJIdea${intellij_idea_version}
+    intellij_idea_cache_dir="${caches_dir}/${intellij_idea_product_dir}"
+    intellij_idea_logs_dir="${logs_dir}/${intellij_idea_product_dir}"
+    intellij_idea_plugins_dir="${app_support_dir}/${intellij_idea_product_dir}"
+    intellij_idea_prefs_dir="${prefs_dir}/${intellij_idea_product_dir}"
+
     write_success "Done!"
     write_blank_line
 }
