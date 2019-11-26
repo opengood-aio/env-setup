@@ -31,7 +31,7 @@ function install() {
 function uninstall() {
     local array=("$@")
 
-    local packageß
+    local package
     for package in "${array[@]}"; do
         local function_name="uninstall_${package}"
         if function_exists "${function_name}"; then

@@ -48,10 +48,14 @@ function install_bashit() {
         write_success "Done!"
         write_blank_line
 
-        write_info "Configuring Bash profile to export Homebrew's sbin directory in PATH env variable..."
+        write_info "Configuring Bash profile to export Homebrew's sbin directory in PATH env variable and initial wokrking directory..."
         cat <<EOF >>"${bash_profile}"
+
 # export Homebrew sbin directory in PATH env variable
 export PATH=/usr/local/sbin:\$PATH
+
+# set initial wokrking directory
+cd ~/workspace
 
 EOF
 

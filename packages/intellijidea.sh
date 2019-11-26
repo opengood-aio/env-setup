@@ -130,7 +130,7 @@ function install_intellijidea_plugins() {
         local file
         file=$(to_lower_case "${name}.jar")
 
-        download_intellijidea_plugin "${name}" "${file}" "${id}"
+        download_intellijidea_plugin "${name}" "${id}" "${file}"
         install_intellijidea_plugin "${name}" "${file}"
         rm -f "${file}"
     done

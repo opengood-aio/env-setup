@@ -129,8 +129,8 @@ function uninstall_git() {
     write_blank_line
 
     write_info "Uninstalling Git dependencies..."
-    brew uninstall git-together || { write_warning "WARNING! git-together is not installed and cannot be uninstalled. Continuing on."; }
     brew uninstall git-author || { write_warning "WARNING! git-author is not installed and cannot be uninstalled. Continuing on."; }
+    brew uninstall git-together || { write_warning "WARNING! git-together is not installed and cannot be uninstalled. Continuing on."; }
     brew uninstall vim || { write_warning "WARNING! Vim is not installed and cannot be uninstalled. Continuing on."; }
     write_success "Done!"
     write_blank_line

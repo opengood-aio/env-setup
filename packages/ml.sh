@@ -4,31 +4,36 @@ function install_ml() {
     write_info "Installing MarkLogic package..."
 
     if [[ ! -d "${library_dir}/MarkLogic" ]]; then
-        write_info "Logging into MarkLogic to get download URI..."
-
-        write_info "Enter ML email address..."
+        write_info "Enter MarkLogic email address..."
         read -r email
         email=$(replace_string "${email}" "@" "%40")
         write_blank_line
 
-        write_info "Enter ML password..."
+        write_info "Enter MarkLogic password..."
         local password
         password=$(read_password_input)
         write_blank_line
 
+        write_info "Logging into MarkLogic to get download URI..."
         cd_push "${downloads_dir}"
-        curl -X POST \
+        local json
+        json=$(curl -X POST \
             -d "email=${email}&password=${password}" \
             --cookie cookies.txt \
             --cookie-jar cookies.txt \
-            "${ml_developer_site_uri}/login"
+            "${ml_developer_site_uri}/login")
+
+        if [[ $(contains_string "${json}" "Bad email/password combination") == "true" ]]; then
+            write_error "Failed to authenticate into MarkLogic"
+            write_progress "${json}"
+            exit 1 
+        fi 
         write_success "Done!"
         write_blank_line
 
         write_info "Getting download URI for MarkLogic version '${ml_version}'..."
-        local json
         json=$(curl -X POST \
-            -d "download=%2Fdownload%2Fbinaries%2F9.0%2FMarkLogic-${ml_version}-x86_64.dmg" \
+            -d "download=%2Fdownload%2Fbinaries%2F10.0%2FMarkLogic-${ml_version}-x86_64.dmg" \
             --cookie cookies.txt \
             --cookie-jar cookies.txt \
             "${ml_developer_site_uri}/get-download-url")
@@ -56,10 +61,12 @@ function install_ml() {
         write_success "Done!"
         write_blank_line
 
-        write_info "Unmounting MarkLogic image..."
-        sudo hdiutil unmount "${volumes_dir}"/MarkLogic
-        write_success "Done!"
-        write_blank_line
+        if [[ -d "${volumes_dir}"/MarkLogic ]]; then
+            write_info "Unmounting MarkLogic image..."
+            sudo hdiutil unmount "${volumes_dir}"/MarkLogic
+            write_success "Done!"
+            write_blank_line
+        fi
 
         if [[ -f marklogic.dmg ]]; then
             write_info "Deleting MarkLogic image..."
@@ -83,10 +90,12 @@ function install_ml() {
 function uninstall_ml() {
     write_info "Uninstalling MarkLogic package..."
 
-    write_info "Stopping MarkLogic service..."
-    "${start_up_dir}"/MarkLogic stop
-    write_success "Done!"
-    write_blank_line
+	if [[ -f "${start_up_dir}"/MarkLogic/MarkLogic ]]; then
+        write_info "Stopping MarkLogic service..."
+        "${start_up_dir}"/MarkLogic/MarkLogic stop
+        write_success "Done!"
+       write_blank_line
+    fi
 
     write_info "Uninstalling MarkLogic converters..."
     sudo pkgutil --forget com.marklogic.converters || { write_warning "WARNING! MarkLogic converters not installed and cannot be uninstalled. Continuing on."; }

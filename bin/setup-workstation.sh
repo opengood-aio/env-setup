@@ -95,6 +95,11 @@ time {
         write_success "Done!"
         write_blank_line
 
+        write_info "Verifying requested packages..."
+        verify "${packages_dir}" "${args[@]}"
+        write_success "Done!"
+        write_blank_line
+
         write_success "-----------------------------------------"
         write_success "Setup complete!"
         write_success "-----------------------------------------"

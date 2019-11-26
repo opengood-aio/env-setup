@@ -37,18 +37,20 @@ function install_node() {
 function uninstall_node() {
     write_info "Uninstalling Node package..."
 
-    local package
-    for package in "${supported_node_packages[@]}"; do
-        local package_installed
-        package_installed=$(npm list -g "${package}")
+	if hash npm 2>/dev/null; then
+        local package
+        for package in "${supported_node_packages[@]}"; do
+            local package_installed
+            package_installed=$(npm list -g "${package}")
 
-        if [[ "$(contains_string "${package_installed}" "(empty)")" == "false" ]]; then
-            write_progress "- Uninstalling Node package '${package}'"
-            write_blank_line
-            npm uninstall "${package}" -g
-        fi
-    done
-    unset package
+            if [[ "$(contains_string "${package_installed}" "(empty)")" == "false" ]]; then
+                write_progress "- Uninstalling Node package '${package}'"
+                write_blank_line
+                npm uninstall "${package}" -g
+            fi
+        done
+        unset package
+    fi
 
     write_info "Uninstalling Node..."
     brew uninstall node || { write_warning "Node is not installed and cannot be uninstalled. Continuing on..."; }

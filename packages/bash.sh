@@ -54,8 +54,8 @@ function uninstall_bash() {
 
     write_info "Resetting prior Bash installation as default..."
     write_warning "NOTE: Requires terminal restart to take effect"
-    chsh -s "${old_bash}"
-    sudo chsh -s "${old_bash}"
+    #chsh -s "${old_bash}"
+    #sudo chsh -s "${old_bash}"
     write_success "Done!"
     write_blank_line
 }
