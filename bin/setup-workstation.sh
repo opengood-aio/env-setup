@@ -77,9 +77,9 @@ time {
         install_ideprefs
 
         write_info "Installing required packages..."
-        print_items_in_array "${required_packages[@]}"
+        print_items_in_array "${required_workstation_packages[@]}"
         write_blank_line
-        install "${required_packages[@]}"
+        install "${required_workstation_packages[@]}"
         write_success "Done!"
         write_blank_line
 
@@ -129,9 +129,9 @@ time {
             uninstall_osprefs
 
             write_info "Uninstalling required packages..."
-            print_items_in_array "${required_packages[@]}"
+            print_items_in_array "${required_workstation_packages[@]}"
             write_blank_line
-            uninstall "${required_packages[@]}"
+            uninstall "${required_workstation_packages[@]}"
             write_success "Done!"
             write_blank_line
 
