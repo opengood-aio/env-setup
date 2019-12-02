@@ -109,6 +109,12 @@ function test_find_value_in_file() {
     echo "${value}"
 }
 
+function test_function_exists() {
+    local name="$1"
+    declare -f -F "${name}" >/dev/null
+    return $?
+}
+
 function test_get_file_contents() {
     local file="$1"
 

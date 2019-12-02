@@ -2,6 +2,19 @@ intellij_idea_product_code=IIU
 intellij_idea_releases_api_base_uri=https://data.services.jetbrains.com/products/releases
 intellij_idea_plugins_api_base_uri=https://plugins.jetbrains.com/pluginManager
 
+function get_intellijidea_dependencies() {
+    write_info "Getting Gradle package dependencies to install..."
+
+    local dependencies=()
+    dependencies+=("jq")
+
+    local array
+    array="$(declare -p dependencies)"
+    local IFS=$'\v'
+    echo "${array#*=}"
+}
+
+
 function install_intellijidea() {
     write_info "Installing IntelliJ IDEA package..."
 
@@ -61,19 +74,6 @@ function uninstall_intellijidea() {
     write_blank_line
 }
 
-function download_intellijidea_plugin() {
-    local name="$1"
-    local id="$2"
-    local file="$3"
-
-    local uri="${intellij_idea_plugins_api_base_uri}?action=download&id=${id}&build=${intellij_idea_build}"
-
-    write_progress "Downloading IntelliJ IDEA plugin '${name}' from '${uri}'..."
-    curl -o "${file}" "${uri}"
-    write_success "Done!"
-    write_blank_line
-}
-
 function get_intellijidea_product_info() {
     write_info "Obtaining product information for latest version of IntelliJ IDEA..."
 
@@ -90,6 +90,19 @@ function get_intellijidea_product_info() {
     intellij_idea_plugins_dir="${app_support_dir}/${intellij_idea_product_dir}"
     intellij_idea_prefs_dir="${prefs_dir}/${intellij_idea_product_dir}"
 
+    write_success "Done!"
+    write_blank_line
+}
+
+function download_intellijidea_plugin() {
+    local name="$1"
+    local id="$2"
+    local file="$3"
+
+    local uri="${intellij_idea_plugins_api_base_uri}?action=download&id=${id}&build=${intellij_idea_build}"
+
+    write_progress "Downloading IntelliJ IDEA plugin '${name}' from '${uri}'..."
+    curl -o "${file}" "${uri}"
     write_success "Done!"
     write_blank_line
 }

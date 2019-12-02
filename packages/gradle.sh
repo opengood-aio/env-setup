@@ -1,3 +1,15 @@
+function get_gradle_dependencies() {
+    write_info "Getting Gradle package dependencies to install..."
+
+    local dependencies=()
+    dependencies+=("java")
+
+    local array
+    array="$(declare -p dependencies)"
+    local IFS=$'\v'
+    echo "${array#*=}"
+}
+
 function install_gradle() {
     write_info "Installing Gradle package..."
 

@@ -16,7 +16,15 @@ function install() {
 
     local package
     for package in "${array[@]}"; do
-        local function_name="install_${package}"
+        local function_name="get_${package}_dependencies"
+        if function_exists "${function_name}"; then
+            eval declare -a dependencies="\$(${function_name})"
+            write_progress "Installing package dependencies for '${package}':"
+            print_items_in_array "${dependencies[@]}"
+            install "${dependencies[@]}"
+        fi
+
+        function_name="install_${package}"
         if function_exists "${function_name}"; then
             write_progress "-----------------------------------------"
             write_progress "Installing package '${package}'"
@@ -55,7 +63,7 @@ function verify() {
 
     local package
     for package in "${array[@]}"; do
-        local file=${dir}/${package}.sh
+        local file="${dir}"/${package}.sh
         if [[ -f ${file} ]]; then
             write_progress "Verified package '${package}' is valid and exists for install/uninstall"
         else
