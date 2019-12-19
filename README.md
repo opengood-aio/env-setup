@@ -10,9 +10,7 @@ Automated environment setup scripts for OpenGood computing environments
   * These scripts might work on previous versions, but are maintained
   with only the latest macOS version in mind
 
-## Workstation Setup
-
-### Getting Started
+## Getting Started
 
 * Open **Terminal** and type `git`
 * One will be prompted to install the required
@@ -32,6 +30,8 @@ cd ~/workspace
 git clone https://github.com/opengoodio/env-setup
 cd env-setup
 ```
+
+## Workstation Setup
 
 ### Supported Packages
 
