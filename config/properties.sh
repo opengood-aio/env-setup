@@ -1,5 +1,5 @@
 # java properties
-default_java_version=11
+default_java_version=13
 
 # local directories
 setup_dir="${workspace_dir}"/env-setup
@@ -50,6 +50,7 @@ required_workstation_packages+=("yq")
 # supported Java versions
 supported_java_versions=()
 supported_java_versions+=("11")
+supported_java_versions+=("13")
 
 # supported node packages
 supported_node_packages=()

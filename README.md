@@ -50,7 +50,7 @@ open the *System Preferences* and grant them elevated privileges under
 ### Install Specific Software/Tools
 
 ```bash
-bin/workstation-setup.sh install <package>
+bin/setup-workstation.sh install <package>
 ```
 
 ### Update Everything
