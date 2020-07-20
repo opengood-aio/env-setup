@@ -7,6 +7,12 @@ function install_go() {
     write_blank_line
 
     write_info "Configuring Bash profile to export Go env variables..."
+    export GOPATH=$HOME/workspace/go
+    export GOBIN=$GOPATH/bin
+    export GOPKG=$GOPATH/pkg
+    export GOSRC=$GOPATH/src
+    export GOPROJ=$GOSRC/github.com/opengoodio
+
     cat <<EOF >>"${bash_profile}"
 # Go env variables
 export GOPATH=\$HOME/workspace/go
