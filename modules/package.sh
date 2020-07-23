@@ -21,6 +21,7 @@ function install() {
             eval declare -a dependencies="\$(${function_name})"
             write_progress "Installing package dependencies for '${package}':"
             print_items_in_array "${dependencies[@]}"
+            write_blank_line
             install "${dependencies[@]}"
         fi
 

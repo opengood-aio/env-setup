@@ -1,17 +1,18 @@
-ml_developer_site_uri=https://developer.marklogic.com
+marklogic_developer_site_uri=https://developer.marklogic.com
 
-function install_ml() {
+function install_marklogic() {
     write_info "Installing MarkLogic package..."
 
     if [[ ! -d "${library_dir}/MarkLogic" ]]; then
         write_info "Enter MarkLogic email address..."
         read -r email
-        email=$(replace_string "${email}" "@" "%40")
+        email="$(replace_string "${email}" "@" "%40")"
         write_blank_line
 
         write_info "Enter MarkLogic password..."
         local password
-        password=$(read_password_input)
+        password="$(read_password_input)"
+        password="$(replace_string "${password}" "+" "%2B")"
         write_blank_line
 
         write_info "Logging into MarkLogic to get download URI..."
@@ -21,7 +22,7 @@ function install_ml() {
             -d "email=${email}&password=${password}" \
             --cookie cookies.txt \
             --cookie-jar cookies.txt \
-            "${ml_developer_site_uri}/login")
+            "${marklogic_developer_site_uri}/login")
 
         if [[ $(contains_string "${json}" "Bad email/password combination") == "true" ]]; then
             write_error "Failed to authenticate into MarkLogic"
@@ -31,12 +32,12 @@ function install_ml() {
         write_success "Done!"
         write_blank_line
 
-        write_info "Getting download URI for MarkLogic version '${ml_version}'..."
+        write_info "Getting download URI for MarkLogic version '${marklogic_version}'..."
         json=$(curl -X POST \
-            -d "download=%2Fdownload%2Fbinaries%2F10.0%2FMarkLogic-${ml_version}-x86_64.dmg" \
+            -d "download=%2Fdownload%2Fbinaries%2F10.0%2FMarkLogic-${marklogic_version}-x86_64.dmg" \
             --cookie cookies.txt \
             --cookie-jar cookies.txt \
-            "${ml_developer_site_uri}/get-download-url")
+            "${marklogic_developer_site_uri}/get-download-url")
         local download_path
         download_path=$(get_json "${json}" ".path")
         write_progress "Download path: ${download_path}"
@@ -44,8 +45,8 @@ function install_ml() {
         write_success "Done!"
         write_blank_line
 
-        write_info "Downloading MarkLogic version '${ml_version}'..."
-        curl -o marklogic.dmg "${ml_developer_site_uri}${download_path}"
+        write_info "Downloading MarkLogic version '${marklogic_version}'..."
+        curl -o marklogic.dmg "${marklogic_developer_site_uri}${download_path}"
         write_success "Done!"
         write_blank_line
 
@@ -55,7 +56,7 @@ function install_ml() {
         write_blank_line
 
         write_info "Installing MarkLogic..."
-        open "${volumes_dir}"/MarkLogic/MarkLogic-${ml_version}-x86_64.pkg
+        open "${volumes_dir}"/MarkLogic/MarkLogic-${marklogic_version}-x86_64.pkg
         echo -e "Waiting for user to complete interactive installation. When done, press [ENTER]:"
         read -r complete
         write_success "Done!"
@@ -87,7 +88,7 @@ function install_ml() {
     fi
 }
 
-function uninstall_ml() {
+function uninstall_marklogic() {
     write_info "Uninstalling MarkLogic package..."
 
 	if [[ -f "${start_up_dir}"/MarkLogic/MarkLogic ]]; then

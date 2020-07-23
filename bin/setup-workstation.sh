@@ -68,46 +68,67 @@ time {
     write_success "Done!"
     write_blank_line
 
+    write_info "Setup Action: ${action}"
+    write_blank_line
+
     case "${action}" in
     "install")
-        install_homebrew
-        install_bash
-        install_bashit
-        install_git
-        install_ideprefs
+        if [[ $(get_array_length "${args[@]}") -eq 0 ]]; then
+            write_error "ERROR! Install package(s) not specified. Please try again."
+            write_blank_line
+            exit 1
+        fi
 
-        write_info "Installing required packages..."
-        print_items_in_array "${required_workstation_packages[@]}"
-        write_blank_line
-        install "${required_workstation_packages[@]}"
-        write_success "Done!"
-        write_blank_line
+        case "${args[0]}" in
+        "all")
+            install_homebrew
+            install_bash
+            install_bashit
+            install_git
+            install_ideprefs
 
-        install_osprefs
+            write_info "Installing required packages..."
+            print_items_in_array "${required_workstation_packages[@]}"
+            write_blank_line
+            install "${required_workstation_packages[@]}"
+            write_success "Done!"
+            write_blank_line
 
-        write_info "Verifying requested packages..."
-        verify "${packages_dir}" "${args[@]}"
-        write_success "Done!"
-        write_blank_line
+            install_osprefs
 
-        write_info "Installing requested packages..."
-        install "${args[@]}"
-        write_success "Done!"
-        write_blank_line
+            write_info "Verifying requested packages..."
+            verify "${packages_dir}" "${args[@]}"
+            write_success "Done!"
+            write_blank_line
 
-        write_info "Verifying requested packages..."
-        verify "${packages_dir}" "${args[@]}"
-        write_success "Done!"
-        write_blank_line
+            write_info "Installing requested packages..."
+            install "${args[@]}"
+            write_success "Done!"
+            write_blank_line
 
-        write_success "-----------------------------------------"
-        write_success "Setup complete!"
-        write_success "-----------------------------------------"
-        write_blank_line
+            write_success "-----------------------------------------"
+            write_success "Setup complete!"
+            write_success "-----------------------------------------"
+            write_blank_line
 
-        write_info "After checking the initial setup install output for any problems, start a new iTerm session to make use of all the installed software/tools"
-        write_info "Rebooting is only necessary for keyboard repeat settings to work"
-        write_blank_line
+            write_info "After checking the initial setup install output for any problems, start a new iTerm session to make use of all the installed software/tools"
+            write_info "Rebooting is only necessary for keyboard repeat settings to work"
+            write_blank_line
+            ;;
+
+        *)
+            write_info "Verifying requested packages..."
+            verify "${packages_dir}" "${args[@]}"
+            write_success "Done!"
+            write_blank_line
+
+            write_info "Installing requested packages..."
+            install "${args[@]}"
+            write_success "Done!"
+            write_blank_line
+            ;;
+
+        esac
         ;;
 
     "update")
@@ -149,4 +170,3 @@ time {
     write_success "Done!"
     write_blank_line
 } 2>&1
-write_info "Setup Action: ${action}"

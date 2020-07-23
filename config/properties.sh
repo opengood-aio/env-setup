@@ -34,12 +34,14 @@ required_workstation_packages+=("gradle")
 required_workstation_packages+=("intellijidea")
 required_workstation_packages+=("iterm")
 required_workstation_packages+=("java")
+required_workstation_packages+=("jenv")
 required_workstation_packages+=("jq")
 required_workstation_packages+=("kotlin")
-#required_workstation_packages+=("ml")
+required_workstation_packages+=("marklogic")
 required_workstation_packages+=("mysql")
 required_workstation_packages+=("node")
 required_workstation_packages+=("postman")
+required_workstation_packages+=("python")
 required_workstation_packages+=("rabbitmq")
 required_workstation_packages+=("shiftit")
 required_workstation_packages+=("slack")
@@ -63,4 +65,4 @@ supported_setup_actions+=("update")
 supported_setup_actions+=("uninstall")
 
 # version properties
-ml_version=10.0-2.1
+marklogic_version=10.0-4.2

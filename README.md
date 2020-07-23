@@ -40,7 +40,7 @@ See [Packages](packages) for list of supported packages.
 ### Install Default Software/Tools
 
 ```bash
-bin/setup-workstation.sh install
+bin/setup-workstation.sh install all
 ```
 
 > **Note:** After `Flycut` and `ShiftIt` are installed, one will need to
