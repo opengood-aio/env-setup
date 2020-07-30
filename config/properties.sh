@@ -40,6 +40,7 @@ required_workstation_packages+=("kotlin")
 required_workstation_packages+=("marklogic")
 required_workstation_packages+=("mysql")
 required_workstation_packages+=("node")
+required_workstation_packages+=("pip")
 required_workstation_packages+=("postman")
 required_workstation_packages+=("python")
 required_workstation_packages+=("rabbitmq")
@@ -57,6 +58,10 @@ supported_java_versions+=("13")
 # supported node packages
 supported_node_packages=()
 supported_node_packages+=("cypress")
+
+# supported pip packages
+supported_pip_packages=()
+supported_pip_packages+=("tensorflow")
 
 # supported setup actions
 supported_setup_actions=()
