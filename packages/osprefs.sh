@@ -38,10 +38,6 @@ function install_osprefs() {
     if dockutil --find Google\ Chrome | grep "was not found"; then dockutil --add /Applications/Google\ Chrome.app --no-restart; fi
     if dockutil --find IntelliJ\ IDEA | grep "was not found"; then dockutil --add /Applications/IntelliJ\ IDEA.app; fi
     if dockutil --find iTerm | grep "was not found"; then dockutil --add /Applications/iTerm.app; fi
-    if dockutil --find Slack | grep "was not found"; then dockutil --add /Applications/Slack.app; fi
-    if dockutil --find App\ Store | grep "was not found"; then dockutil --add /Applications/App\ Store.app; fi
-    if dockutil --find System\ Preferences | grep "was not found"; then dockutil --add /Applications/System\ Preferences.app; fi
-    if dockutil --find Launchpad | grep "was not found"; then dockutil --add /Applications/Launchpad.app; fi
     write_success "Done!"
     write_blank_line
 }

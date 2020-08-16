@@ -25,8 +25,6 @@ function install_intellijidea() {
         write_blank_line
 
         get_intellijidea_product_info
-        install_intellijidea_plugins
-        install_intellijidea_settings
         write_success "Done!"
         write_blank_line
 
@@ -34,6 +32,11 @@ function install_intellijidea() {
         cd_push "${workspace_dir}"/pivotal_ide_prefs/cli
         ./bin/ide_prefs install --ide=intellij
         cd_pop
+        write_success "Done!"
+        write_blank_line
+
+        install_intellijidea_plugins
+        install_intellijidea_settings
         write_success "Done!"
         write_blank_line
     else
@@ -85,10 +88,10 @@ function get_intellijidea_product_info() {
     intellij_idea_build="IU-${intellij_idea_build_version}"
 
     intellij_idea_product_dir=IntelliJIdea${intellij_idea_version}
-    intellij_idea_cache_dir="${caches_dir}/${intellij_idea_product_dir}"
-    intellij_idea_logs_dir="${logs_dir}/${intellij_idea_product_dir}"
-    intellij_idea_plugins_dir="${app_support_dir}/${intellij_idea_product_dir}"
-    intellij_idea_prefs_dir="${prefs_dir}/${intellij_idea_product_dir}"
+    intellij_idea_cache_dir="${caches_dir}/JetBrains/${intellij_idea_product_dir}"
+    intellij_idea_logs_dir="${logs_dir}/JetBrains/${intellij_idea_product_dir}"
+    intellij_idea_plugins_dir="${app_support_dir}/JetBrains/${intellij_idea_product_dir}/plugins"
+    intellij_idea_prefs_dir="${app_support_dir}/JetBrains/${intellij_idea_product_dir}"
 
     write_success "Done!"
     write_blank_line
@@ -130,6 +133,7 @@ function install_intellijidea_plugins() {
     plugins+=("LinesSorter,org.sylfra.idea.plugins.linessorter")
     plugins+=("Lombok,Lombook%20Plugin")
     plugins+=("MarkdownNavigator,com.vladsch.idea.multimarkdown")
+    plugins+=("Python,Pythonid")
     plugins+=("Toml,org.toml.lang")
 
     cd_push "${downloads_dir}"
@@ -163,9 +167,7 @@ function install_intellijidea_settings() {
     cp resources/intellij_idea_settings.zip "${prefs_dir}"
     cd_push "${prefs_dir}"
     unzip -o intellij_idea_settings.zip -d intellij_idea_settings
-    cd_push intellij_idea_settings
-    cp -R * "${intellij_idea_prefs_dir}"/
-    cd_pop
+    cp -R intellij_idea_settings/* "${intellij_idea_prefs_dir}"/
     rm -Rf intellij_idea_settings/
     rm -f intellij_idea_settings.zip
     cd_pop
