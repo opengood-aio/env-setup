@@ -6,7 +6,7 @@ Automated environment setup scripts for OpenGood computing environments
 
 * Access to GitHub with permissions to clone repos
 * Familiarity with running commands and scripts from `macOS` Terminal
-* Running the latest version of **macOS**, currently **Catalina**
+* Running the latest version of **macOS**, currently **Big Sur**
   * These scripts might work on previous versions, but are maintained
   with only the latest macOS version in mind
 
@@ -43,7 +43,17 @@ See [Packages](packages) for list of supported packages.
 bin/setup-workstation.sh install all
 ```
 
-> **Note:** After `Flycut` and `ShiftIt` are installed, one will need to
+**Notes:**
+
+* One will be prompted to enter credentials to grant elevated privileges
+to install packages
+* One will be prompted to interactively enter the path to Bash 5.0 shell,
+as this cannot be automated due to security restrictions in macOS
+requiring root level access to modify `/etc/shells`  shells
+configuration file
+* One will be prompted for credentials to a MarkLogic account that has
+access to download MarkLogic's installation package
+* After `Flycut` and `ShiftIt` are installed, one will need to
 open the *System Preferences* and grant them elevated privileges under 
 `Security & Privacy > Privacy > Accessibility`
 

@@ -112,7 +112,6 @@ time {
             write_blank_line
 
             write_info "After checking the initial setup install output for any problems, start a new iTerm session to make use of all the installed software/tools"
-            write_info "Rebooting is only necessary for keyboard repeat settings to work"
             write_blank_line
             ;;
 
