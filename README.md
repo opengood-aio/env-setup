@@ -1,6 +1,7 @@
 # Environment Setup
 
-Automated environment setup scripts for OpenGood computing environments
+Automated environment setup and configuration for OpenGood computing
+environments
 
 ## Prerequisites
 
