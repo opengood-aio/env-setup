@@ -48,11 +48,11 @@ bin/setup-workstation.sh install all
 
 * One will be prompted to enter credentials to grant elevated privileges
 to install packages
-* One will be prompted to interactively enter the path to Bash 5.0 shell,
-as this cannot be automated due to security restrictions in macOS
+* One will be prompted to interactively enter the path to `Bash 5.0`
+shell, as this cannot be automated due to security restrictions in macOS
 requiring root level access to modify `/etc/shells`  shells
 configuration file
-* One will be prompted for credentials to a MarkLogic account that has
+* One will be prompted for credentials to a `MarkLogic` account that has
 access to download MarkLogic's installation package
 * After `Flycut` and `ShiftIt` are installed, one will need to
 open the *System Preferences* and grant them elevated privileges under 

@@ -25,7 +25,7 @@ function install_bash() {
         write_info "Whitelisting new Bash installation to make it a trusted shell..."
         write_warning "Manually add '${bash}' to '${shells}'"
         write_warning "Script will wait for 5 seconds before continuing to open ${shells}' in Vim..."
-        sleep 5
+        sleep 10
         sudo vim "${shells}"
         write_success "Done!"
         write_blank_line
