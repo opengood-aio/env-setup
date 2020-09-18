@@ -1,4 +1,4 @@
-function install_osprefs() {
+function install_os_prefs() {
     write_info "Installing macOS preferences..."
 
     write_info "Setting macOS menu clock format..."
@@ -35,14 +35,14 @@ function install_osprefs() {
     curl https://raw.githubusercontent.com/kcrawford/dockutil/master/scripts/dockutil >/usr/local/bin/dockutil
     chmod a+rx,go-w /usr/local/bin/dockutil
     dockutil --list | awk -F\t '{print "dockutil --remove \""$1"\" --no-restart"}' | sh
-    if dockutil --find Google\ Chrome | grep "was not found"; then dockutil --add /Applications/Google\ Chrome.app --no-restart; fi
-    if dockutil --find IntelliJ\ IDEA | grep "was not found"; then dockutil --add /Applications/IntelliJ\ IDEA.app; fi
-    if dockutil --find iTerm | grep "was not found"; then dockutil --add /Applications/iTerm.app; fi
+    if dockutil --find Google\ Chrome | grep "was not found"; then dockutil --add "${apps_dir}"/Google\ Chrome.app --no-restart; fi
+    if dockutil --find IntelliJ\ IDEA | grep "was not found"; then dockutil --add "${apps_dir}"/IntelliJ\ IDEA.app; fi
+    if dockutil --find iTerm | grep "was not found"; then dockutil --add "${apps_dir}"/iTerm.app; fi
     write_success "Done!"
     write_blank_line
 }
 
-function uninstall_osprefs() {
+function uninstall_os_prefs() {
     write_info "Uninstalling macOS preferences..."
 
     write_info "Resetting macOS menu clock format..."
@@ -69,9 +69,9 @@ function uninstall_osprefs() {
 
     write_info "Resetting appearance of Dock to standard icons..."
     dockutil --list | awk -F\t '{print "dockutil --remove \""$1"\" --no-restart"}' | sh
-    if dockutil --find App\ Store | grep "was not found"; then dockutil --add /Applications/App\ Store.app; fi
-    if dockutil --find System\ Preferences | grep "was not found"; then dockutil --add /Applications/System\ Preferences.app; fi
-    if dockutil --find Launchpad | grep "was not found"; then dockutil --add /Applications/Launchpad.app; fi
+    if dockutil --find App\ Store | grep "was not found"; then dockutil --add "${apps_dir}"/App\ Store.app; fi
+    if dockutil --find System\ Preferences | grep "was not found"; then dockutil --add "${apps_dir}"/System\ Preferences.app; fi
+    if dockutil --find Launchpad | grep "was not found"; then dockutil --add "${apps_dir}"/Launchpad.app; fi
     write_success "Done!"
     write_blank_line
 }

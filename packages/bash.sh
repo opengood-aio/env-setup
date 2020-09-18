@@ -1,11 +1,7 @@
-bash=/usr/local/bin/bash
-old_bash=/bin/bash
-shells=/etc/shells
-
 function install_bash() {
     write_info "Installing Bash package..."
 
-    if [[ ! -f "${bash}" ]]; then
+    if [[ ! -f "${bash_latest}" ]]; then
         write_info "Installing latest Bash version..."
         brew list bash &>/dev/null || brew install bash
         write_success "Done!"
@@ -17,13 +13,13 @@ function install_bash() {
         write_blank_line
 
         write_info "Displaying installed Bash versions..."
-        "${bash}" --version
-        "${old_bash}" --version
+        "${bash_latest}" --version
+        "${bash_base}" --version
         write_success "Done!"
         write_blank_line
 
         write_info "Whitelisting new Bash installation to make it a trusted shell..."
-        write_warning "Manually add '${bash}' to '${shells}'"
+        write_warning "Manually add '${bash_latest}' to '${shells}'"
         write_warning "Script will wait for 5 seconds before continuing to open ${shells}' in Vim..."
         sleep 10
         sudo vim "${shells}"
@@ -33,8 +29,8 @@ function install_bash() {
         write_info "Setting new Bash installation as default..."
         write_warning "Afterwards you will be prompted for your password to confirm new Bash installation as default"
         write_warning "NOTE: Requires terminal restart to take effect"
-        chsh -s "${bash}"
-        sudo chsh -s "${bash}"
+        chsh -s "${bash_latest}"
+        sudo chsh -s "${bash_latest}"
         write_success "Done!"
         write_blank_line
     else
@@ -54,8 +50,8 @@ function uninstall_bash() {
 
     write_info "Resetting prior Bash installation as default..."
     write_warning "NOTE: Requires terminal restart to take effect"
-    #chsh -s "${old_bash}"
-    #sudo chsh -s "${old_bash}"
+    #chsh -s "${bash_base}"
+    #sudo chsh -s "${bash_base}"
     write_success "Done!"
     write_blank_line
 }

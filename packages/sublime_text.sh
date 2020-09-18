@@ -1,7 +1,7 @@
-function install_sublimetext() {
+function install_sublime_text() {
     write_info "Installing Sublime Text package..."
 
-    if [[ ! -d "/Applications/Sublime Text.app" ]]; then
+    if [[ ! -d "${apps_dir}/Sublime Text.app" ]]; then
         write_info "Installing Sublime Text..."
         brew cask install sublime-text
         write_success "Done!"
@@ -13,7 +13,7 @@ function install_sublimetext() {
     fi
 }
 
-function uninstall_sublimetext() {
+function uninstall_sublime_text() {
     write_info "Uninstalling Sublime Text package..."
 
     write_info "Uninstalling Sublime Text..."

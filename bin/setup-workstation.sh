@@ -1,16 +1,20 @@
 #!/usr/bin/env bash
 set -e
 
-script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-work_dir=$(dirname "${script_dir}")
-workspace_dir=$(dirname "${work_dir}")
+bin_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+setup_dir=$(dirname "${bin_dir}")
+workspace_dir=$(dirname "${setup_dir}")
 
-source "${work_dir}"/config/properties.sh
-source "${work_dir}"/modules/colors.sh
-source "${work_dir}"/modules/commons.sh
-source "${work_dir}"/modules/io.sh
-source "${work_dir}"/modules/package.sh
-source "${work_dir}"/modules/parse.sh
+source "${setup_dir}"/config/global.sh
+source "${setup_dir}"/config/io.sh
+source "${setup_dir}"/config/packages.sh
+source "${setup_dir}"/modules/colors.sh
+source "${setup_dir}"/modules/commons.sh
+source "${setup_dir}"/modules/io.sh
+source "${setup_dir}"/modules/package.sh
+source "${setup_dir}"/modules/parse.sh
+
+packages_dir=${setup_dir}/packages
 
 function usage() {
     write_info "Usage: ./$(basename "$0") <setup-action>"
@@ -83,9 +87,9 @@ time {
         "all")
             install_homebrew
             install_bash
-            install_bashit
+            install_bash_it
             install_git
-            install_ideprefs
+            install_ide_prefs
 
             write_info "Installing required packages..."
             print_items_in_array "${required_workstation_packages[@]}"
@@ -94,7 +98,7 @@ time {
             write_success "Done!"
             write_blank_line
 
-            install_osprefs
+            install_os_prefs
 
             write_info "Verifying requested packages..."
             verify "${packages_dir}" "${args[@]}"
@@ -146,7 +150,7 @@ time {
         write_blank_line
 
         if [[ "$(contains_item_in_array "all" "${args[@]}")" == "true" ]]; then
-            uninstall_osprefs
+            uninstall_os_prefs
 
             write_info "Uninstalling required packages..."
             print_items_in_array "${required_workstation_packages[@]}"
@@ -155,9 +159,9 @@ time {
             write_success "Done!"
             write_blank_line
 
-            uninstall_ideprefs
+            uninstall_ide_prefs
             uninstall_git
-            uninstall_bashit
+            uninstall_bas_hit
             uninstall_bash
             uninstall_homebrew
         fi

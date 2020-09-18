@@ -1,4 +1,4 @@
-marklogic_developer_site_uri=https://developer.marklogic.com
+source "${setup_dir}"/config/marklogic.sh
 
 function install_marklogic() {
     write_info "Installing MarkLogic package..."

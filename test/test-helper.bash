@@ -1,7 +1,9 @@
 src_dir="${BATS_TEST_DIRNAME}/.."
 tmp_dir="${BATS_TMPDIR}"
 
-source "${src_dir}"/config/properties.sh
+source "${src_dir}"/config/global.sh
+source "${src_dir}"/config/io.sh
+source "${src_dir}"/config/packages.sh
 source "${src_dir}"/modules/colors.sh
 source "${src_dir}"/modules/commons.sh
 

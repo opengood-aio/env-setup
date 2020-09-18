@@ -2,7 +2,7 @@ function install_postman() {
     write_info "Installing Postman package..."
 
     write_info "Installing Postman..."
-    if [[ ! -d "/Applications/Postman.app" ]]; then brew cask install postman; else write_progress "Postman already installed"; fi
+    if [[ ! -d "${apps_dir}/Postman.app" ]]; then brew cask install postman; else write_progress "Postman already installed"; fi
     write_success "Done!"
     write_blank_line
 }

@@ -1,3 +1,5 @@
+source "${setup_dir}"/config/java.sh
+
 function install_java() {
     write_info "Installing Java package..."
 
@@ -28,15 +30,6 @@ function install_java() {
 
         write_info "Verifying Java version '${default_java_version}' is default version and JAVA_HOME path env variable is set correctly..."
         java -version
-        write_success "Done!"
-        write_blank_line
-
-        write_info "Configuring Bash profile with JAVA_HOME path env variable...'"
-        cat <<EOF >>"${bash_profile}"
-# JAVA_HOME path env variable
-export JAVA_HOME=\$(/usr/libexec/java_home -v ${default_java_version})
-
-EOF
         write_success "Done!"
         write_blank_line
     else

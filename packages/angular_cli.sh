@@ -1,4 +1,4 @@
-function install_angularcli() {
+function install_angular_cli() {
     write_info "Installing Angular CLI package..."
 
     write_info "Installing Angular CLI..."
@@ -7,7 +7,7 @@ function install_angularcli() {
     write_blank_line
 }
 
-function uninstall_angularcli() {
+function uninstall_angular_cli() {
     write_info "Uninstalling Angular CLI package..."
 
     write_info "Uninstalling Angular CLI..."

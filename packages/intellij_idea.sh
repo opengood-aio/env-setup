@@ -1,8 +1,6 @@
-intellij_idea_product_code=IIU
-intellij_idea_releases_api_base_uri=https://data.services.jetbrains.com/products/releases
-intellij_idea_plugins_api_base_uri=https://plugins.jetbrains.com/pluginManager
+source "${setup_dir}"/config/intellij_idea.sh
 
-function get_intellijidea_dependencies() {
+function get_intellij_idea_dependencies() {
     write_info "Getting Gradle package dependencies to install..."
 
     local dependencies=()
@@ -14,17 +12,16 @@ function get_intellijidea_dependencies() {
     echo "${array#*=}"
 }
 
-
-function install_intellijidea() {
+function install_intellij_idea() {
     write_info "Installing IntelliJ IDEA package..."
 
-    if [[ ! -d "/Applications/IntelliJ IDEA.app" ]]; then
+    if [[ ! -d "${apps_dir}/IntelliJ IDEA.app" ]]; then
         write_info "Installing IntelliJ IDEA..."
         brew cask list intellij-idea &>/dev/null || brew cask install intellij-idea
         write_success "Done!"
         write_blank_line
 
-        get_intellijidea_product_info
+        get_intellij_idea_product_info
         write_success "Done!"
         write_blank_line
 
@@ -35,8 +32,8 @@ function install_intellijidea() {
         write_success "Done!"
         write_blank_line
 
-        install_intellijidea_plugins
-        install_intellijidea_settings
+        install_intellij_idea_plugins
+        install_intellij_idea_settings
         write_success "Done!"
         write_blank_line
     else
@@ -46,10 +43,10 @@ function install_intellijidea() {
     fi
 }
 
-function uninstall_intellijidea() {
+function uninstall_intellij_idea() {
     write_info "Uninstalling IntelliJ IDEA package..."
 
-    get_intellijidea_product_info
+    get_intellij_idea_product_info
 
     write_info "Uninstalling IntelliJ IDEA..."
     brew cask uninstall intellij-idea || { write_warning "WARNING! IntelliJ IDEA is not installed and cannot be uninstalled. Continuing on."; }
@@ -77,7 +74,7 @@ function uninstall_intellijidea() {
     write_blank_line
 }
 
-function get_intellijidea_product_info() {
+function get_intellij_idea_product_info() {
     write_info "Obtaining product information for latest version of IntelliJ IDEA..."
 
     local json
@@ -97,7 +94,7 @@ function get_intellijidea_product_info() {
     write_blank_line
 }
 
-function download_intellijidea_plugin() {
+function download_intellij_idea_plugin() {
     local name="$1"
     local id="$2"
     local file="$3"
@@ -110,7 +107,7 @@ function download_intellijidea_plugin() {
     write_blank_line
 }
 
-function install_intellijidea_plugin() {
+function install_intellij_idea_plugin() {
     local name="$1"
     local file="$2"
 
@@ -124,7 +121,7 @@ function install_intellijidea_plugin() {
     write_blank_line
 }
 
-function install_intellijidea_plugins() {
+function install_intellij_idea_plugins() {
     write_info "Installing IntelliJ IDEA plugins..."
 
     local plugins=()
@@ -147,8 +144,8 @@ function install_intellijidea_plugins() {
         local file
         file=$(to_lower_case "${name}.jar")
 
-        download_intellijidea_plugin "${name}" "${id}" "${file}"
-        install_intellijidea_plugin "${name}" "${file}"
+        download_intellij_idea_plugin "${name}" "${id}" "${file}"
+        install_intellij_idea_plugin "${name}" "${file}"
         rm -f "${file}"
     done
     unset plugin
@@ -156,7 +153,7 @@ function install_intellijidea_plugins() {
     cd_pop
 }
 
-function install_intellijidea_settings() {
+function install_intellij_idea_settings() {
     write_progress "Installing IntelliJ IDEA settings to '${intellij_idea_prefs_dir}'..."
 
     rm -Rf "${intellij_idea_prefs_dir}"

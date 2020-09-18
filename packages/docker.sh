@@ -1,6 +1,3 @@
-docker_app=/Applications/Docker.app
-docker_resources_dir=${docker_app}/Contents/Resources
-
 function install_docker() {
     write_info "Installing Docker package..."
 
@@ -17,8 +14,8 @@ function install_docker() {
         write_blank_line
 
         write_info "Installing Docker..."
-        cp -a "${volumes_dir}"/Docker/Docker.app ${docker_app}
-        open ${docker_app}
+        cp -a "${volumes_dir}"/Docker/Docker.app "${docker_app}"
+        open "${docker_app}"
         echo -e "Waiting for user to complete interactive installation. When done, press [ENTER]:"
         read -r complete
         write_success "Done!"
@@ -37,9 +34,9 @@ function install_docker() {
 
         write_info "Installing Docker Bash parameter completion..."
         cd_push /usr/local/etc/bash_completion.d
-        ln -fs ${docker_resources_dir}/etc/docker.bash-completion
-        ln -fs ${docker_resources_dir}/etc/docker-machine.bash-completion
-        ln -fs ${docker_resources_dir}/etc/docker-compose.bash-completion
+        ln -fs "${docker_resources_dir}"/etc/docker.bash-completion
+        ln -fs "${docker_resources_dir}"/etc/docker-machine.bash-completion
+        ln -fs "${docker_resources_dir}"/etc/docker-compose.bash-completion
         cd_pop
         write_success "Done!"
         write_blank_line
@@ -59,7 +56,7 @@ function uninstall_docker() {
     write_blank_line
 
     write_info "Uninstalling Docker..."
-    rm -Rf ${docker_app} || { write_warning "WARNING! Docker is not installed and cannot be uninstalled. Continuing on."; }
+    rm -Rf "${docker_app}" || { write_warning "WARNING! Docker is not installed and cannot be uninstalled. Continuing on."; }
     write_success "Done!"
     write_blank_line
 }

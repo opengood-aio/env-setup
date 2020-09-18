@@ -275,6 +275,13 @@ file=file.txt
     [ "${output}" = "" ]
 }
 
+@test "'left_chars' returns string left substring-ed with specified number of characters" {
+    run left_chars "Hello World!" "2"
+
+    [ "${status}" -eq 0 ]
+    [ "${output}" = "He" ]
+}
+
 @test "'left_pad_string' returns string left padded with specified character" {
     run left_pad_string "Hello World!" " " "5"
 

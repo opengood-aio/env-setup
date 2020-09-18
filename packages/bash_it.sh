@@ -1,6 +1,4 @@
-bash_it_dir=~/.bash_it
-
-function install_bashit() {
+function install_bash_it() {
     write_info "Installing bash-it package..."
 
     if [[ ! -d "${bash_it_dir}" ]]; then
@@ -44,7 +42,7 @@ function install_bashit() {
         write_blank_line
 
         write_info "Installing bash-it..."
-        ${bash_it_dir}/install.sh --silent
+        "${bash_it_dir}"/install.sh --silent
         write_success "Done!"
         write_blank_line
 
@@ -54,7 +52,7 @@ function install_bashit() {
 # export Homebrew sbin directory in PATH env variable
 export PATH=/usr/local/sbin:\$PATH
 
-# set initial wokrking directory
+# set initial working directory
 cd ~/workspace
 
 EOF
@@ -85,7 +83,7 @@ EOF
 
         write_info "Configuring direnv with bash-it..."
         brew list direnv &>/dev/null || brew install direnv
-        cp resources/direnv.bash ${bash_it_dir}/custom/direnv.bash
+        cp resources/direnv.bash "${bash_it_dir}"/custom/direnv.bash
         write_success "Done!"
         write_blank_line
     else
@@ -95,7 +93,7 @@ EOF
     fi
 }
 
-function uninstall_bashit() {
+function uninstall_bash_it() {
     write_info "Uninstalling bash-it package..."
 
     write_info "Uninstalling bash-it dependencies..."
@@ -117,7 +115,7 @@ function uninstall_bashit() {
     write_blank_line
 
     write_info "Uninstalling bash-it..."
-    rm -Rf ${bash_it_dir}
+    rm -Rf "${bash_it_dir}"
     write_success "Done!"
     write_blank_line
 

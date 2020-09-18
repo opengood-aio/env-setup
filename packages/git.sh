@@ -1,6 +1,3 @@
-git_hooks_dir=${workspace_dir}/git-hooks-core
-bash_it_aliases=~/.bash_it/aliases
-
 function install_git() {
     write_info "Installing Git package..."
 
@@ -8,6 +5,24 @@ function install_git() {
         ! hash git-together 2>/dev/null ||
         ! hash git-author 2>/dev/null ||
         ! hash vim 2>/dev/null; then
+
+        write_info "Enter Git user name (i.e. John Smith)..."
+        read -r git_user_name
+        write_blank_line
+
+        write_info "Enter Git user email (i.e. user@domain.com)..."
+        read -r git_user_email
+        git_user_initials=$(left_chars "${git_user_email}" 2)
+        write_blank_line
+
+        write_info "Enter GitHub user name (i.e. jsmith)..."
+        read -r github_user_name
+        write_blank_line
+
+        write_info "Enter GitHub access token (i.e. xcxcdt45tysfgfghty67tyhgghgsd544)..."
+        local github_access_token
+        github_access_token="$(read_password_input)"
+        write_blank_line
 
         write_info "Installing Git..."
         brew list git &>/dev/null || brew install git
@@ -79,14 +94,15 @@ function install_git() {
         git config --global alias.squash "commit --squash"
         git config --global alias.unstage "reset HEAD"
         git config --global alias.rum "rebase master@{u}"
+        git config --global alias.gtg "git config --global --add include.path ~/.git-together"
         write_success "Done!"
         write_blank_line
 
         write_info "Setting bash-it aliases for Git..."
         if [[ ! -d ${bash_it_aliases}/enable ]]; then
-            mkdir ${bash_it_aliases}/enable
-            echo "#Git" >>${bash_it_aliases}/general.aliases.bash
-            echo "alias gst='git status'" >>${bash_it_aliases}/general.aliases.bash
+            mkdir "${bash_it_aliases}"/enable
+            echo "#Git" >>"${bash_it_aliases}"/general.aliases.bash
+            echo "alias gst='git status'" >>"${bash_it_aliases}"/general.aliases.bash
         else
             write_info "bash-it aliases for Git already installed..."
         fi
@@ -113,6 +129,24 @@ EOF
         source "${bash_profile}"
         write_success "Done!"
         write_blank_line
+
+        write_info "Configuring global git-together configuration...'"
+        cat <<EOF >>"${git_together}"
+[git-together "authors"]
+  $git_user_initials = "$git_user_name; $git_user_email"
+
+EOF
+        source "${bash_profile}"
+        write_success "Done!"
+
+        write_info "Configuring GitHub properties...'"
+        cat <<EOF >>"${github_properties}"
+github.user=$github_user_name
+github.access.token=$github_access_token
+
+EOF
+        source "${bash_profile}"
+        write_success "Done!"
     else
         write_progress "Git are already installed"
         write_success "Done!"

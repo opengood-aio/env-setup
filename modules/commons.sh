@@ -174,6 +174,14 @@ function mask_string() {
     echo "${value}"
 }
 
+function left_chars() {
+    local string="$1"
+    local chars="$2"
+
+    local value="${string:0:chars}"
+    echo "${value}"
+}
+
 function left_pad_string() {
     local string="$1"
     local pad_char="$2"

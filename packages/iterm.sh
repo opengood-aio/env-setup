@@ -1,7 +1,7 @@
 function install_iterm() {
     write_info "Installing iTerm package..."
 
-    if [[ ! -d "/Applications/iTerm.app" ]]; then
+    if [[ ! -d "${apps_dir}/iTerm.app" ]]; then
         write_info "Installing iTerm..."
         brew cask install iterm2
         write_success "Done!"

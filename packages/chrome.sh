@@ -1,7 +1,7 @@
 function install_chrome() {
     write_info "Installing Google Chrome package..."
 
-    if [[ ! -d "/Applications/Google Chrome.app" ]]; then
+    if [[ ! -d "${apps_dir}/Google Chrome.app" ]]; then
         write_info "Installing Google Chrome..."
         brew cask install google-chrome
         write_success "Done!"
