@@ -49,7 +49,7 @@ time {
         write_info "Pulling latest changes for local Git repo '${repo}'..."
         cd_push "${repo}"
         git checkout main || { git checkout master || { write_warning "Unable to checkout main or master branch"; } }
-        git pull origin main -r || { git pull origin master || { write_warning "Unable to pull changes"; } }
+        git pull origin main -r || { git pull origin master -r || { write_warning "Unable to pull changes"; } }
         cd_pop
         write_success "Done!"
         write_blank_line
