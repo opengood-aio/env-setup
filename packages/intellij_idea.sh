@@ -125,8 +125,11 @@ function install_intellij_idea_plugins() {
     write_info "Installing IntelliJ IDEA plugins..."
 
     local plugins=()
+    plugins+=("BashSupport Pro,pro.bashsupport")
     plugins+=("Go,org.jetbrains.plugins.go")
     plugins+=("Ignore,mobi.hsz.idea.gitignore")
+    plugins+=("Kotest,kotest-plugin-intellij<")
+    plugins+=("Kotlin,org.jetbrains.kotlin")
     plugins+=("LinesSorter,org.sylfra.idea.plugins.linessorter")
     plugins+=("Lombok,Lombook%20Plugin")
     plugins+=("MarkdownNavigator,com.vladsch.idea.multimarkdown")
