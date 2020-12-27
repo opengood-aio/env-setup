@@ -24,15 +24,7 @@ jobs:
           bats-version: 1.2.1
 
       - name: Build
-        uses: sudo-bot/action-kcov@latest
-        with:
-          cli-args: "./coverage bats -p ./test"
-
-      - name: Coverage
-        uses: codecov/codecov-action@v1
-        with:
-          file: ./coverage
-          verbose: true
+        run: bats -p ./test
 
       - name: FOSSA
         uses: fossa-contrib/fossa-action@v1
