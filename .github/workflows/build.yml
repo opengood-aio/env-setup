@@ -23,15 +23,10 @@ jobs:
         with:
           bats-version: 1.2.1
 
-      - name: Setup kcov
+      - name: Build
         uses: sudo-bot/action-kcov@latest
         with:
-          cli-args: "--version"
-
-      - name: Build
-        run: |
-          kcov coverage bats -p test
-          ls -la coverage
+          cli-args: "kcov ./coverage bats -p ./test"
 
       - name: Coverage
         uses: codecov/codecov-action@v1
