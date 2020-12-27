@@ -1,0 +1,45 @@
+name: Build
+# description:
+# - Runs Bash build executing tests
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '.gitignore'
+      - 'LICENSE'
+      - 'README.md'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'Create release')"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup BATS
+        uses: mig4/setup-bats@v1
+        with:
+          bats-version: 1.2.1
+
+      - name: Setup kcov
+        uses: sudo-bot/action-kcov@latest
+        with:
+          cli-args: "--version"
+
+      - name: Build
+        run: |
+          kcov coverage bats -p test
+          ls -la coverage
+
+      - name: Coverage
+        uses: codecov/codecov-action@v1
+        with:
+          file: ./coverage
+          verbose: true
+
+      - name: FOSSA
+        uses: fossa-contrib/fossa-action@v1
+        with:
+          fossa-api-key: ${{ secrets.FOSSA_API_KEY }}

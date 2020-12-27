@@ -9,3 +9,6 @@
 generated/
 generated_tests/
 out/
+
+### GitHub Actions ###
+\~/
