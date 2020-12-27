@@ -25,3 +25,8 @@ jobs:
 
       - name: Build
         run: bats -r .
+
+      - name: FOSSA
+        uses: fossa-contrib/fossa-action@v1
+        with:
+          fossa-api-key: ${{ secrets.FOSSA_API_KEY }}

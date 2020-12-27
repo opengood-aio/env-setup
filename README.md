@@ -1,6 +1,7 @@
 # Environment Setup
 
 [![Build](https://github.com/opengoodio/env-setup/workflows/Build/badge.svg)](https://github.com/opengoodio/env-setup/actions?query=workflow%3ABuild)
+[![FOSSA Status](https://app.fossa.com/api/projects/custom%2B22161%2Fgithub.com%2Fopengoodio%2Fenv-setup.svg?type=small)](https://app.fossa.com/projects/custom%2B22161%2Fgithub.com%2Fopengoodio%2Fenv-setup?ref=badge_small)
 
 Automated environment setup and configuration for OpenGood computing
 environments
