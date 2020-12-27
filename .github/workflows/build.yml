@@ -24,7 +24,7 @@ jobs:
           bats-version: 1.2.1
 
       - name: Build
-        run: bats -p test
+        run: bats -r .
 
       - name: FOSSA
         uses: fossa-contrib/fossa-action@v1
