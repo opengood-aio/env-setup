@@ -22,6 +22,7 @@ function install_homebrew() {
         brew tap homebrew/cask
         brew tap buo/cask-upgrade
         brew tap pivotal/tap
+        brew tap kaos/shell
         write_success "Done!"
         write_blank_line
 

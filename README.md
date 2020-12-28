@@ -54,8 +54,6 @@ to install packages
 shell, as this cannot be automated due to security restrictions in macOS
 requiring root level access to modify `/etc/shells`  shells
 configuration file
-* One will be prompted for credentials to a `MarkLogic` account that has
-access to download MarkLogic's installation package
 * After `Flycut` and `ShiftIt` are installed, one will need to
 open the *System Preferences* and grant them elevated privileges under 
 `Security & Privacy > Privacy > Accessibility`
@@ -65,6 +63,12 @@ open the *System Preferences* and grant them elevated privileges under
 ```bash
 bin/setup-workstation.sh install <package>
 ```
+
+**Notes:**
+
+* For `marklogic` package, one will be prompted for credentials to a
+`MarkLogic` account that has access to download MarkLogic's installation
+package
 
 ### Update Everything
 

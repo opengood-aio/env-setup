@@ -1,3 +1,12 @@
+if ! hash brew 2>/dev/null; then
+    test_brew_prefix="$(brew --prefix)"
+    load "${test_brew_prefix}/lib/bats-support/load.bash"
+    load "${test_brew_prefix}/lib/bats-assert/load.bash"
+else
+    load '../node_modules/bats-support/load'
+    load '../node_modules/bats-assert/load'
+fi
+
 src_dir="${BATS_TEST_DIRNAME}/.."
 tmp_dir="${BATS_TMPDIR}"
 
