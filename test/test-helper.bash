@@ -1,7 +1,13 @@
 if [[ $(command -v brew) != "" ]]; then
     test_brew_prefix="$(brew --prefix)"
-    load "${test_brew_prefix}/lib/bats-support/load.bash"
-    load "${test_brew_prefix}/lib/bats-assert/load.bash"
+    if test -f "${test_brew_prefix}/lib/bats-support/load.bash" && \
+        test -f "${test_brew_prefix}/lib/bats-assert/load.bash"; then
+        load "${test_brew_prefix}/lib/bats-support/load.bash"
+        load "${test_brew_prefix}/lib/bats-assert/load.bash"
+    else
+        load "../node_modules/bats-support/load"
+        load "../node_modules/bats-assert/load"
+    fi
 else
     load "../node_modules/bats-support/load"
     load "../node_modules/bats-assert/load"
