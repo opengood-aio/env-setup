@@ -1,7 +1,7 @@
 # Environment Setup
 
 [![Build](https://github.com/opengoodio/env-setup/workflows/Build/badge.svg)](https://github.com/opengoodio/env-setup/actions?query=workflow%3Abuild)
-[![License](https://img.shields.io/badge/license-CC0-blue.svg)](https://raw.githubusercontent.com/opengoodio/env-setup/master/LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/opengoodio/env-setup/master/LICENSE)
 
 Automated environment setup and configuration for OpenGood computing
 environments

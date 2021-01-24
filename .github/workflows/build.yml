@@ -39,4 +39,4 @@ jobs:
         run: npm install --save-dev https://github.com/ztombol/bats-assert
 
       - name: Build
-        run: bats -r .
+        run: bats -r test
