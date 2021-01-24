@@ -1,4 +1,4 @@
-if hash brew 2>/dev/null; then
+if [[ $(command -v brew) != "" ]]; then
     test_brew_prefix="$(brew --prefix)"
     load "${test_brew_prefix}/lib/bats-support/load.bash"
     load "${test_brew_prefix}/lib/bats-assert/load.bash"
