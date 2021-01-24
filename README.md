@@ -1,6 +1,7 @@
 # Environment Setup
 
 [![Build](https://github.com/opengoodio/env-setup/workflows/Build/badge.svg)](https://github.com/opengoodio/env-setup/actions?query=workflow%3ABuild)
+[![License](https://img.shields.io/badge/license-CC0-blue.svg)](https://raw.githubusercontent.com/opengoodio/env-setup/master/LICENSE)
 
 Automated environment setup and configuration for OpenGood computing
 environments
@@ -86,4 +87,16 @@ bin/workstation-setup.sh uninstall <package>
 
 ```bash
 bin/workstation-setup.sh uninstall all
+```
+
+### Bulk Git Pull/Rebase
+
+At times, one needs to perform a `git pull -r` for multiple repos. This
+usually involves changing directories to each repo and manually issuing
+the above command.
+
+To perform this recursively in all sub-directories with repos:
+
+```bash
+bin/pull-git-repos.sh ~/workspace
 ```
