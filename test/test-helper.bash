@@ -1,10 +1,11 @@
-if ! hash brew 2>/dev/null; then
+if test -f "../node_modules/bats-support/load.bash" && \
+    test -f "../node_modules/bats-assert/load.bash"; then
+    load "../node_modules/bats-support/load"
+    load "../node_modules/bats-assert/load"
+else
     test_brew_prefix="$(brew --prefix)"
     load "${test_brew_prefix}/lib/bats-support/load.bash"
     load "${test_brew_prefix}/lib/bats-assert/load.bash"
-else
-    load '../node_modules/bats-support/load'
-    load '../node_modules/bats-assert/load'
 fi
 
 src_dir="${BATS_TEST_DIRNAME}/.."
