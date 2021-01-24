@@ -18,10 +18,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+
+      - name: Install Node
+        run: npm install
+
       - name: Setup BATS
         uses: mig4/setup-bats@v1
         with:
           bats-version: 1.2.1
+
+      - name: Install BATS Support
+        run: npm install --save-dev https://github.com/ztombol/bats-support
+
+      - name: Install BATS Assert
+        run: npm install --save-dev https://github.com/ztombol/bats-assert
 
       - name: Build
         run: bats -r .
