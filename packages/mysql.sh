@@ -16,7 +16,7 @@ function uninstall_mysql() {
     write_info "Uninstalling MySQL package..."
 
     write_info "Uninstalling MySQL..."
-    brew uninstall mysql || { write_warning "WARNING! NySQL is not installed and cannot be uninstalled. Continuing on."; }
+    brew uninstall mysql || { write_warning "WARNING! MySQL is not installed and cannot be uninstalled. Continuing on."; }
     write_success "Done!"
     write_blank_line
 }
