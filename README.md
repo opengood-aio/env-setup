@@ -53,8 +53,13 @@ bin/setup-workstation.sh install all
 to install packages
 * One will be prompted to interactively enter the path to `Bash 5.0`
 shell, as this cannot be automated due to security restrictions in macOS
-requiring root level access to modify `/etc/shells`  shells
+requiring root level access to modify `/etc/shells` shells
 configuration file
+* For `git` package, one will be prompted for:
+  * Git `name`
+  * Git `email`
+  * GitHub `username`
+  * GitHub `password` or `access token` (latter used for 2FA)
 * After `Flycut` and `ShiftIt` are installed, one will need to
 open the *System Preferences* and grant them elevated privileges under 
 `Security & Privacy > Privacy > Accessibility`
