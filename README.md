@@ -10,7 +10,7 @@ environments
 
 * Access to GitHub with permissions to clone repos
 * Familiarity with running commands and scripts from `macOS` Terminal
-* Running the latest version of **macOS**, currently **Big Sur**
+* Running the latest version of **macOS**, currently **Monterey**
   * These scripts might work on previous versions, but are maintained
   with only the latest macOS version in mind
 
