@@ -55,7 +55,7 @@ to install packages
 shell, as this cannot be automated due to security restrictions in macOS
 requiring root level access to modify `/etc/shells` shells
 configuration file
-* For `Git`, one will be prompted for following for setup of various Git configurations:
+* For `Git`, one will be prompted for the following information to complete the setup of various Git configurations:
   * Git `name`
   * Git `email`
   * GitHub `username`
