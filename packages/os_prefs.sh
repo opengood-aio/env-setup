@@ -1,3 +1,15 @@
+function get_os_prefs_dependencies() {
+    write_info "Getting macOS preferences package dependencies to install..."
+
+    local dependencies=()
+    dependencies+=("dockutil")
+
+    local array
+    array="$(declare -p dependencies)"
+    local IFS=$'\v'
+    echo "${array#*=}"
+}
+
 function install_os_prefs() {
     write_info "Installing macOS preferences..."
 

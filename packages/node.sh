@@ -15,7 +15,7 @@ function install_node() {
         local package
         for package in "${supported_node_packages[@]}"; do
             local package_installed
-            package_installed=$(npm list -g "${package}")
+            package_installed=$(npm list -g "${package}" || { write_warning "Unable to install package"; })
 
             if [[ "$(contains_string "${package_installed}" "(empty)")" == "true" ]]; then
                 write_progress "- Installing Node package '${package}'"
@@ -41,12 +41,12 @@ function uninstall_node() {
         local package
         for package in "${supported_node_packages[@]}"; do
             local package_installed
-            package_installed=$(npm list -g "${package}")
+            package_installed=$(npm list -g "${package}" || { write_warning "Package not installed. Continuing on..."; } )
 
             if [[ "$(contains_string "${package_installed}" "(empty)")" == "false" ]]; then
                 write_progress "- Uninstalling Node package '${package}'"
                 write_blank_line
-                npm uninstall "${package}" -g
+                npm uninstall "${package}" -g || { write_warning "Package not installed. Continuing on..."; }
             fi
         done
         unset package

@@ -121,12 +121,11 @@ function install_intellij_idea_plugins() {
 
     local plugins=()
     plugins+=("BashSupportPro,pro.bashsupport")
-    plugins+=("Go,org.jetbrains.plugins.go")
     plugins+=("Ignore,mobi.hsz.idea.gitignore")
     plugins+=("Kotest,kotest-plugin-intellij")
+    plugins+=("Ktlint,com.nbadal.ktlint")
     plugins+=("MarkdownNavigator,com.vladsch.idea.multimarkdown")
     plugins+=("Python,Pythonid")
-
 
     if [[ ! -d "${intellij_idea_plugins_dir}" ]]; then
     	write_progress "Creating IntelliJ IDEA plugins directory '${intellij_idea_plugins_dir}'..."

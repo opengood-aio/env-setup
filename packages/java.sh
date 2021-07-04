@@ -17,7 +17,7 @@ function install_java() {
         write_info "Installing Java OpenJDK versions..."
         local version
         for version in "${supported_java_versions[@]}"; do
-            brew cask list "adoptopenjdk${version}" &>/dev/null || brew cask install "adoptopenjdk${version}"
+            brew list "adoptopenjdk${version}" &>/dev/null || brew install --cask "adoptopenjdk${version}"
         done
         unset version
         write_success "Done!"
@@ -45,7 +45,7 @@ function uninstall_java() {
     write_info "Uninstalling Java OpenJDK versions..."
     local version
     for version in "${supported_java_versions[@]}"; do
-        brew cask uninstall "adoptopenjdk${version}" || { write_warning "Java OpenJDK ${version} is not installed and cannot be uninstalled. Continuing on..."; }
+        brew uninstall --cask "adoptopenjdk${version}" || { write_warning "Java OpenJDK ${version} is not installed and cannot be uninstalled. Continuing on..."; }
     done
     unset version
     write_success "Done!"

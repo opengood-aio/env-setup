@@ -1,6 +1,7 @@
 base_packages=()
 base_packages+=("bash")
 base_packages+=("bash_it")
+base_packages+=("dockutil")
 base_packages+=("git")
 base_packages+=("homebrew")
 base_packages+=("ide_prefs")

@@ -3,7 +3,7 @@ function install_iterm() {
 
     if [[ ! -d "${apps_dir}/iTerm.app" ]]; then
         write_info "Installing iTerm..."
-        brew cask install iterm2
+        brew install --cask iterm2
         write_success "Done!"
         write_blank_line
     else
@@ -22,7 +22,7 @@ function uninstall_iterm() {
     write_info "Uninstalling iTerm package..."
 
     write_info "Uninstalling iTerm..."
-    brew cask uninstall iterm2 || { write_warning "WARNING! iTerm is not installed and cannot be uninstalled. Continuing on."; }
+    brew uninstall --cask iterm2 || { write_warning "WARNING! iTerm is not installed and cannot be uninstalled. Continuing on."; }
     write_success "Done!"
     write_blank_line
 

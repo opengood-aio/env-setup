@@ -151,6 +151,7 @@ time {
 
         if [[ "$(contains_item_in_array "all" "${args[@]}")" == "true" ]]; then
             uninstall_os_prefs
+            uninstall_dockutil
 
             write_info "Uninstalling required packages..."
             print_items_in_array "${required_workstation_packages[@]}"
@@ -161,7 +162,7 @@ time {
 
             uninstall_ide_prefs
             uninstall_git
-            uninstall_bas_hit
+            uninstall_bash_it
             uninstall_bash
             uninstall_homebrew
         fi

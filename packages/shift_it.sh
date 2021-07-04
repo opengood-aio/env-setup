@@ -3,7 +3,7 @@ function install_shift_it() {
 
     if [[ ! -d "${apps_dir}/ShiftIt.app" ]]; then
         write_info "Installing ShiftIt..."
-        brew cask list shiftit &>/dev/null || brew cask install shiftit
+        brew list shiftit &>/dev/null || brew install shiftit
         write_success "Done!"
         write_blank_line
 
@@ -27,7 +27,7 @@ function uninstall_shift_it() {
     write_info "Uninstalling ShiftIt package..."
 
     write_info "Uninstalling ShiftIt..."
-    brew cask uninstall shiftit || { write_warning "WARNING! ShiftIt is not installed and cannot be uninstalled. Continuing on."; }
+    brew uninstall shiftit || { write_warning "WARNING! ShiftIt is not installed and cannot be uninstalled. Continuing on."; }
     write_success "Done!"
     write_blank_line
 }

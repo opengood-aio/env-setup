@@ -20,9 +20,6 @@ function install_homebrew() {
         write_info "Installing Homebrew taps..."
         brew tap homebrew/services
         brew tap homebrew/cask
-        brew tap buo/cask-upgrade
-        brew tap pivotal/tap
-        brew tap kaos/shell
         write_success "Done!"
         write_blank_line
 

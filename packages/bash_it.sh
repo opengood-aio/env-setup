@@ -36,11 +36,6 @@ function install_bash_it() {
         write_success "Done!"
         write_blank_line
 
-        write_info "Installing CF CLI Bash parameter completion..."
-        cp resources/cf_cli.completion.bash ${bash_it_dir}/completion/available
-        write_success "Done!"
-        write_blank_line
-
         write_info "Installing bash-it..."
         "${bash_it_dir}"/install.sh --silent
         write_success "Done!"
@@ -68,10 +63,9 @@ EOF
         write_success "Done!"
         write_blank_line
 
-        write_info "Enabling Bash parameter completion for Git, SSH, and CF CLI..."
+        write_info "Enabling Bash parameter completion for Git and SSH..."
         bash-it enable completion git
         bash-it enable completion ssh
-        bash-it enable completion cf_cli
         write_success "Done!"
         write_blank_line
 

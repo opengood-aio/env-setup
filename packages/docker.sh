@@ -4,7 +4,7 @@ function install_docker() {
     if [[ ! -d "${docker_app}" ]]; then
         write_info "Downloading Docker..."
         cd_push "${downloads_dir}"
-        curl -o docker.dmg https://download.docker.com/mac/stable/Docker.dmg
+        curl -o docker.dmg https://desktop.docker.com/mac/stable/amd64/Docker.dmg
         write_success "Done!"
         write_blank_line
 

@@ -3,7 +3,7 @@ function install_sublime_text() {
 
     if [[ ! -d "${apps_dir}/Sublime Text.app" ]]; then
         write_info "Installing Sublime Text..."
-        brew cask install sublime-text
+        brew install --cask sublime-text
         write_success "Done!"
         write_blank_line
     else
@@ -17,7 +17,7 @@ function uninstall_sublime_text() {
     write_info "Uninstalling Sublime Text package..."
 
     write_info "Uninstalling Sublime Text..."
-    brew cask uninstall sublime-text || { write_warning "WARNING! Sublime Text is not installed and cannot be uninstalled. Continuing on."; }
+    brew uninstall --cask sublime-text || { write_warning "WARNING! Sublime Text is not installed and cannot be uninstalled. Continuing on."; }
     write_success "Done!"
     write_blank_line
 }

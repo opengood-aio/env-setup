@@ -30,8 +30,8 @@ function install_git() {
         write_blank_line
 
         write_info "Installing Git dependencies..."
-        brew list git-together &>/dev/null || brew install git-together
-        brew list git-author &>/dev/null || brew install git-author
+        brew list git-together &>/dev/null || brew install pivotal/tap/git-together
+        brew list git-author &>/dev/null || brew install pivotal/tap/git-author
         brew list vim &>/dev/null || brew install vim
         write_success "Done!"
         write_blank_line

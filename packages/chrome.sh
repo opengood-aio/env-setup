@@ -3,7 +3,7 @@ function install_chrome() {
 
     if [[ ! -d "${apps_dir}/Google Chrome.app" ]]; then
         write_info "Installing Google Chrome..."
-        brew cask install google-chrome
+        brew install --cask google-chrome
         write_success "Done!"
         write_blank_line
     else
@@ -17,7 +17,7 @@ function uninstall_chrome() {
     write_info "Uninstalling Google Chrome package..."
 
     write_info "Uninstalling Google Chrome..."
-    brew cask uninstall google-chrome || { write_warning "WARNING! Google Chrome is not installed and cannot be uninstalled. Continuing on."; }
+    brew uninstall --cask google-chrome || { write_warning "WARNING! Google Chrome is not installed and cannot be uninstalled. Continuing on."; }
     write_success "Done!"
     write_blank_line
 }
