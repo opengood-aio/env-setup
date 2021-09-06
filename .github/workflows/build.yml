@@ -1,12 +1,15 @@
 name: build
 # description:
-# - Runs Bash build executing tests
+# - Runs Gradle build compiling source code and executing tests
 on:
   push:
     branches:
       - main
     paths-ignore:
+      - '.github/workflows/cancel.yml'
+      - '.github/workflows/release.yml'
       - '.gitignore'
+      - 'gradle.properties'
       - 'LICENSE'
       - 'README.md'
 
@@ -19,24 +22,31 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup Node
-        uses: actions/setup-node@v2
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Setup Java
+        uses: actions/setup-java@v1
         with:
-          node-version: '12'
-
-      - name: Install Node
-        run: npm install
-
-      - name: Setup BATS
-        uses: mig4/setup-bats@v1
-        with:
-          bats-version: 1.2.1
-
-      - name: Install BATS Support
-        run: npm install --save-dev https://github.com/ztombol/bats-support
-
-      - name: Install BATS Assert
-        run: npm install --save-dev https://github.com/ztombol/bats-assert
+          java-version: 11
+          distribution: 'adopt'
 
       - name: Build
-        run: bats -r test
+        uses: burrunan/gradle-cache-action@v1
+        with:
+          arguments: clean build
+          gradle-version: wrapper
+
+      - name: Codestyle
+        uses: fabiocapasso93/gha-kotlin-linter@v1.0
+
+      - name: Coverage
+        uses: codecov/codecov-action@v1
+        with:
+          file: ./build/reports/jacoco/test/jacocoTestReport.xml
+          verbose: true
+
+      - name: FOSSA
+        uses: fossas/fossa-action@v1
+        with:
+          api-key: ${{ secrets.FOSSA_API_KEY }}
