@@ -1,4 +1,4 @@
-function install_jq() {
+function install_dockutil() {
     write_info "Installing Dockutil package..."
 
     write_info "Installing Dockutil..."
@@ -7,7 +7,7 @@ function install_jq() {
     write_blank_line
 }
 
-function uninstall_jq() {
+function uninstall_dockutil() {
     write_info "Uninstalling Dockutil package..."
 
     write_info "Uninstalling Dockutil..."
