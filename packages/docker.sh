@@ -4,7 +4,7 @@ function install_docker() {
     if [[ ! -d "${docker_app}" ]]; then
         write_info "Downloading Docker..."
         cd_push "${downloads_dir}"
-        curl -o docker.dmg https://desktop.docker.com/mac/stable/amd64/Docker.dmg
+        curl -o docker.dmg https://desktop.docker.com/mac/main/arm64/Docker.dmg
         write_success "Done!"
         write_blank_line
 
@@ -33,6 +33,7 @@ function install_docker() {
         write_blank_line
 
         write_info "Installing Docker Bash parameter completion..."
+        sudo mkdir -p /usr/local/etc/bash_completion.d
         cd_push /usr/local/etc/bash_completion.d
         ln -fs "${docker_resources_dir}"/etc/docker.bash-completion
         ln -fs "${docker_resources_dir}"/etc/docker-machine.bash-completion

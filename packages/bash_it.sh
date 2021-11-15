@@ -41,21 +41,6 @@ function install_bash_it() {
         write_success "Done!"
         write_blank_line
 
-        write_info "Configuring Bash profile to export Homebrew's sbin directory in PATH env variable and initial wokrking directory..."
-        cat <<EOF >>"${bash_profile}"
-
-# export Homebrew sbin directory in PATH env variable
-export PATH=/usr/local/sbin:\$PATH
-
-# set initial working directory
-cd ~/workspace
-
-EOF
-
-        source "${bash_profile}"
-        write_success "Done!"
-        write_blank_line
-
         write_info "Sourcing Bash profile and bash-it..."
         export BASH_IT=${bash_it_dir}
         source "${bash_profile}"

@@ -124,7 +124,6 @@ function install_intellij_idea_plugins() {
     plugins+=("Ignore,mobi.hsz.idea.gitignore")
     plugins+=("Kotest,kotest-plugin-intellij")
     plugins+=("Ktlint,com.nbadal.ktlint")
-    plugins+=("MarkdownNavigator,com.vladsch.idea.multimarkdown")
     plugins+=("Python,Pythonid")
 
     if [[ ! -d "${intellij_idea_plugins_dir}" ]]; then

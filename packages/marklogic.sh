@@ -78,7 +78,7 @@ function install_marklogic() {
         fi
 
         write_info "Starting MarkLogic service..."
-        "${start_up_dir}"/MarkLogic/Marklogic start
+        "${startup_items_dir}"/MarkLogic/Marklogic start
         write_success "Done!"
         write_blank_line
     else
@@ -91,9 +91,9 @@ function install_marklogic() {
 function uninstall_marklogic() {
     write_info "Uninstalling MarkLogic package..."
 
-	if [[ -f "${start_up_dir}"/MarkLogic/MarkLogic ]]; then
+	if [[ -f "${startup_items_dir}"/MarkLogic/MarkLogic ]]; then
         write_info "Stopping MarkLogic service..."
-        "${start_up_dir}"/MarkLogic/MarkLogic stop
+        "${startup_items_dir}"/MarkLogic/MarkLogic stop
         write_success "Done!"
        write_blank_line
     fi
@@ -112,7 +112,7 @@ function uninstall_marklogic() {
     write_info "Uninstalling MarkLogic..."
     sudo rm -Rf "${library_dir}"/MarkLogic
     sudo rm -Rf "${app_support_dir}/MarkLogic"
-    sudo rm -Rf "${start_up_dir}"/MarkLogic
+    sudo rm -Rf "${startup_items_dir}"/MarkLogic
     sudo rm -Rf "${library_dir}"/PreferencePanes/MarkLogic.prefPane
     sudo pkgutil --forget com.marklogic.server || { write_warning "WARNING! MarkLogic Server not installed and cannot be uninstalled. Continuing on."; }
     write_success "Done!"

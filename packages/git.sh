@@ -2,8 +2,8 @@ function install_git() {
     write_info "Installing Git package..."
 
     if ! hash git 2>/dev/null ||
-        ! hash git-together 2>/dev/null ||
-        ! hash git-author 2>/dev/null ||
+#        ! hash git-together 2>/dev/null ||
+#        ! hash git-author 2>/dev/null ||
         ! hash vim 2>/dev/null; then
 
         write_info "Enter Git user name (i.e. John Smith)..."
@@ -12,7 +12,7 @@ function install_git() {
 
         write_info "Enter Git user email (i.e. user@domain.com)..."
         read -r git_user_email
-        git_user_initials=$(left_chars "${git_user_email}" 2)
+#        git_user_initials=$(left_chars "${git_user_email}" 2)
         write_blank_line
 
         write_info "Enter GitHub user name (i.e. jsmith)..."
@@ -29,14 +29,21 @@ function install_git() {
         write_success "Done!"
         write_blank_line
 
+        write_info "Creating Git symlink..."
+        sudo ln -s /opt/homebrew/bin/git /usr/local/bin/git
+        write_success "Done!"
+        write_blank_line
+
         write_info "Installing Git dependencies..."
-        brew list git-together &>/dev/null || brew install pivotal/tap/git-together
-        brew list git-author &>/dev/null || brew install pivotal/tap/git-author
+#        brew list git-together &>/dev/null || brew install pivotal/tap/git-together
+#        brew list git-author &>/dev/null || brew install pivotal/tap/git-author
         brew list vim &>/dev/null || brew install vim
         write_success "Done!"
         write_blank_line
 
         write_info "Setting global Git configurations..."
+        git config --global user.name "${git_user_name}"
+        git config --global user.email "${git_user_email}"
         git config --global core.editor /usr/local/bin/vim
         git config --global transfer.fsckobjects true
         write_success "Done!"
@@ -63,7 +70,8 @@ function install_git() {
             cd_push "${downloads_dir}"
             curl -o cred-alert-cli https://s3.amazonaws.com/cred-alert/cli/current-release/cred-alert-cli_${os_name}
             chmod 755 cred-alert-cli
-            mv cred-alert-cli /usr/local/bin
+            sudo mkdir -p /usr/local/bin
+            sudo mv cred-alert-cli /usr/local/bin
             cd_pop
         else
             write_info "cred-alert already installed..."
@@ -119,31 +127,59 @@ function install_git() {
         write_success "Done!"
         write_blank_line
 
-        write_info "Configuring Bash profile with git-together...'"
-        cat <<EOF >>"${bash_profile}"
-# git-together alias
-alias git=git-together
+#        write_info "Configuring Bash profile with git-together...'"
+#        cat <<EOF >>"${bash_profile}"
+## git-together alias
+#alias git=git-together
+#
+#EOF
+#
+#        source "${bash_profile}"
+#        write_success "Done!"
+#        write_blank_line
 
-EOF
-
-        source "${bash_profile}"
-        write_success "Done!"
-        write_blank_line
-
-        write_info "Configuring global git-together configuration...'"
-        cat <<EOF >>"${git_together}"
-[git-together "authors"]
-  $git_user_initials = "$git_user_name; $git_user_email"
-
-EOF
-        source "${bash_profile}"
-        write_success "Done!"
+#        write_info "Configuring global git-together configuration...'"
+#        cat <<EOF >>"${git_together}"
+#[git-together "authors"]
+#  $git_user_initials = "$git_user_name; $git_user_email"
+#
+#EOF
+#        source "${bash_profile}"
+#        write_success "Done!"
+#        write_blank_line
 
         write_info "Configuring GitHub properties...'"
         cat <<EOF >>"${github_properties}"
 github.user=$github_user_name
 github.access.token=$github_access_token
 
+EOF
+        source "${bash_profile}"
+        write_success "Done!"
+        write_blank_line
+
+        write_info "Configuring Git commands line functions in Bash profile...'"
+        cat <<EOF >>"${bash_profile}"
+function git-push() {
+    git st
+    ktlint -F "src/**/*.kt"
+    git add .
+    git st
+    git ci -m "$1"
+    git pull -r
+    git push
+    git st
+}
+
+function git-release() {
+    git ci --allow-empty -m "Create release"
+    git push
+}
+
+function git-deploy() {
+    git ci --allow-empty -m "Deploy $1 $2"
+    git push
+}
 EOF
         source "${bash_profile}"
         write_success "Done!"

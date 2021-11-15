@@ -8,14 +8,15 @@ caches_dir=${library_dir}/Caches
 containers_dir=${library_dir}/Containers
 logs_dir=${library_dir}/Logs
 prefs_dir=${library_dir}/Preferences
-start_up_dir=${library_dir}/StartupItems
+startup_items_dir=${library_dir}/StartupItems
 
 bash_it_dir=~/.bash_it
 bash_it_aliases=~/.bash_it/aliases
 bash_profile=~/.bash_profile
+zsh_profile=~/.zprofile
 
 bash_base=/bin/bash
-bash_latest=/usr/local/bin/bash
+bash_latest=/opt/homebrew/bin/bash
 shells=/etc/shells
 
 docker_app=${apps_dir}/Docker.app

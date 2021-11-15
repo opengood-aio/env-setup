@@ -3,7 +3,32 @@ function install_homebrew() {
 
     if ! hash brew 2>/dev/null; then
         write_info "Installing Homebrew..."
-        yes '' | ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        yes '' | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        write_success "Done!"
+        write_blank_line
+
+        write_info "Configuring Homebrew path in shell profiles and initial working directory..."
+        cat <<EOF >>"${bash_profile}"
+
+# Homebrew path
+eval "\$(/opt/homebrew/bin/brew shellenv)"
+
+# set initial working directory
+cd ~/workspace
+
+EOF
+
+        cat <<EOF >>"${zsh_profile}"
+
+# Homebrew path
+eval "\$(/opt/homebrew/bin/brew shellenv)"
+
+# set initial working directory
+cd ~/workspace
+
+EOF
+        source "${bash_profile}"
+        source "${zsh_profile}"
         write_success "Done!"
         write_blank_line
 
@@ -44,7 +69,7 @@ function uninstall_homebrew() {
 
     if hash brew 2>/dev/null; then
         write_info "Uninstalling Homebrew..."
-        yes '' | ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"
+        yes '' | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"
         write_success "Done!"
         write_blank_line
     else

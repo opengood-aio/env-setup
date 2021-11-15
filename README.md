@@ -6,13 +6,21 @@
 Automated environment setup and configuration for OpenGood computing
 environments
 
-## Prerequisites
+## Pre-Requisites
 
 * Access to GitHub with permissions to clone repos
 * Familiarity with running commands and scripts from `macOS` Terminal
-* Running the latest version of **macOS**, currently **Monterey**
-  * These scripts might work on previous versions, but are maintained
-  with only the latest macOS version in mind
+
+## Compatibility
+
+Installation is maintained for the recent version(s) of macOS and required
+tools:
+
+| Requirement | Version |
+|---|---|
+| macOS | Monterey 12.x |
+| Processor | Apple Mx |
+
 
 ## Getting Started
 

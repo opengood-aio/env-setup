@@ -44,8 +44,9 @@ function install_os_prefs() {
     write_blank_line
 
     write_info "Modifying appearance of Dock to remove standard icons and add custom icons..."
-    curl https://raw.githubusercontent.com/kcrawford/dockutil/master/scripts/dockutil >/usr/local/bin/dockutil
-    chmod a+rx,go-w /usr/local/bin/dockutil
+    curl https://raw.githubusercontent.com/kcrawford/dockutil/master/scripts/dockutil > "${downloads_dir}/dockutil"
+    chmod a+rx,go-w "${downloads_dir}/dockutil"
+    sudo mv "${downloads_dir}/dockutil" /usr/local/bin
     dockutil --list | awk -F\t '{print "dockutil --remove \""$1"\" --no-restart"}' | sh
     if dockutil --find Google\ Chrome | grep "was not found"; then dockutil --add "${apps_dir}"/Google\ Chrome.app --no-restart; fi
     if dockutil --find IntelliJ\ IDEA | grep "was not found"; then dockutil --add "${apps_dir}"/IntelliJ\ IDEA.app; fi
