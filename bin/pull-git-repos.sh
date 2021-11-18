@@ -11,7 +11,8 @@ source "${setup_dir}"/modules/commons.sh
 source "${setup_dir}"/modules/io.sh
 
 function usage() {
-    write_info "Usage: ./$(basename "$0") <base-dir>"
+    write_info "Usage: ./$(basename "$0") <base-dir> <branch-name>"
+    write_info "Note: <branch-name> is optional. Defaults to 'main'"
     write_blank_line
     exit 1
 }
@@ -29,11 +30,16 @@ fi
 time {
     args=("$@")
     base_dir="${args[0]}"
+    branch="${args[1]}"
 
     if [[ "${base_dir}" == "" ]] || [[ ! -d "${base_dir}" ]]; then
         write_error "ERROR! Base directory '${base_dir}' specified does not exist. Please try again."
         write_blank_line
         exit 1
+    fi
+
+    if [[ "${branch}" == "" ]] || [[ ! -d "${branch}" ]]; then
+        branch="main"
     fi
 
     write_info "Changing directory to '${base_dir}'..."
@@ -48,8 +54,8 @@ time {
         repo=$(replace_string "${repo_path}" "\/.git" "")
         write_info "Pulling latest changes for local Git repo '${repo}'..."
         cd_push "${repo}"
-        git checkout main || { git checkout master || { write_warning "Unable to checkout main or master branch"; } }
-        git pull origin main -r || { git pull origin master -r || { write_warning "Unable to pull changes"; } }
+        git checkout "${branch}" || { git checkout "${branch}" || { write_warning "Unable to checkout ${branch} branch"; } }
+        git pull origin "${branch}" -r || { git pull origin "${branch}" -r || { write_warning "Unable to pull changes"; } }
         cd_pop
         write_success "Done!"
         write_blank_line
