@@ -7,7 +7,7 @@ function install_homebrew() {
         write_success "Done!"
         write_blank_line
 
-        write_info "Configuring Homebrew path in shell profiles and initial working directory..."
+        write_info "Configuring Homebrew path in shell profiles and initial working directory in Bash profile(s)..."
         cat <<EOF >>"${bash_profile}"
 
 # Homebrew path
@@ -45,6 +45,7 @@ EOF
         write_info "Installing Homebrew taps..."
         brew tap homebrew/services
         brew tap homebrew/cask
+        brew tap homebrew/cask-versions
         write_success "Done!"
         write_blank_line
 

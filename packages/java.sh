@@ -9,15 +9,10 @@ function install_java() {
     if [[ ! -d "${java_home}" ]] &&
         [[ "$(contains_string "${java_home}" "Unable to find any JVMs matching version \"${version}\"")" == "false" ]]; then
 
-        write_info "Installing AdoptOpenJDK Homebrew tap..."
-        brew tap AdoptOpenJDK/openjdk
-        write_success "Done!"
-        write_blank_line
-
-        write_info "Installing Java OpenJDK versions..."
+        write_info "Installing Java Eclipse Foundation Adoptium versions..."
         local version
         for version in "${supported_java_versions[@]}"; do
-            brew list "adoptopenjdk${version}" &>/dev/null || brew install --cask "adoptopenjdk${version}"
+            brew list "temurin${version}" &>/dev/null || brew install --cask "temurin${version}"
         done
         unset version
         write_success "Done!"
@@ -42,10 +37,10 @@ function install_java() {
 function uninstall_java() {
     write_info "Uninstalling Java package..."
 
-    write_info "Uninstalling Java OpenJDK versions..."
+    write_info "Uninstalling Java Eclipse Foundation Adoptium versions..."
     local version
     for version in "${supported_java_versions[@]}"; do
-        brew uninstall --cask "adoptopenjdk${version}" || { write_warning "Java OpenJDK ${version} is not installed and cannot be uninstalled. Continuing on..."; }
+        brew uninstall --cask "temurin${version}" || { write_warning "Java Eclipse Foundation Adoptium ${version} is not installed and cannot be uninstalled. Continuing on..."; }
     done
     unset version
     write_success "Done!"

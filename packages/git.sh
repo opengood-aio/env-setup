@@ -127,7 +127,7 @@ function install_git() {
         write_success "Done!"
         write_blank_line
 
-#        write_info "Configuring Bash profile with git-together...'"
+#        write_info "Configuring git-together in Bash profile...'"
 #        cat <<EOF >>"${bash_profile}"
 ## git-together alias
 #alias git=git-together
