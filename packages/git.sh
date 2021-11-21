@@ -46,6 +46,7 @@ function install_git() {
         git config --global user.email "${git_user_email}"
         git config --global core.editor /usr/local/bin/vim
         git config --global transfer.fsckobjects true
+        git config --global pull.rebase true
         write_success "Done!"
         write_blank_line
 
