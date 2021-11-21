@@ -25,3 +25,5 @@ docker_resources_dir=${docker_app}/Contents/Resources
 git_hooks_dir=${workspace_dir}/git-hooks-core
 git_together=~/.git-together
 github_properties=~/.github.properties
+
+jenv_dir=${workspace_dir}/.jenv

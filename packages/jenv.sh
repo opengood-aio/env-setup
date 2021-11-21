@@ -25,9 +25,28 @@ function install_jenv() {
 if which jenv > /dev/null; then eval "\$(jenv init -)"; fi
 
 EOF
-        source "${bash_profile}"
-        write_success "Done!"
-        write_blank_line
+    source "${bash_profile}"
+    write_success "Done!"
+    write_blank_line
+
+    write_info "Creating jEnv directory '${jenv_dir}'..."
+    mkdir -p "${jenv_dir}"
+    write_success "Done!"
+    write_blank_line
+
+    write_info "Adding Java installations to jEnv..."
+    local version
+    for version in "${supported_java_versions[@]}"; do
+        jenv add "/Library/Java/JavaVirtualMachines/temurin-${version}.jdk/Contents/Home"
+    done
+    unset version
+    write_success "Done!"
+    write_blank_line
+
+    write_info "Configuring jEnv with Java default version '${default_java_version}'..."
+    jenv global "${default_java_version}"
+    write_success "Done!"
+    write_blank_line
 }
 
 function uninstall_jenv() {
