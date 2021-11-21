@@ -38,9 +38,13 @@ time {
         exit 1
     fi
 
-    if [[ "${branch}" == "" ]] || [[ ! -d "${branch}" ]]; then
+    if [[ "${branch}" == "" ]]; then
         branch="main"
     fi
+
+    write_info "Base dir: ${base_dir}"
+    write_info "  Branch: ${branch}"
+    write_blank_line
 
     write_info "Changing directory to '${base_dir}'..."
     cd_push "${base_dir}"
