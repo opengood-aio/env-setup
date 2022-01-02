@@ -173,6 +173,7 @@ function git-push() {
 }
 
 function git-release() {
+    git pull -r
     git ci --allow-empty -m "Create release"
     git push
 }
