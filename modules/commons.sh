@@ -1,4 +1,4 @@
-function contains_item_in_array() {
+contains_item_in_array() {
     local item="$1"
     shift
 
@@ -13,7 +13,7 @@ function contains_item_in_array() {
     echo "${contains}"
 }
 
-function contains_string() {
+contains_string() {
     local string="$1"
     local search_string="$2"
 
@@ -24,7 +24,7 @@ function contains_string() {
     fi
 }
 
-function contains_string_in_file() {
+contains_string_in_file() {
     local file="$1"
     local search_string="$2"
 
@@ -38,7 +38,7 @@ function contains_string_in_file() {
     fi
 }
 
-function create_dir() {
+create_dir() {
     local dir="$1"
 
     if [[ ! -d "${dir}" ]]; then
@@ -46,7 +46,7 @@ function create_dir() {
     fi
 }
 
-function file_not_empty() {
+file_not_empty() {
     local file="$1"
 
     if [[ -f "${file}" ]] && [[ ! -s "${file}" ]]; then
@@ -56,7 +56,7 @@ function file_not_empty() {
     fi
 }
 
-function find_string_in_file() {
+find_string_in_file() {
     local file="$1"
     local search_string="$2"
 
@@ -76,7 +76,7 @@ function find_string_in_file() {
     echo "${output}"
 }
 
-function find_strings_in_file() {
+find_strings_in_file() {
     local file="$1"
     local search_string="$2"
 
@@ -86,7 +86,7 @@ function find_strings_in_file() {
     echo "${output}"
 }
 
-function find_strings_and_line_numbers_in_file() {
+find_strings_and_line_numbers_in_file() {
     local file="$1"
     local search_string="$2"
 
@@ -96,13 +96,13 @@ function find_strings_and_line_numbers_in_file() {
     echo "${output}"
 }
 
-function function_exists() {
+function_exists() {
     local name="$1"
     declare -f -F "${name}" >/dev/null
     return $?
 }
 
-function get_arg_value() {
+get_arg_value() {
     local arg="$1"
     shift
 
@@ -117,7 +117,7 @@ function get_arg_value() {
     echo "${value}"
 }
 
-function get_array_item_index() {
+get_array_item_index() {
     local value="$1"
     local array=("$@")
 
@@ -133,19 +133,19 @@ function get_array_item_index() {
     echo "${index}"
 }
 
-function get_array_item_value() {
+get_array_item_value() {
     local index="$1"
     local array=("$@")
 
     echo "${array[${index}]}"
 }
 
-function get_array_length() {
+get_array_length() {
     local array=("$@")
     echo ${#array[@]}
 }
 
-function get_count_of_leading_spaces_in_string() {
+get_count_of_leading_spaces_in_string() {
     local string="$1"
 
     local count
@@ -153,7 +153,7 @@ function get_count_of_leading_spaces_in_string() {
     echo "${count}"
 }
 
-function join_string() {
+join_string() {
     local delimiter="$1"
     shift 1
     local array=("$@")
@@ -166,7 +166,7 @@ function join_string() {
     echo "${output}"
 }
 
-function mask_string() {
+mask_string() {
     local string="$1"
     while read -r -n1 character; do
         value+="x"
@@ -174,7 +174,7 @@ function mask_string() {
     echo "${value}"
 }
 
-function left_chars() {
+left_chars() {
     local string="$1"
     local chars="$2"
 
@@ -182,7 +182,7 @@ function left_chars() {
     echo "${value}"
 }
 
-function left_pad_string() {
+left_pad_string() {
     local string="$1"
     local pad_char="$2"
     local length="$3"
@@ -196,7 +196,7 @@ function left_pad_string() {
     echo "${output}"
 }
 
-function left_trim_occurrences() {
+left_trim_occurrences() {
     local string="$1"
     local count="$2"
 
@@ -205,7 +205,7 @@ function left_trim_occurrences() {
     echo "${output}"
 }
 
-function print_items_in_array() {
+print_items_in_array() {
     local array=("$@")
 
     local item
@@ -215,7 +215,7 @@ function print_items_in_array() {
     unset item
 }
 
-function read_password_input() {
+read_password_input() {
     unset password
     local password=""
     while IFS= read -r -s -n1 input; do
@@ -234,13 +234,13 @@ function read_password_input() {
     echo "${password}"
 }
 
-function remove_leading_char() {
+remove_leading_char() {
     local string="$1"
     local value=${string#?}
     echo "${value}"
 }
 
-function remove_special_chars() {
+remove_special_chars() {
     local string="$1"
 
     local value
@@ -248,7 +248,7 @@ function remove_special_chars() {
     echo "${value}"
 }
 
-function remove_special_chars_but_period() {
+remove_special_chars_but_period() {
     local string="$1"
 
     local value
@@ -256,13 +256,13 @@ function remove_special_chars_but_period() {
     echo "${value}"
 }
 
-function remove_trailing_char() {
+remove_trailing_char() {
     local string="$1"
     local value=${string%?}
     echo "${value}"
 }
 
-function remove_whitespace_chars() {
+remove_whitespace_chars() {
     local string="$1"
 
     local value
@@ -270,7 +270,7 @@ function remove_whitespace_chars() {
     echo "${value}"
 }
 
-function replace_special_chars_with_dash() {
+replace_special_chars_with_dash() {
     local string="$1"
 
     local value
@@ -278,7 +278,7 @@ function replace_special_chars_with_dash() {
     echo "${value}"
 }
 
-function replace_special_chars_with_whitespace() {
+replace_special_chars_with_whitespace() {
     local string="$1"
 
     local value
@@ -286,12 +286,12 @@ function replace_special_chars_with_whitespace() {
     echo "${value}"
 }
 
-function replace_newline_placeholder_in_file() {
+replace_newline_placeholder_in_file() {
     local file="$1"
     sed -i '' $'s/\[newline\]/\\\n/g' "${file}"
 }
 
-function replace_string() {
+replace_string() {
     local string="$1"
     local search_string="$2"
     local replace_string="$3"
@@ -301,7 +301,7 @@ function replace_string() {
     echo "${value}"
 }
 
-function replace_string_in_file() {
+replace_string_in_file() {
     local file="$1"
     local search_string="$2"
     local replace_string="$3"
@@ -310,7 +310,7 @@ function replace_string_in_file() {
     replace_newline_placeholder_in_file "${file}"
 }
 
-function split_string_into_array() {
+split_string_into_array() {
     local string="$1"
     local delimiter="$2"
 
@@ -322,7 +322,7 @@ function split_string_into_array() {
     echo "${array#*=}"
 }
 
-function string_ends_with() {
+string_ends_with() {
     local string="$1"
     local character="$2"
 
@@ -333,7 +333,7 @@ function string_ends_with() {
     fi
 }
 
-function string_starts_with() {
+string_starts_with() {
     local string="$1"
     local character="$2"
 
@@ -344,7 +344,7 @@ function string_starts_with() {
     fi
 }
 
-function to_lower_case() {
+to_lower_case() {
     local string="$1"
 
     local value
@@ -352,7 +352,7 @@ function to_lower_case() {
     echo "${value}"
 }
 
-function to_title_case() {
+to_title_case() {
     local string="$1"
 
     local value
@@ -361,7 +361,7 @@ function to_title_case() {
     echo "${value}"
 }
 
-function to_upper_case() {
+to_upper_case() {
     local string="$1"
 
     local value
@@ -369,7 +369,7 @@ function to_upper_case() {
     echo "${value}"
 }
 
-function var_is_defined() {
+var_is_defined() {
     local name="$1"
 
     if [[ -n ${!name:-} ]]; then
@@ -379,36 +379,36 @@ function var_is_defined() {
     fi
 }
 
-function write_blank_line() {
+write_blank_line() {
     echo "" 1>&2
 }
 
-function write_error() {
+write_error() {
     local msg="$1"
     echo -e "${red_color}${msg}${no_color}" >&2
 }
 
-function write_info() {
+write_info() {
     local msg="$1"
     echo -e "${cyan_color}${msg}${no_color}" 1>&2
 }
 
-function write_message() {
+write_message() {
     local msg="$1"
     echo -e "${msg}" 1>&2
 }
 
-function write_progress() {
+write_progress() {
     local msg="$1"
     echo -e "${purple_color}${msg}${no_color}" 1>&2
 }
 
-function write_success() {
+write_success() {
     local msg="$1"
     echo -e "${green_color}${msg}${no_color}" 1>&2
 }
 
-function write_warning() {
+write_warning() {
     local msg="$1"
     echo -e "${yellow_color}${msg}${no_color}" 1>&2
 }

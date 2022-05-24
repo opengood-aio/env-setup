@@ -1,4 +1,4 @@
-function install_jq() {
+install_jq() {
     write_info "Installing JQ package..."
 
     write_info "Installing JQ..."
@@ -7,7 +7,7 @@ function install_jq() {
     write_blank_line
 }
 
-function uninstall_jq() {
+uninstall_jq() {
     write_info "Uninstalling JQ package..."
 
     write_info "Uninstalling JQ..."

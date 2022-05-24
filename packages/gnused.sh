@@ -1,4 +1,4 @@
-function install_gnused() {
+install_gnused() {
     write_info "Installing GNU Sed package..."
 
     write_info "Installing GNU Sed..."
@@ -7,7 +7,7 @@ function install_gnused() {
     write_blank_line
 }
 
-function uninstall_gnused() {
+uninstall_gnused() {
     write_info "Uninstalling GNU Sed package..."
 
     write_info "Uninstalling GNU Sed..."

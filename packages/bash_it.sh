@@ -1,4 +1,4 @@
-function install_bash_it() {
+install_bash_it() {
     write_info "Installing bash-it package..."
 
     if [[ ! -d "${bash_it_dir}" ]]; then
@@ -72,7 +72,7 @@ function install_bash_it() {
     fi
 }
 
-function uninstall_bash_it() {
+uninstall_bash_it() {
     write_info "Uninstalling bash-it package..."
 
     write_info "Uninstalling bash-it dependencies..."

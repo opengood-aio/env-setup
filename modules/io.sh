@@ -1,8 +1,8 @@
-function cd_pop() {
+cd_pop() {
     popd >/dev/null || exit
 }
 
-function cd_push() {
+cd_push() {
     local path="$1"
     pushd "${path}" >/dev/null || exit
 }

@@ -1,4 +1,4 @@
-function get_gradle_dependencies() {
+get_gradle_dependencies() {
     write_info "Getting Gradle package dependencies to install..."
 
     local dependencies=()
@@ -10,7 +10,7 @@ function get_gradle_dependencies() {
     echo "${array#*=}"
 }
 
-function install_gradle() {
+install_gradle() {
     write_info "Installing Gradle package..."
 
     write_info "Installing Gradle..."
@@ -19,7 +19,7 @@ function install_gradle() {
     write_blank_line
 }
 
-function uninstall_gradle() {
+uninstall_gradle() {
     write_info "Uninstalling Gradle package..."
 
     write_info "Uninstalling Gradle..."

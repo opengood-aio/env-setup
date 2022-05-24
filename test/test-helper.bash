@@ -32,27 +32,27 @@ teardown() {
     test_cd_pop
 }
 
-function test_append_file_with_contents() {
+test_append_file_with_contents() {
     local file="$1"
     local contents="$2"
 
     echo "${contents}" >>"${file}"
 }
 
-function test_cd_pop() {
+test_cd_pop() {
     popd >/dev/null || exit
 }
 
-function test_cd_push() {
+test_cd_push() {
     local path="$1"
     pushd "${path}" >/dev/null || exit
 }
 
-function test_cd_tmp_dir() {
+test_cd_tmp_dir() {
     test_cd_push "${tmp_dir}"
 }
 
-function test_contains_string() {
+test_contains_string() {
     local string="$1"
     local search_string="$2"
 
@@ -63,7 +63,7 @@ function test_contains_string() {
     fi
 }
 
-function test_create_dir() {
+test_create_dir() {
     local dir="$1"
 
     if [[ ! -d "${dir}" ]]; then
@@ -71,7 +71,7 @@ function test_create_dir() {
     fi
 }
 
-function test_create_file() {
+test_create_file() {
     local file="$1"
 
     if [[ ! -f "${file}" ]]; then
@@ -79,14 +79,14 @@ function test_create_file() {
     fi
 }
 
-function test_create_file_with_contents() {
+test_create_file_with_contents() {
     local file="$1"
     local contents="$2"
 
     echo "${contents}" >"${file}"
 }
 
-function test_remove_dir() {
+test_remove_dir() {
     local dir="$1"
 
     if [[ -d "${dir}" ]]; then
@@ -95,7 +95,7 @@ function test_remove_dir() {
     fi
 }
 
-function test_remove_file() {
+test_remove_file() {
     local file="$1"
 
     if [[ -f "${file}" ]]; then

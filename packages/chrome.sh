@@ -1,4 +1,4 @@
-function install_chrome() {
+install_chrome() {
     write_info "Installing Google Chrome package..."
 
     if [[ ! -d "${apps_dir}/Google Chrome.app" ]]; then
@@ -13,7 +13,7 @@ function install_chrome() {
     fi
 }
 
-function uninstall_chrome() {
+uninstall_chrome() {
     write_info "Uninstalling Google Chrome package..."
 
     write_info "Uninstalling Google Chrome..."

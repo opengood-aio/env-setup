@@ -1,4 +1,4 @@
-function install_ide_prefs() {
+install_ide_prefs() {
     write_info "Installing IDE preferences package..."
 
     write_info "Installing IDE preferences..."
@@ -17,7 +17,7 @@ function install_ide_prefs() {
     write_blank_line
 }
 
-function uninstall_ide_prefs() {
+uninstall_ide_prefs() {
     write_info "Uninstalling IDE preferences package..."
 
     write_info "Uninstalling IDE preferences..."

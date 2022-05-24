@@ -1,4 +1,4 @@
-function install_kscript() {
+install_kscript() {
     write_info "Installing KScript package..."
 
     write_info "Installing KScript..."
@@ -7,7 +7,7 @@ function install_kscript() {
     write_blank_line
 }
 
-function uninstall_kscript() {
+uninstall_kscript() {
     write_info "Uninstalling KScript package..."
 
     write_info "Uninstalling KScript..."

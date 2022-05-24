@@ -1,4 +1,4 @@
-function get_json() {
+get_json() {
     local object="$1"
     local path="$2"
 
@@ -7,7 +7,7 @@ function get_json() {
     echo "${json}"
 }
 
-function get_json_from_yaml() {
+get_json_from_yaml() {
     local file="$1"
     local path="$2"
 
@@ -16,7 +16,7 @@ function get_json_from_yaml() {
     echo "${yaml}"
 }
 
-function get_yaml() {
+get_yaml() {
     local file="$1"
     local path="$2"
 

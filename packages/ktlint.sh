@@ -1,4 +1,4 @@
-function install_ktlint() {
+install_ktlint() {
     write_info "Installing ktlint package..."
 
     write_info "Installing ktlint..."
@@ -7,7 +7,7 @@ function install_ktlint() {
     write_blank_line
 }
 
-function uninstall_ktlint() {
+uninstall_ktlint() {
     write_info "Uninstalling ktlint package..."
 
     write_info "Uninstalling ktlint..."

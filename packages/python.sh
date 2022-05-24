@@ -1,4 +1,4 @@
-function install_python() {
+install_python() {
     write_info "Installing Python package..."
 
     write_info "Installing Python..."
@@ -12,7 +12,7 @@ function install_python() {
     write_blank_line
 }
 
-function uninstall_python() {
+uninstall_python() {
     write_info "Uninstalling Python package..."
 
     write_info "Uninstalling Python..."

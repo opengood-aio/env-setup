@@ -1,6 +1,6 @@
 source "${setup_dir}"/config/intellij_idea.sh
 
-function get_intellij_idea_dependencies() {
+get_intellij_idea_dependencies() {
     write_info "Getting Gradle package dependencies to install..."
 
     local dependencies=()
@@ -12,7 +12,7 @@ function get_intellij_idea_dependencies() {
     echo "${array#*=}"
 }
 
-function install_intellij_idea() {
+install_intellij_idea() {
     write_info "Installing IntelliJ IDEA package..."
 
     if [[ ! -d "${apps_dir}/IntelliJ IDEA.app" ]]; then
@@ -31,7 +31,7 @@ function install_intellij_idea() {
     fi
 }
 
-function uninstall_intellij_idea() {
+uninstall_intellij_idea() {
     write_info "Uninstalling IntelliJ IDEA package..."
 
     get_intellij_idea_product_info
@@ -62,7 +62,7 @@ function uninstall_intellij_idea() {
     write_blank_line
 }
 
-function get_intellij_idea_product_info() {
+get_intellij_idea_product_info() {
     write_info "Obtaining product information for latest version of IntelliJ IDEA..."
 
     local json
@@ -93,7 +93,7 @@ function get_intellij_idea_product_info() {
     write_blank_line
 }
 
-function download_intellij_idea_plugin() {
+download_intellij_idea_plugin() {
     local name="$1"
     local id="$2"
     local file="$3"
@@ -116,7 +116,7 @@ function download_intellij_idea_plugin() {
     write_blank_line
 }
 
-function install_intellij_idea_plugins() {
+install_intellij_idea_plugins() {
     write_info "Installing IntelliJ IDEA plugins..."
 
     local plugins=()
@@ -149,7 +149,7 @@ function install_intellij_idea_plugins() {
     cd_pop
 }
 
-function install_intellij_idea_settings() {
+install_intellij_idea_settings() {
     write_progress "Installing IntelliJ IDEA settings to '${intellij_idea_settings_dir}'..."
 
     rm -Rf "${intellij_idea_settings_dir}"

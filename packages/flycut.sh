@@ -1,4 +1,4 @@
-function install_flycut() {
+install_flycut() {
     write_info "Installing Flycut package..."
 
     if [[ ! -d "${apps_dir}/Flycut.app" ]]; then
@@ -13,7 +13,7 @@ function install_flycut() {
     fi
 }
 
-function uninstall_flycut() {
+uninstall_flycut() {
     write_info "Uninstalling Flycut package..."
 
     write_info "Uninstalling Flycut..."

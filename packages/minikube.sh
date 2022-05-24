@@ -1,4 +1,4 @@
-function install_minikube() {
+install_minikube() {
     write_info "Installing Minikube package..."
 
     write_info "Installing Minikube..."
@@ -7,7 +7,7 @@ function install_minikube() {
     write_blank_line
 }
 
-function uninstall_minikube() {
+uninstall_minikube() {
     write_info "Uninstalling Minikube package..."
 
     write_info "Uninstalling Minikube..."

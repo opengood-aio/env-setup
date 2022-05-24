@@ -1,4 +1,4 @@
-function get_pip_dependencies() {
+get_pip_dependencies() {
     write_info "Getting Pip package dependencies to install..."
 
     local dependencies=()
@@ -10,7 +10,7 @@ function get_pip_dependencies() {
     echo "${array#*=}"
 }
 
-function install_pip() {
+install_pip() {
     write_info "Installing Pip package..."
 
     if ! hash pip3 2>/dev/null; then
@@ -44,7 +44,7 @@ function install_pip() {
     fi
 }
 
-function uninstall_pip() {
+uninstall_pip() {
     write_info "Uninstalling Pip package..."
 
     if hash pip3 2>/dev/null; then

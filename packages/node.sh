@@ -1,4 +1,4 @@
-function install_node() {
+install_node() {
     write_info "Installing Node package..."
 
     if ! hash npm 2>/dev/null; then
@@ -34,7 +34,7 @@ function install_node() {
     fi
 }
 
-function uninstall_node() {
+uninstall_node() {
     write_info "Uninstalling Node package..."
 
 	if hash npm 2>/dev/null; then

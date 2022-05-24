@@ -1,4 +1,4 @@
-function install_sublime_text() {
+install_sublime_text() {
     write_info "Installing Sublime Text package..."
 
     if [[ ! -d "${apps_dir}/Sublime Text.app" ]]; then
@@ -13,7 +13,7 @@ function install_sublime_text() {
     fi
 }
 
-function uninstall_sublime_text() {
+uninstall_sublime_text() {
     write_info "Uninstalling Sublime Text package..."
 
     write_info "Uninstalling Sublime Text..."

@@ -1,4 +1,4 @@
-function install_gcc() {
+install_gcc() {
     write_info "Installing GCC package..."
 
     write_info "Installing GCC..."
@@ -7,7 +7,7 @@ function install_gcc() {
     write_blank_line
 }
 
-function uninstall_gcc() {
+uninstall_gcc() {
     write_info "Uninstalling GCC package..."
 
     write_info "Uninstalling GCC..."

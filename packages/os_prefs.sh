@@ -1,4 +1,4 @@
-function get_os_prefs_dependencies() {
+get_os_prefs_dependencies() {
     write_info "Getting macOS preferences package dependencies to install..."
 
     local dependencies=()
@@ -10,7 +10,7 @@ function get_os_prefs_dependencies() {
     echo "${array#*=}"
 }
 
-function install_os_prefs() {
+install_os_prefs() {
     write_info "Installing macOS preferences..."
 
     write_info "Setting macOS menu clock format..."
@@ -55,7 +55,7 @@ function install_os_prefs() {
     write_blank_line
 }
 
-function uninstall_os_prefs() {
+uninstall_os_prefs() {
     write_info "Uninstalling macOS preferences..."
 
     write_info "Resetting macOS menu clock format..."

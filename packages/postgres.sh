@@ -1,4 +1,4 @@
-function install_postgres() {
+install_postgres() {
     write_info "Installing Postgres package..."
 
     write_info "Installing Postgres..."
@@ -12,7 +12,7 @@ function install_postgres() {
     write_blank_line
 }
 
-function uninstall_postgres() {
+uninstall_postgres() {
     write_info "Uninstalling Postgres package..."
 
     write_info "Uninstalling Postgres..."

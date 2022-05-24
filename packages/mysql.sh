@@ -1,4 +1,4 @@
-function install_mysql() {
+install_mysql() {
     write_info "Installing MySQL package..."
 
     write_info "Installing MySQL..."
@@ -12,7 +12,7 @@ function install_mysql() {
     write_blank_line
 }
 
-function uninstall_mysql() {
+uninstall_mysql() {
     write_info "Uninstalling MySQL package..."
 
     write_info "Uninstalling MySQL..."

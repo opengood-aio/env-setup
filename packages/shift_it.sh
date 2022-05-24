@@ -1,4 +1,4 @@
-function install_shift_it() {
+install_shift_it() {
     write_info "Installing ShiftIt package..."
 
     if [[ ! -d "${apps_dir}/ShiftIt.app" ]]; then
@@ -23,7 +23,7 @@ function install_shift_it() {
     fi
 }
 
-function uninstall_shift_it() {
+uninstall_shift_it() {
     write_info "Uninstalling ShiftIt package..."
 
     write_info "Uninstalling ShiftIt..."

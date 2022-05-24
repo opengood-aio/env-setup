@@ -1,4 +1,4 @@
-function get_bats_dependencies() {
+get_bats_dependencies() {
     write_info "Getting BATS package dependencies to install..."
 
     local dependencies=()
@@ -10,22 +10,21 @@ function get_bats_dependencies() {
     echo "${array#*=}"
 }
 
-function install_bats() {
+install_bats() {
     write_info "Installing BATS package..."
 
     if ! hash bats-core 2>/dev/null; then
         write_info "Installing BATS Core..."
         brew list bats-core &>/dev/null || brew install bats-core
 
-        # TODO: Get fix for BATS tap
-        #write_info "Installing BATS Assert..."
-        #brew list bats-assert &>/dev/null || brew install kaos/shell/bats-assert
+        write_info "Installing BATS Assert..."
+        brew list bats-assert &>/dev/null || brew install kaos/shell/bats-assert
 
-        #write_info "Installing BATS File..."
-        #brew list bats-file &>/dev/null || brew install kaos/shell/bats-file
+        write_info "Installing BATS File..."
+        brew list bats-file &>/dev/null || brew install kaos/shell/bats-file
 
-        #write_info "Installing BATS Support..."
-        #brew list bats-support &>/dev/null || brew install kaos/shell/bats-support
+        write_info "Installing BATS Support..."
+        brew list bats-support &>/dev/null || brew install kaos/shell/bats-support
         write_success "Done!"
         write_blank_line
     else
@@ -35,7 +34,7 @@ function install_bats() {
     fi
 }
 
-function uninstall_bats() {
+uninstall_bats() {
     write_info "Uninstalling BATS package..."
 
     write_info "Uninstalling BATS Core..."

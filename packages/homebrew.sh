@@ -1,4 +1,4 @@
-function install_homebrew() {
+install_homebrew() {
     write_info "Installing Homebrew package..."
 
     if ! hash brew 2>/dev/null; then
@@ -65,7 +65,7 @@ EOF
     fi
 }
 
-function uninstall_homebrew() {
+uninstall_homebrew() {
     write_info "Uninstalling Homebrew package..."
 
     if hash brew 2>/dev/null; then

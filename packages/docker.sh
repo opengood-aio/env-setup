@@ -1,4 +1,4 @@
-function install_docker() {
+install_docker() {
     write_info "Installing Docker package..."
 
     if [[ ! -d "${docker_app}" ]]; then
@@ -48,7 +48,7 @@ function install_docker() {
     fi
 }
 
-function uninstall_docker() {
+uninstall_docker() {
     write_info "Uninstalling Docker package..."
 
     write_info "Uninstalling Docker installation directories..."

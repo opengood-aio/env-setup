@@ -1,4 +1,4 @@
-function load() {
+load() {
     local dir="$1"
 
     local package
@@ -11,7 +11,7 @@ function load() {
     unset package
 }
 
-function install() {
+install() {
     local array=("$@")
 
     local package
@@ -37,7 +37,7 @@ function install() {
     unset package
 }
 
-function uninstall() {
+uninstall() {
     local array=("$@")
 
     local package
@@ -54,7 +54,7 @@ function uninstall() {
     unset package
 }
 
-function verify() {
+verify() {
     local dir="$1"
     shift 1
     local array=("$@")

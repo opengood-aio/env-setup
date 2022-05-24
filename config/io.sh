@@ -12,6 +12,7 @@ startup_items_dir=${library_dir}/StartupItems
 
 bash_it_dir=~/.bash_it
 bash_it_aliases=~/.bash_it/aliases
+
 bash_profile=~/.bash_profile
 zsh_profile=~/.zprofile
 
@@ -27,3 +28,6 @@ git_together=~/.git-together
 github_properties=~/.github.properties
 
 jenv_dir=${workspace_dir}/.jenv
+
+vim=/usr/bin/vim
+vim_dir=~/.vim

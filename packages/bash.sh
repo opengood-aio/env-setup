@@ -1,4 +1,4 @@
-function install_bash() {
+install_bash() {
     write_info "Installing Bash package..."
 
     if [[ ! -f "${bash_latest}" ]]; then
@@ -40,7 +40,7 @@ function install_bash() {
     fi
 }
 
-function uninstall_bash() {
+uninstall_bash() {
     write_info "Uninstalling Bash package..."
 
     write_info "Uninstalling latest Bash version..."

@@ -1,4 +1,4 @@
-function install_dockutil() {
+install_dockutil() {
     write_info "Installing Dockutil package..."
 
     write_info "Installing Dockutil..."
@@ -7,7 +7,7 @@ function install_dockutil() {
     write_blank_line
 }
 
-function uninstall_dockutil() {
+uninstall_dockutil() {
     write_info "Uninstalling Dockutil package..."
 
     write_info "Uninstalling Dockutil..."

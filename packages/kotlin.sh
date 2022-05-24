@@ -1,4 +1,4 @@
-function install_kotlin() {
+install_kotlin() {
     write_info "Installing Kotlin package..."
 
     write_info "Installing Kotlin..."
@@ -7,7 +7,7 @@ function install_kotlin() {
     write_blank_line
 }
 
-function uninstall_kotlin() {
+uninstall_kotlin() {
     write_info "Uninstalling Kotlin package..."
 
     write_info "Uninstalling Kotlin..."

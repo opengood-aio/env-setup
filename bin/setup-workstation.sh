@@ -86,15 +86,16 @@ time {
         case "${args[0]}" in
         "all")
             install_homebrew
+            install_vim
             install_bash
             install_bash_it
             install_git
             install_ide_prefs
 
             write_info "Installing required packages..."
-            print_items_in_array "${required_workstation_packages[@]}"
+            print_items_in_array "${required_packages[@]}"
             write_blank_line
-            install "${required_workstation_packages[@]}"
+            install "${required_packages[@]}"
             write_success "Done!"
             write_blank_line
 
@@ -154,9 +155,9 @@ time {
             uninstall_dockutil
 
             write_info "Uninstalling required packages..."
-            print_items_in_array "${required_workstation_packages[@]}"
+            print_items_in_array "${required_packages[@]}"
             write_blank_line
-            uninstall "${required_workstation_packages[@]}"
+            uninstall "${required_packages[@]}"
             write_success "Done!"
             write_blank_line
 
@@ -164,6 +165,7 @@ time {
             uninstall_git
             uninstall_bash_it
             uninstall_bash
+            uninstall_vim
             uninstall_homebrew
         fi
         ;;

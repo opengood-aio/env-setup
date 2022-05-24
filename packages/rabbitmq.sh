@@ -1,4 +1,4 @@
-function install_rabbitmq() {
+install_rabbitmq() {
     write_info "Installing RabbitMQ package..."
 
     write_info "Installing RabbitMQ..."
@@ -12,7 +12,7 @@ function install_rabbitmq() {
     write_blank_line
 }
 
-function uninstall_rabbitmq() {
+uninstall_rabbitmq() {
     write_info "Uninstalling RabbitMQ package..."
 
     write_info "Uninstalling RabbitMQ..."

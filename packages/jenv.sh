@@ -1,4 +1,4 @@
-function get_jenv_dependencies() {
+get_jenv_dependencies() {
     write_info "Getting jEnv package dependencies to install..."
 
     local dependencies=()
@@ -10,7 +10,7 @@ function get_jenv_dependencies() {
     echo "${array#*=}"
 }
 
-function install_jenv() {
+install_jenv() {
     write_info "Installing jEnv package..."
 
     write_info "Installing jEnv..."
@@ -49,7 +49,7 @@ EOF
     write_blank_line
 }
 
-function uninstall_jenv() {
+uninstall_jenv() {
     write_info "Uninstalling jEnv package..."
 
     write_info "Uninstalling jEnv..."

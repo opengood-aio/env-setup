@@ -1,4 +1,4 @@
-function install_wget() {
+install_wget() {
     write_info "Installing WGet package..."
 
     write_info "Installing WGet..."
@@ -7,7 +7,7 @@ function install_wget() {
     write_blank_line
 }
 
-function uninstall_wget() {
+uninstall_wget() {
     write_info "Uninstalling WGet package..."
 
     write_info "Uninstalling WGet..."

@@ -1,6 +1,6 @@
 source "${setup_dir}"/config/java.sh
 
-function install_java() {
+install_java() {
     write_info "Installing Java package..."
 
     write_info "Obtaining JAVA_HOME path for installed Java version '${default_java_version}' as default version..."
@@ -34,7 +34,7 @@ function install_java() {
     fi
 }
 
-function uninstall_java() {
+uninstall_java() {
     write_info "Uninstalling Java package..."
 
     write_info "Uninstalling Java Eclipse Foundation Adoptium versions..."

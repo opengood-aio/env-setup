@@ -1,4 +1,4 @@
-function install_postman() {
+install_postman() {
     write_info "Installing Postman package..."
 
     write_info "Installing Postman..."
@@ -11,7 +11,7 @@ function install_postman() {
     write_blank_line
 }
 
-function uninstall_postman() {
+uninstall_postman() {
     write_info "Uninstalling Postman package..."
 
     write_info "Uninstalling Postman..."

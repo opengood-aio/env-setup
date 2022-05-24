@@ -1,4 +1,4 @@
-function install_yq() {
+install_yq() {
     write_info "Installing YQ package..."
 
     write_info "Installing YQ..."
@@ -7,7 +7,7 @@ function install_yq() {
     write_blank_line
 }
 
-function uninstall_yq() {
+uninstall_yq() {
     write_info "Uninstalling YQ package..."
 
     write_info "Uninstalling YQ..."

@@ -1,4 +1,4 @@
-function install_iterm() {
+install_iterm() {
     write_info "Installing iTerm package..."
 
     if [[ ! -d "${apps_dir}/iTerm.app" ]]; then
@@ -18,7 +18,7 @@ function install_iterm() {
     write_blank_line
 }
 
-function uninstall_iterm() {
+uninstall_iterm() {
     write_info "Uninstalling iTerm package..."
 
     write_info "Uninstalling iTerm..."
