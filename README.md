@@ -16,10 +16,10 @@ environments
 Installation is maintained for the recent version(s) of macOS and required
 tools:
 
-| Requirement | Version |
-|---|---|
-| macOS | Monterey 12.x |
-| Processor | Apple Mx |
+| Requirement | Version       |
+|-------------|---------------|
+| macOS       | Monterey 12.x |
+| Processor   | Apple Mx      |
 
 
 ## Getting Started
@@ -87,19 +87,19 @@ package
 ### Update Everything
 
 ```bash
-bin/workstation-setup.sh update
+bin/setup-workstation.sh update
 ```
 
 ### Uninstall Specific Software/Tools
 
 ```bash
-bin/workstation-setup.sh uninstall <package>
+bin/setup-workstation.sh uninstall <package>
 ```
 
 ### Uninstall Everything
 
 ```bash
-bin/workstation-setup.sh uninstall all
+bin/setup-workstation.sh uninstall all
 ```
 
 ### Bulk Git Pull/Rebase

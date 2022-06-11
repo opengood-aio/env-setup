@@ -1,4 +1,4 @@
-default_java_version=11
+default_java_version=17
 
 supported_java_versions=()
 supported_java_versions+=("11")

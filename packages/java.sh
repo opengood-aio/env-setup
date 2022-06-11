@@ -9,7 +9,7 @@ install_java() {
     if [[ ! -d "${java_home}" ]] &&
         [[ "$(contains_string "${java_home}" "Unable to find any JVMs matching version \"${version}\"")" == "false" ]]; then
 
-        write_info "Installing Java Eclipse Foundation Adoptium versions..."
+        write_info "Installing Adoptium Eclipse Temurin Java JDK versions..."
         local version
         for version in "${supported_java_versions[@]}"; do
             brew list "temurin${version}" &>/dev/null || brew install --cask "temurin${version}"
@@ -37,10 +37,10 @@ install_java() {
 uninstall_java() {
     write_info "Uninstalling Java package..."
 
-    write_info "Uninstalling Java Eclipse Foundation Adoptium versions..."
+    write_info "Uninstalling Adoptium Eclipse Temurin Java JDK versions..."
     local version
     for version in "${supported_java_versions[@]}"; do
-        brew uninstall --cask "temurin${version}" || { write_warning "Java Eclipse Foundation Adoptium ${version} is not installed and cannot be uninstalled. Continuing on..."; }
+        brew uninstall --cask "temurin${version}" || { write_warning "Adoptium Eclipse Temurin Java JDK ${version} is not installed and cannot be uninstalled. Continuing on..."; }
     done
     unset version
     write_success "Done!"
