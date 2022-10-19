@@ -123,7 +123,7 @@ function git-push() {
     ktlint -F "src/**/*.kt"
     git add .
     git st
-    git ci -m "$1"
+    git ci -m "\$1"
     git pull -r
     git push
     git st
@@ -137,7 +137,7 @@ function git-release() {
 
 function git-deploy() {
     git pull -r
-    git ci --allow-empty -m "Deploy $1 $2"
+    git ci --allow-empty -m "Deploy \$1 \$2"
     git push
 }
 EOF
