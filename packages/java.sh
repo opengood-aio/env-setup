@@ -18,6 +18,16 @@ install_java() {
         write_success "Done!"
         write_blank_line
 
+        write_info "Installing GraalVM Java JDK versions..."
+        local version
+        for version in "${supported_java_versions[@]}"; do
+
+            brew list "graalvm-ce-java${version}" &>/dev/null || brew install --cask "graalvm/tap/graalvm-ce-java${version}"
+        done
+        unset version
+        write_success "Done!"
+        write_blank_line
+
         write_info "Configuring JAVA_HOME path env variable with Java version '${default_java_version}' as default version..."
         export JAVA_HOME=$(/usr/libexec/java_home -v "${default_java_version}")
         write_success "Done!"
@@ -41,6 +51,11 @@ uninstall_java() {
     local version
     for version in "${supported_java_versions[@]}"; do
         brew uninstall --cask "temurin${version}" || { write_warning "Adoptium Eclipse Temurin Java JDK ${version} is not installed and cannot be uninstalled. Continuing on..."; }
+    done
+
+    write_info "Uninstalling GraalVM Java JDK versions..."
+    for version in "${supported_java_versions[@]}"; do
+        brew uninstall --cask "graalvm-ce-java${version}" || { write_warning "GraalVM Java JDK ${version} is not installed and cannot be uninstalled. Continuing on..."; }
     done
     unset version
     write_success "Done!"
