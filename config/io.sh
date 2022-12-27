@@ -27,6 +27,8 @@ git_hooks_dir=${workspace_dir}/git-hooks-core
 git_together=~/.git-together
 github_properties=~/.github.properties
 
+jvms_dir=${library_dir}/Java/JavaVirtualMachines
+
 jenv_dir=${workspace_dir}/.jenv
 
 vim=/usr/bin/vim
