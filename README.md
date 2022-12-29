@@ -78,12 +78,6 @@ open the *System Preferences* and grant them elevated privileges under
 bin/setup-workstation.sh install <package>
 ```
 
-**Notes:**
-
-* For `marklogic` package, one will be prompted for credentials to a
-`MarkLogic` account that has access to download MarkLogic's installation
-package
-
 ### Update Everything
 
 ```bash
