@@ -21,7 +21,7 @@ install_java() {
         write_info "Installing GraalVM Java JDK versions..."
         for version in "${supported_java_versions[@]}"; do
             brew list "graalvm-ce-java${version}" &>/dev/null || brew install --cask "graalvm/tap/graalvm-ce-java${version}"
-            jvm_dir=$(find "${jvms_dir}" -type d -name 'graalvm-ce-java*')
+            jvm_dir=$(find "${jvms_dir}" -type d -name "graalvm-ce-java${version}*")
             sudo xattr -r -d com.apple.quarantine "${jvm_dir}"
         done
         unset version
