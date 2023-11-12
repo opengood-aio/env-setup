@@ -16,10 +16,10 @@ environments
 Installation is maintained for the recent version(s) of macOS and required
 tools:
 
-| Requirement | Version       |
-|-------------|---------------|
-| macOS       | Monterey 12.x |
-| Processor   | Apple Mx      |
+| Requirement | Version     |
+|-------------|-------------|
+| macOS       | Sonoma 14.x |
+| Processor   | Apple Mx    |
 
 
 ## Getting Started
