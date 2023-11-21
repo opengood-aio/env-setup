@@ -68,7 +68,7 @@ configuration file
   * Git `email`
   * GitHub `username`
   * GitHub `password` or `access token` (latter used for 2FA)
-* After `Jumpcut` and `Rectangle` are installed, one will need to
+* After `CopyQ` and `Rectangle` are installed, one will need to
 open the *System Preferences* and grant them elevated privileges under 
 `Security & Privacy > Privacy > Accessibility`
 
