@@ -296,6 +296,32 @@ file=file.txt
     [ "${output}" = "Hello World!" ]
 }
 
+@test "'print_entries_in_map' outputs entries in map" {
+    write_info() {
+        local msg="$1"
+        echo "\\${msg}"
+    }
+
+    declare -gA test_map
+    test_map[foo]="bar"
+    test_map[baz]="paz"
+
+    run print_entries_in_map test_map
+
+    [ "${status}" -eq 0 ]
+    [ "$(test_contains_string "${output}" "\- foo = bar")" = "true" ]
+    [ "$(test_contains_string "${output}" "\- baz = paz")" = "true" ]
+}
+
+@test "'print_entries_in_map' does not output entries in map when no entries contained in map" {
+    declare -gA empty_map
+
+    run print_entries_in_map empty_map
+
+    [ "${status}" -eq 0 ]
+    [ "$(test_contains_string "${output}" "None")" = "true" ]
+}
+
 @test "'print_items_in_array' outputs list of items in array" {
     write_info() {
         local msg="$1"
@@ -317,9 +343,10 @@ file=file.txt
     array=()
 
     run print_items_in_array "${array[@]}"
+    echo "Output: '$output'"
 
     [ "${status}" -eq 0 ]
-    [ "${output}" = "" ]
+    [ "$(test_contains_string "${output}" "None")" = "true" ]
 }
 
 @test "'remove_leading_char' removes first character in string and returns modified string" {

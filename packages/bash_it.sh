@@ -12,12 +12,12 @@ install_bash_it() {
         write_blank_line
 
         write_info "Installing Bash 'Solarized Dark' color theme..."
-        cp resources/dircolors.ansi-dark ~/.dircolors
+        cp "${resources_dir}/dircolors.ansi-dark" ~/.dircolors
         write_success "Done!"
         write_blank_line
 
         write_info "Installing Bash 'inputrc' configuration..."
-        cp resources/.inputrc ~/.inputrc
+        cp "${resources_dir}/.inputrc" ~/.inputrc
         write_success "Done!"
         write_blank_line
 
@@ -27,12 +27,12 @@ install_bash_it() {
         write_blank_line
 
         write_info "Adding user initials to Git prompt info..."
-        cp resources/add_user_initials_to_git_prompt_info.bash ${bash_it_dir}/custom
+        cp "${resources_dir}/add_user_initials_to_git_prompt_info.bash" ${bash_it_dir}/custom
         write_success "Done!"
         write_blank_line
 
         write_info "Installing Pivotal Bobby Bash theme..."
-        cp resources/bobby_pivotal.theme.bash ${bash_it_dir}/themes/bobby/bobby.theme.bash
+        cp "${resources_dir}/bobby_pivotal.theme.bash" ${bash_it_dir}/themes/bobby/bobby.theme.bash
         write_success "Done!"
         write_blank_line
 
@@ -62,7 +62,7 @@ install_bash_it() {
 
         write_info "Configuring direnv with bash-it..."
         brew list direnv &>/dev/null || brew install direnv
-        cp resources/direnv.bash "${bash_it_dir}"/custom/direnv.bash
+        cp "${resources_dir}/direnv.bash" "${bash_it_dir}"/custom/direnv.bash
         write_success "Done!"
         write_blank_line
     else

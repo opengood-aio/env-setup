@@ -205,14 +205,33 @@ left_trim_occurrences() {
     echo "${output}"
 }
 
+print_entries_in_map() {
+    local -n map=$1
+
+    if [[ $(get_array_length "${map[@]}") -eq 0 ]]; then
+        write_info "None"
+    else
+        local key
+        for key in "${!map[@]}"; do
+            write_info "- ${key} = ${map[$key]}"
+        done
+        unset key
+    fi
+}
+
 print_items_in_array() {
     local array=("$@")
 
-    local item
-    for item in "${array[@]}"; do
-        write_info "- ${item}"
-    done
-    unset item
+    if [[ $(get_array_length "${array[@]}") -eq 0 ]]; then
+        write_info "None"
+        write_blank_line
+    else
+        local item
+        for item in "${array[@]}"; do
+            write_info "- ${item}"
+        done
+        unset item
+    fi
 }
 
 read_password_input() {

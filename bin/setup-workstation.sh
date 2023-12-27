@@ -85,12 +85,12 @@ time {
 
         case "${args[0]}" in
         "all")
-            install_homebrew
-            install_vim
-            install_bash
-            install_bash_it
-            install_git
-            install_ide_prefs
+            write_info "Installing base packages..."
+            print_items_in_array "${base_packages[@]}"
+            write_blank_line
+            install "${base_packages[@]}"
+            write_success "Done!"
+            write_blank_line
 
             write_info "Installing required packages..."
             print_items_in_array "${required_packages[@]}"
@@ -98,8 +98,6 @@ time {
             install "${required_packages[@]}"
             write_success "Done!"
             write_blank_line
-
-            install_os_prefs
 
             write_info "Verifying requested packages..."
             verify "${packages_dir}" "${args[@]}"
@@ -110,6 +108,9 @@ time {
             install "${args[@]}"
             write_success "Done!"
             write_blank_line
+
+            install_dockutil
+            install_os_prefs
 
             write_success "-----------------------------------------"
             write_success "Setup complete!"
@@ -161,13 +162,18 @@ time {
             write_success "Done!"
             write_blank_line
 
-            uninstall_ide_prefs
-            uninstall_git
-            uninstall_bash_it
-            uninstall_bash
-            uninstall_vim
-            uninstall_homebrew
+            write_info "Uninstalling base packages..."
+            print_items_in_array "${base_packages[@]}"
+            write_blank_line
+            uninstall "${base_packages[@]}"
+            write_success "Done!"
+            write_blank_line
         fi
+
+        write_success "-----------------------------------------"
+        write_success "Uninstall complete"
+        write_success "-----------------------------------------"
+        write_blank_line
         ;;
     esac
 

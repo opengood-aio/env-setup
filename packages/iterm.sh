@@ -13,7 +13,7 @@ install_iterm() {
     fi
 
     write_info "Configuring iTerm..."
-    cp resources/com.googlecode.iterm2.plist "${prefs_dir}"
+    cp "${resources_dir}/com.googlecode.iterm2.plist" "${preferences_dir}"
     write_success "Done!"
     write_blank_line
 }
@@ -27,7 +27,7 @@ uninstall_iterm() {
     write_blank_line
 
     write_info "Removing iTerm configuration..."
-    rm -f "${prefs_dir}"/com.googlecode.iterm2.plist
+    rm -f "${preferences_dir}"/com.googlecode.iterm2.plist
     write_success "Done!"
     write_blank_line
 }
