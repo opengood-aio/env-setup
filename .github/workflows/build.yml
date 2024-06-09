@@ -3,10 +3,12 @@ name: build
 on:
   push:
     branches:
-      - main
+      - '**'
+      - '!main'
     paths-ignore:
       - .github/workflows/*
       - .gitignore
+      - gradle.properties
       - LICENSE
       - README.md
 
