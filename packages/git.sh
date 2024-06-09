@@ -35,6 +35,7 @@ install_git() {
         git config --global core.editor "${vim}"
         git config --global transfer.fsckobjects true
         git config --global pull.rebase true
+        git config --global push.autoSetupRemote true
         write_success "Done!"
         write_blank_line
 
@@ -127,18 +128,6 @@ function git-push() {
     git pull -r
     git push
     git st
-}
-
-function git-release() {
-    git pull -r
-    git ci --allow-empty -m "Create release"
-    git push
-}
-
-function git-deploy() {
-    git pull -r
-    git ci --allow-empty -m "Deploy \$1 \$2"
-    git push
 }
 EOF
         source "${bash_profile}"

@@ -12,4 +12,4 @@ on:
 
 jobs:
   build:
-    uses: opengoodio/central-workflows/.github/workflows/bash-bats-build.yml@main
+    uses: opengood-aio/central-workflows/.github/workflows/bash-bats-build.yml@main

@@ -1,7 +1,7 @@
 # Environment Setup
 
-[![Build](https://github.com/opengoodio/env-setup/workflows/build/badge.svg)](https://github.com/opengoodio/env-setup/actions?query=workflow%3Abuild)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/opengoodio/env-setup/master/LICENSE)
+[![Build](https://github.com/opengood-aio/env-setup/workflows/build/badge.svg)](https://github.com/opengood-aio/env-setup/actions?query=workflow%3Abuild)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/opengood-aio/env-setup/master/LICENSE)
 
 Automated environment setup and configuration for OpenGood computing
 environments
@@ -39,7 +39,7 @@ mkdir -p ~/workspace
 
 ```bash
 cd ~/workspace
-git clone https://github.com/opengoodio/env-setup
+git clone https://github.com/opengood-aio/env-setup
 cd env-setup
 ```
 
