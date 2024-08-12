@@ -124,7 +124,7 @@ function git-push() {
     ktlint -F "src/**/*.kt"
     git add .
     git st
-    git ci -m "\$1"
+    git ci -S -m "\$1"
     git pull -r
     git push
     git st
