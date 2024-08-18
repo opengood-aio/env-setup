@@ -6,7 +6,7 @@ install_git_together() {
         read -r git_user_name
         write_blank_line
 
-        write_info "Enter Git user email (i.e. user@domain.com)..."
+        write_info "Enter Git user email (i.e. jsmith@users.noreply.github.com)..."
         read -r git_user_email
         git_user_initials=$(left_chars "${git_user_email}" 2)
         write_blank_line
@@ -18,6 +18,11 @@ install_git_together() {
         write_info "Installing Git Together..."
         brew list git-together &>/dev/null || brew install pivotal/tap/git-together
         write_success "Done!"
+
+        write_info "Setting global Git configurations for Git Together..."
+        git config --global alias.gtg "git config --global --add include.path ~/.git-together"
+        write_success "Done!"
+        write_blank_line
 
         write_info "Configuring git-together in Bash profile...'"
         cat <<EOF >>"${bash_profile}"

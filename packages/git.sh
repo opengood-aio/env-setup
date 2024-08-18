@@ -6,7 +6,7 @@ install_git() {
         read -r git_user_name
         write_blank_line
 
-        write_info "Enter Git user email (i.e. user@domain.com)..."
+        write_info "Enter Git user email (i.e. jsmith@users.noreply.github.com)..."
         read -r git_user_email
         write_blank_line
 
@@ -17,6 +17,11 @@ install_git() {
         write_info "Enter GitHub access token (i.e. xcxcdt45tysfgfghty67tyhgghgsd544)..."
         local github_access_token
         github_access_token="$(read_password_input)"
+        write_blank_line
+
+        write_info "Enter GitHub GPG signing key (i.e. X9255HU3)..."
+        local github_gpg_signing_key
+        github_gpg_signing_key="$(read_password_input)"
         write_blank_line
 
         write_info "Installing Git..."
@@ -32,10 +37,22 @@ install_git() {
         write_info "Setting global Git configurations..."
         git config --global user.name "${git_user_name}"
         git config --global user.email "${git_user_email}"
+        git config --global user.signingKey "${github_gpg_signing_key}"
         git config --global core.editor "${vim}"
         git config --global transfer.fsckobjects true
         git config --global pull.rebase true
         git config --global push.autoSetupRemote true
+        git config --global commit.gpgSign true
+        write_success "Done!"
+        write_blank_line
+
+        write_info "Installing Git completion..."
+        if [[ ! -f "${git_completion}" ]]; then
+            curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o "${git_completion}"
+            chmod +x "${git_completion}"
+        else
+            write_info "Git completion installed..."
+        fi
         write_success "Done!"
         write_blank_line
 
@@ -92,7 +109,6 @@ install_git() {
         git config --global alias.squash "commit --squash"
         git config --global alias.unstage "reset HEAD"
         git config --global alias.rum "rebase master@{u}"
-        git config --global alias.gtg "git config --global --add include.path ~/.git-together"
         write_success "Done!"
         write_blank_line
 
@@ -119,6 +135,7 @@ EOF
 
         write_info "Configuring Git command line functions in Bash profile...'"
         cat <<EOF >>"${bash_profile}"
+# custom git commands
 function git-push() {
     git st
     ktlint -F "src/**/*.kt"
