@@ -26,6 +26,7 @@ docker_app=${apps_dir}/Docker.app
 docker_resources_dir=${docker_app}/Contents/Resources
 
 git_hooks_dir=${workspace_dir}/git-hooks-core
+git_completion=~/.git-completion.bash
 git_together=~/.git-together
 github_properties=~/.github.properties
 
