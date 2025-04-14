@@ -70,4 +70,3 @@ time {
     write_success "Done!"
     write_blank_line
 } 2>&1
-
