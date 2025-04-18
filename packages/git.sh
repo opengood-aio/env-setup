@@ -107,7 +107,7 @@ install_git() {
         git config --global alias.lol "log --graph --decorate --oneline"
         git config --global alias.lola "log --graph --decorate --oneline --all"
         git config --global alias.pl "pull -r"
-        git config --global alias.ps "!git status && git add . && git status && git commit -S -m "$1" && git pull -r && git push && git status"
+        git config --global alias.ps "!git status && git add -A && git status && git commit -S -m \"$1\" && git pull -r && git push -u origin && git status"
         git config --global alias.ra "rebase --abort"
         git config --global alias.rc "rebase --continue"
         git config --global alias.rum "rebase main@{u}"
