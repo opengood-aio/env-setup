@@ -21,7 +21,6 @@ tools:
 | macOS       | Sequoia 15.x |
 | Processor   | Apple Mx     |
 
-
 ## Getting Started
 
 * Open **Terminal** and type `git`
