@@ -87,28 +87,32 @@ install_git() {
         write_blank_line
 
         write_info "Setting Git aliases..."
-        git config --global alias.gst git status
-        git config --global alias.st status
-        git config --global alias.di diff
-        git config --global alias.co checkout
-        git config --global alias.cl clone
-        git config --global alias.ci commit
         git config --global alias.br branch
+        git config --global alias.ci commit
+        git config --global alias.cl clone
+        git config --global alias.co checkout
+        git config --global alias.di diff
+        git config --global alias.m merge
         git config --global alias.ref reflog
+        git config --global alias.st status
         git config --global alias.sta stash
         git config --global alias.stap stash pop
-        git config --global alias.ca "git commit -a -m"
-        git config --global alias.llog "log --date=local"
-        git config --global alias.flog "log --pretty=fuller --decorate"
-        git config --global alias.lg "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
-        git config --global alias.lol "log --graph --decorate --oneline"
-        git config --global alias.lola "log --graph --decorate --oneline --all"
-        git config --global alias.blog "log origin/master... --left-right"
+        git config --global alias.blog "log origin/main... --left-right"
+        git config --global alias.ca "commit -a -m"
         git config --global alias.ds "diff --staged"
         git config --global alias.fixup "commit --fixup"
+        git config --global alias.flog "log --pretty=fuller --decorate"
+        git config --global alias.lg "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+        git config --global alias.llog "log --date=local"
+        git config --global alias.lol "log --graph --decorate --oneline"
+        git config --global alias.lola "log --graph --decorate --oneline --all"
+        git config --global alias.pl "pull -r"
+        git config --global alias.ps "!git status && git add . && git status && git commit -S -m "$1" && git pull -r && git push && git status"
+        git config --global alias.ra "rebase --abort"
+        git config --global alias.rc "rebase --continue"
+        git config --global alias.rum "rebase main@{u}"
         git config --global alias.squash "commit --squash"
         git config --global alias.unstage "reset HEAD"
-        git config --global alias.rum "rebase master@{u}"
         write_success "Done!"
         write_blank_line
 
@@ -128,24 +132,6 @@ install_git() {
 github.user=$github_user_name
 github.access.token=$github_access_token
 
-EOF
-        source "${bash_profile}"
-        write_success "Done!"
-        write_blank_line
-
-        write_info "Configuring Git command line functions in Bash profile...'"
-        cat <<EOF >>"${bash_profile}"
-# custom git commands
-function git-push() {
-    git st
-    ktlint -F "src/**/*.kt"
-    git add .
-    git st
-    git ci -S -m "\$1"
-    git pull -r
-    git push
-    git st
-}
 EOF
         source "${bash_profile}"
         write_success "Done!"
