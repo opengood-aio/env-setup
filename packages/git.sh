@@ -99,6 +99,7 @@ install_git() {
         git config --global alias.stap stash pop
         git config --global alias.blog "log origin/main... --left-right"
         git config --global alias.ca "commit -a -m"
+        git config --global alias.cb "checkout -b"
         git config --global alias.ds "diff --staged"
         git config --global alias.fixup "commit --fixup"
         git config --global alias.flog "log --pretty=fuller --decorate"
@@ -107,6 +108,7 @@ install_git() {
         git config --global alias.lol "log --graph --decorate --oneline"
         git config --global alias.lola "log --graph --decorate --oneline --all"
         git config --global alias.pl "pull -r"
+        git config --global alias.pm "!git status && git checkout main && git pull -r && git checkout $1 && git merge main && git push -u origin \"$(git symbolic-ref --short HEAD)\" && git status"
         git config --global alias.ps "!git status && git add -A && git status && git commit -S -m \"$1\" && git pull -r && git push -u origin \"$(git symbolic-ref --short HEAD)\" && git status"
         git config --global alias.ra "rebase --abort"
         git config --global alias.rc "rebase --continue"
