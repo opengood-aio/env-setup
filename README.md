@@ -46,7 +46,55 @@ cd env-setup
 
 ### Supported Packages
 
-See [Packages](packages) for list of supported packages.
+#### Base Packages (Core Tools)
+
+* `homebrew` - Package manager for macOS
+* `vim` - Text editor
+* `bash` - Bash shell (5.0+)
+* `bash_it` - Bash framework with themes and plugins
+* `git` - Version control system
+
+#### Required Packages (Standard Development Tools)
+
+* `bats` - Bash Automated Testing System
+* `docker` - Container platform
+* `gnused` - GNU implementation of sed
+* `gradle` - Build automation tool
+* `intellij_idea` - JetBrains IDE for Java/Kotlin
+* `iterm` - Terminal emulator for macOS
+* `java` - Java Development Kit
+* `jenv` - Java environment manager
+* `jq` - JSON processor
+* `kafka` - Distributed streaming platform
+* `kotlin` - Kotlin programming language
+* `ktlint` - Kotlin linter
+* `llm_context` - LLM context management tool
+* `maccy` - Clipboard manager
+* `pip` - Python package installer
+* `postgres` - PostgreSQL database
+* `python` - Python programming language
+* `rectangle` - Window management tool
+* `uv` - Fast Python package installer and manager
+* `wget` - File downloader
+* `yq` - YAML processor
+
+#### Additional Packages
+
+* `dockutil` - Dock management utility
+* `gcc` - GNU Compiler Collection
+* `git_together` - Git pair programming tool
+* `minikube` - Local Kubernetes cluster
+* `node` - Node.js runtime
+* `os_prefs` - macOS preferences configuration
+* `pycharm` - JetBrains IDE for Python
+
+#### Node.js Packages
+
+* `cypress` - End-to-end testing framework
+
+#### Python Packages
+
+* `tensorflow` - Machine learning framework
 
 ### Install Default Software/Tools
 
