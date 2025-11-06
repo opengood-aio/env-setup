@@ -1,12 +1,12 @@
 install_vim() {
-    write_info "Installing Vim package..."
+    write_info "Installing vim package..."
 
-    write_info "Installing Vim..."
+    write_info "Installing vim..."
     brew list vim &>/dev/null || brew install vim
     write_success "Done!"
     write_blank_line
 
-    write_info "Installing Vim configuration..."
+    write_info "Installing vim configuration..."
     cd_push ~/
     if [[ ! -d "${vim_dir}" ]]; then
         git clone https://github.com/pivotal/vim-config "${vim_dir}"
@@ -18,15 +18,15 @@ install_vim() {
 }
 
 uninstall_vim() {
-    write_info "Uninstalling Vim package..."
+    write_info "Uninstalling vim package..."
 
-    write_info "Uninstalling Vim configuration..."
+    write_info "Uninstalling vim configuration..."
     rm -Rf "${vim_dir}"
     write_success "Done!"
     write_blank_line
 
-    write_info "Uninstalling Vim..."
-    brew uninstall vim || { write_warning "WARNING! Vim is not installed and cannot be uninstalled. Continuing on."; }
+    write_info "Uninstalling vim..."
+    brew uninstall vim || { write_warning "WARNING! vim is not installed and cannot be uninstalled. Continuing on."; }
     write_success "Done!"
     write_blank_line
 }

@@ -14,18 +14,20 @@ environments
 ## Compatibility
 
 Installation is maintained for the recent version(s) of macOS and required
-tools:
+processors:
 
-| Requirement | Version      |
-|-------------|--------------|
-| macOS       | Sequoia 15.x |
-| Processor   | Apple Mx     |
+| Requirement | Version    |
+|-------------|------------|
+| macOS       | Tahoe 16.x |
+| Processor   | Apple Mx   |
+
+---
 
 ## Getting Started
 
 * Open **Terminal** and type `git`
 * One will be prompted to install the required
-**Command Line Developer Tools**
+  **Command Line Developer Tools**
 * Once installed, run the following commands from Terminal:
 
 ### Create `workspace` Directory
@@ -34,13 +36,15 @@ tools:
 mkdir -p ~/workspace
 ```
 
-### Download Project
+### Download Repo
 
 ```bash
 cd ~/workspace
 git clone https://github.com/opengood-aio/env-setup
 cd env-setup
 ```
+
+---
 
 ## Workstation Setup
 
@@ -54,49 +58,41 @@ cd env-setup
 * `bash_it` - Bash framework with themes and plugins
 * `git` - Version control system
 
-#### Required Packages (Standard Development Tools)
+#### Required Packages (Standard Tools)
 
 * `bats` - Bash Automated Testing System
-* `docker` - Container platform
-* `gnused` - GNU implementation of sed
+* `dockutil` - Dock management utility
+* `gcc` - GNU Compiler Collection
 * `gradle` - Build automation tool
 * `intellij_idea` - JetBrains IDE for Java/Kotlin
 * `iterm` - Terminal emulator for macOS
 * `java` - Java Development Kit
 * `jenv` - Java environment manager
 * `jq` - JSON processor
-* `kafka` - Distributed streaming platform
 * `kotlin` - Kotlin programming language
 * `ktlint` - Kotlin linter
 * `llm_context` - LLM context management tool
 * `maccy` - Clipboard manager
+* `node` - Node.js runtime
 * `pip` - Python package installer
-* `postgres` - PostgreSQL database
+* `pycharm` - JetBrains IDE for Python
 * `python` - Python programming language
 * `rectangle` - Window management tool
 * `uv` - Fast Python package installer and manager
-* `wget` - File downloader
-* `yq` - YAML processor
 
-#### Additional Packages
+#### Additional Packages (Optional Tools)
 
-* `dockutil` - Dock management utility
-* `gcc` - GNU Compiler Collection
-* `git_together` - Git pair programming tool
+* `docker` - Container platform
+* `gnused` - GNU implementation of sed
+* `google_chrome` - Google Chrome web browser
+* `kafka` - Distributed streaming platform
 * `minikube` - Local Kubernetes cluster
-* `node` - Node.js runtime
 * `os_prefs` - macOS preferences configuration
-* `pycharm` - JetBrains IDE for Python
+* `postgres` - PostgreSQL database
 
-#### Node.js Packages
+---
 
-* `cypress` - End-to-end testing framework
-
-#### Python Packages
-
-* `tensorflow` - Machine learning framework
-
-### Install Default Software/Tools
+### Install Default Tools
 
 ```bash
 bin/setup-workstation.sh install all
@@ -105,52 +101,86 @@ bin/setup-workstation.sh install all
 **Notes:**
 
 * One will be prompted to enter credentials to grant elevated privileges
-to install packages
-* One will be prompted to interactively enter the path to `Bash 5.0`
-shell, as this cannot be automated due to security restrictions in macOS
-requiring root level access to modify `/etc/shells` shells
-configuration file
-* For `Git`, one will be prompted for the following information to complete the setup of various Git configurations:
-  * Git `name`
-  * Git `email`
-  * GitHub `username`
-  * GitHub `password` or `access token` (latter used for 2FA)
+  to install packages
+* One will be prompted to interactively enter the path to the `Bash 5.0` or
+  later shell, as this cannot be automated due to security restrictions in macOS
+  requiring root level access to modify `/etc/shells` shells
+  configuration file
+* For `Git`, one will be prompted for the following information to complete the
+  setup of various Git configurations:
+    * Git `name`
+    * Git `email`
+    * GitHub `username`
+    * GitHub `access token`
+    * GitHub GPG signing key `gpg signing key`
 * After `Maacy` and `Rectangle` are installed, one will need to
-open the *System Preferences* and grant them elevated privileges under 
-`Security & Privacy > Privacy > Accessibility`
+  open the *System Preferences* and grant them elevated privileges under
+  `Security & Privacy > Privacy > Accessibility`
 
-### Install Specific Software/Tools
+### Install Specific Tools
 
 ```bash
 bin/setup-workstation.sh install <package>
 ```
 
-### Update Everything
-
-```bash
-bin/setup-workstation.sh update
-```
-
-### Uninstall Specific Software/Tools
+### Uninstall Specific Tools
 
 ```bash
 bin/setup-workstation.sh uninstall <package>
 ```
 
-### Uninstall Everything
+### Uninstall All Tools
 
 ```bash
 bin/setup-workstation.sh uninstall all
 ```
 
-### Bulk Git Pull/Rebase
+---
 
-At times, one needs to perform a `git pull -r` for multiple repos. This
-usually involves changing directories to each repo and manually issuing
-the above command.
+## Custom Tools
 
-To perform this recursively in all sub-directories with repos:
+### Sync BMad-Core
+
+To install or update `.bmad-core` with the latest `bmad-method` npm package:
+
+#### Install to current project (default)
 
 ```bash
-bin/pull-git-repos.sh ~/workspace
+bin/sync-bmad-core.sh
 ```
+
+#### Install to another project in workspace
+
+```bash
+bin/sync-bmad-core.sh <relative-path>
+```
+
+#### Show help
+
+```bash
+bin/sync-bmad-core.sh -h
+```
+
+**Examples:**
+
+#### Install to env-setup project (default)
+
+```bash
+bin/sync-bmad-core.sh
+```
+
+#### Install to my-project in workspace
+
+```bash
+bin/sync-bmad-core.sh my-project
+```
+
+**Notes:**
+
+* Takes optional parameter for relative directory path from workspace directory
+* Defaults to current project (env-setup) if no parameter provided
+* Installs the latest `bmad-method` package in a temporary directory
+* Backups existing `.bmad-core` directory with timestamp (if it exists)
+* Copies the new `.bmad-core` to specified installation directory
+* Copies updated BMad commands to `.claude/commands/BMad` (if applicable)
+* Verifies installation directory exists before proceeding

@@ -1,3 +1,4 @@
+# ANSI color codes for terminal output formatting
 blue_color='\033[1;34m'
 cyan_color='\033[1;36m'
 green_color='\033[1;32m'

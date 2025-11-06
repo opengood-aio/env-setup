@@ -136,10 +136,6 @@ time {
         esac
         ;;
 
-    "update")
-        brew update && brew upgrade
-        ;;
-
     "uninstall")
         write_info "Verifying requested packages..."
         verify "${packages_dir}" "${args[@]}"

@@ -56,36 +56,6 @@ install_git() {
         write_success "Done!"
         write_blank_line
 
-        write_info "Installing Git hooks..."
-        if [[ ! -d "${git_hooks_dir}" ]]; then
-            write_progress "Installing Git hooks for cred-alert"
-            git clone https://github.com/pivotal-cf/git-hooks-core "${git_hooks_dir}"
-            git config --global --add core.hooksPath "${git_hooks_dir}"
-        else
-            write_progress "Updating Git hooks for cred-alert"
-            cd_push "${git_hooks_dir}"
-            git checkout .
-            git pull -r
-            cd_pop
-        fi
-        write_success "Done!"
-        write_blank_line
-
-        write_info "Installing cred-alert..."
-        if [[ ! -f "/usr/local/bin/cred-alert-cli" ]]; then
-            os_name=$(uname | awk '{print tolower($1)}')
-            cd_push "${downloads_dir}"
-            curl -o cred-alert-cli https://s3.amazonaws.com/cred-alert/cli/current-release/cred-alert-cli_${os_name}
-            chmod 755 cred-alert-cli
-            sudo mkdir -p /usr/local/bin
-            sudo mv cred-alert-cli /usr/local/bin
-            cd_pop
-        else
-            write_info "cred-alert already installed..."
-        fi
-        write_success "Done!"
-        write_blank_line
-
         write_info "Setting Git aliases..."
         git config --global alias.br branch
         git config --global alias.ci commit
@@ -153,14 +123,6 @@ uninstall_git() {
 
     write_info "Uninstalling Git..."
     brew uninstall git || { write_warning "WARNING! Git is not installed and cannot be uninstalled. Continuing on."; }
-    write_success "Done!"
-    write_blank_line
-
-    write_info "Uninstalling Git hooks..."
-    rm -Rf "${workspace_dir}"/git-hooks-core
-
-    write_info "Uninstalling cred-alert..."
-    sudo rm -f /usr/local/bin/cred-alert-cli
     write_success "Done!"
     write_blank_line
 }

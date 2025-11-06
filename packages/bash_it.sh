@@ -26,13 +26,8 @@ install_bash_it() {
         write_success "Done!"
         write_blank_line
 
-        write_info "Adding user initials to Git prompt info..."
-        cp "${resources_dir}/add_user_initials_to_git_prompt_info.bash" ${bash_it_dir}/custom
-        write_success "Done!"
-        write_blank_line
-
-        write_info "Installing Pivotal Bobby Bash theme..."
-        cp "${resources_dir}/bobby_pivotal.theme.bash" ${bash_it_dir}/themes/bobby/bobby.theme.bash
+        write_info "Installing Bobby Bash theme..."
+        cp "${resources_dir}/bobby.theme.bash" ${bash_it_dir}/themes/bobby/bobby.theme.bash
         write_success "Done!"
         write_blank_line
 
