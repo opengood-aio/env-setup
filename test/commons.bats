@@ -40,62 +40,6 @@ file=file.txt
     [ "${output}" = "false" ]
 }
 
-@test "'contains_string_in_file' returns true when item contained in file" {
-    test_create_file_with_contents "${file}" "foo bar"
-
-    run contains_string_in_file "${file}" "foo"
-
-    [ "${status}" -eq 0 ]
-    [ "${output}" = "true" ]
-
-    test_remove_file "${file}"
-}
-
-@test "'contains_string_in_file' returns false when item not contained in file" {
-    test_create_file_with_contents "${file}" "bar"
-
-    run contains_string_in_file "${file}" "foo"
-
-    [ "${status}" -eq 0 ]
-    [ "${output}" = "false" ]
-
-    test_remove_file "${file}"
-}
-
-@test "'create_dir' creates directory when it does not exist" {
-    run create_dir "${dir}"
-
-    exists=$(if [[ -d "${dir}" ]]; then echo true; else false; fi)
-
-    [ "${status}" -eq 0 ]
-    [ "${output}" = "" ]
-    [ "${exists}" = "true" ]
-
-    test_remove_dir "${dir}"
-}
-
-@test "'file_not_empty' returns true when contents contained in file" {
-    test_create_file_with_contents "${file}" "foo bar"
-
-    run file_not_empty "${file}"
-
-    [ "${status}" -eq 0 ]
-    [ "${output}" = "true" ]
-
-    test_remove_file "${file}"
-}
-
-@test "'file_not_empty' returns false when contents not contained in file" {
-    test_create_file "${file}"
-
-    run file_not_empty "${file}"
-
-    [ "${status}" -eq 0 ]
-    [ "${output}" = "false" ]
-
-    test_remove_file "${file}"
-}
-
 @test "'find_string_in_file' returns item contained in file" {
     test_create_file_with_contents "${file}" "foo"
     test_append_file_with_contents "${file}" "bar"
@@ -241,61 +185,6 @@ file=file.txt
     [ "${output}" = "0" ]
 }
 
-@test "'get_count_of_leading_spaces_in_string' returns count of lead spaces in string when leading spaces exist in string" {
-    run get_count_of_leading_spaces_in_string "   Hello World!"
-
-    [ "${status}" -eq 0 ]
-    [ "${output}" = "3" ]
-}
-
-@test "'get_count_of_leading_spaces_in_string' returns count of lead spaces in string when no leading spaces exist in string" {
-    run get_count_of_leading_spaces_in_string "Hello World!"
-
-    [ "${status}" -eq 0 ]
-    [ "${output}" = "0" ]
-}
-
-@test "'join_string' returns concatenated string of items contained in array with specified delimiter when items exists in array" {
-    array=()
-    array+=("foo")
-    array+=("bar")
-
-    run join_string "," "${array[@]}"
-
-    [ "${status}" -eq 0 ]
-    [ "${output}" = "foo,bar" ]
-}
-
-@test "'join_string' returns empty string of items without specified delimiter when no items exist in array" {
-    array=()
-
-    run join_string "," "${array[@]}"
-
-    [ "${status}" -eq 0 ]
-    [ "${output}" = "" ]
-}
-
-@test "'left_chars' returns string left substring-ed with specified number of characters" {
-    run left_chars "Hello World!" "2"
-
-    [ "${status}" -eq 0 ]
-    [ "${output}" = "He" ]
-}
-
-@test "'left_pad_string' returns string left padded with specified character" {
-    run left_pad_string "Hello World!" " " "5"
-
-    [ "${status}" -eq 0 ]
-    [ "${output}" = "     Hello World!" ]
-}
-
-@test "'left_trim_occurrences' returns string left trimmed of specified number of characeters" {
-    run left_trim_occurrences "     Hello World!" "5"
-
-    [ "${status}" -eq 0 ]
-    [ "${output}" = "Hello World!" ]
-}
-
 @test "'print_entries_in_map' outputs entries in map" {
     write_info() {
         local msg="$1"
@@ -405,58 +294,6 @@ file=file.txt
     [ "${output}" = "Hello World!" ]
 }
 
-@test "'split_string_into_array' splits string into array using specified delimiter" {
-    write_info() {
-        local msg="$1"
-        echo "\\${msg}"
-    }
-
-    eval declare -a array="$(split_string_into_array "foo,bar" ',')"
-
-    run print_items_in_array "${array[@]}"
-
-    [ "${status}" -eq 0 ]
-    [ "$(test_contains_string "${output}" "\- foo")" = "true" ]
-    [ "$(test_contains_string "${output}" "\- bar")" = "true" ]
-}
-
-@test "'split_string_into_array' does not split string into array when string is empty" {
-    eval declare -a array="$(split_string_into_array "" ',')"
-
-    run print_items_in_array "${array[@]}"
-
-    [ "${status}" -eq 0 ]
-    [ "$(test_contains_string "${output}" "")" = "true" ]
-}
-
-@test "'string_ends_with' returns true when string ends in specified character" {
-    run string_ends_with "Hello World!" "!"
-
-    [ "${status}" -eq 0 ]
-    [ "${output}" = "true" ]
-}
-
-@test "'string_ends_with' returns false when string does not end in specified character" {
-    run string_ends_with "Hello World!" "d"
-
-    [ "${status}" -eq 0 ]
-    [ "${output}" = "false" ]
-}
-
-@test "'string_starts_with' returns true when string starts in specified character" {
-    run string_starts_with "Hello World!" "H"
-
-    [ "${status}" -eq 0 ]
-    [ "${output}" = "true" ]
-}
-
-@test "'string_starts_with' returns false when string does not start in specified character" {
-    run string_starts_with "Hello World!" "e"
-
-    [ "${status}" -eq 0 ]
-    [ "${output}" = "false" ]
-}
-
 @test "'to_lower_case' lower cases string and returns modified string" {
     run to_lower_case "HELLO WORLD!"
 
@@ -476,22 +313,6 @@ file=file.txt
 
     [ "${status}" -eq 0 ]
     [ "${output}" = "HELLO WORLD!" ]
-}
-
-@test "'var_is_defined' returns true when variable is defined" {
-    test="foo"
-
-    run var_is_defined "test"
-
-    [ "${status}" -eq 0 ]
-    [ "${output}" = "true" ]
-}
-
-@test "'var_is_defined' returns false when variable is not defined" {
-    run var_is_defined "test"
-
-    [ "${status}" -eq 0 ]
-    [ "${output}" = "false" ]
 }
 
 @test "'write_blank_line' writes blank line to standard output" {

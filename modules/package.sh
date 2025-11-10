@@ -1,3 +1,7 @@
+# Load all package scripts from a directory
+# Arguments:
+#   $1 - Directory path containing package .sh files
+# Sources each .sh file and logs the loaded package name
 load() {
     local dir="$1"
 
@@ -11,6 +15,12 @@ load() {
     unset package
 }
 
+# Install packages and their dependencies recursively
+# Arguments:
+#   $@ - Array of package names to install
+# For each package:
+#   1. Checks for get_<package>_dependencies function and installs dependencies first
+#   2. Calls install_<package> function if it exists
 install() {
     local array=("$@")
 
@@ -37,6 +47,10 @@ install() {
     unset package
 }
 
+# Uninstall packages
+# Arguments:
+#   $@ - Array of package names to uninstall
+# Calls uninstall_<package> function for each package if it exists
 uninstall() {
     local array=("$@")
 
@@ -54,6 +68,11 @@ uninstall() {
     unset package
 }
 
+# Verify that package files exist in the packages directory
+# Arguments:
+#   $1 - Directory path to search for package files
+#   $@ - Array of package names to verify
+# Checks if <package>.sh file exists for each package
 verify() {
     local dir="$1"
     shift 1

@@ -1,5 +1,11 @@
 source "${setup_dir}"/config/jetbrains.sh
 
+# Download and install a JetBrains plugin
+# Arguments:
+#   $1 - Plugin name
+#   $2 - Plugin ID
+#   $3 - Output filename for download
+# Uses: jetbrains_product_info global associative array
 download_jetbrains_plugin() {
     local name="$1"
     local id="$2"
@@ -24,6 +30,10 @@ download_jetbrains_plugin() {
     write_blank_line
 }
 
+# Fetch product information for a JetBrains product from the JetBrains API
+# Arguments:
+#   $1 - Product code (e.g., "IIU" for IntelliJ IDEA Ultimate, "PCP" for PyCharm Professional)
+# Sets: Global associative array jetbrains_product_info with version, build, and directory paths
 get_jetbrains_product_info() {
     local product_code="$1"
 
@@ -64,6 +74,10 @@ get_jetbrains_product_info() {
     write_blank_line
 }
 
+# Install multiple plugins for a JetBrains product
+# Arguments:
+#   $1 - Name reference to associative array of plugins (name => plugin_id)
+# Uses: jetbrains_product_info global associative array
 install_jetbrains_plugins() {
     declare -n plugins=$1
 
@@ -94,6 +108,11 @@ install_jetbrains_plugins() {
     cd_pop
 }
 
+# Install a JetBrains product via Homebrew and apply settings/plugins
+# Arguments:
+#   $1 - Product code (e.g., "IIU" for IntelliJ IDEA Ultimate)
+#   $2 - Name reference to associative array of plugins to install
+# Installs product, settings from resources/, and specified plugins
 install_jetbrains_product() {
     local product_code="$1"
     local -n product_plugins=$2
@@ -116,6 +135,11 @@ install_jetbrains_product() {
     fi
 }
 
+# Install product settings from a settings archive in resources/ directory
+# Arguments:
+#   $1 - Product code
+# Extracts settings ZIP archive to the product's settings directory
+# Uses: jetbrains_product_info global associative array
 install_jetbrains_product_settings() {
     local product_code="$1"
 
@@ -147,6 +171,10 @@ install_jetbrains_product_settings() {
     write_blank_line
 }
 
+# Uninstall a JetBrains product and remove all associated data
+# Arguments:
+#   $1 - Product code (e.g., "IIU" for IntelliJ IDEA Ultimate)
+# Removes: Application, cache directory, logs directory, plugins directory, settings directory
 uninstall_jetbrains_product() {
     local product_code="$1"
 
