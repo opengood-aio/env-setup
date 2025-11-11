@@ -108,7 +108,8 @@ The package system uses a convention-based approach:
     - `base_packages`: Core tools (homebrew, vim, bash, bash_it, git)
     - `required_packages`: Standard development tools (includes dependencies like
       dockutil, gcc, node)
-    - `optional_packages`: Additional tools (docker, gnused, kafka, postgres, etc.)
+    - `optional_packages`: Additional tools (docker, docker_compose, gnused,
+      google_chrome, kafka, minikube, ollama, os_prefs, postgres)
     - `supported_node_packages`: Node.js packages
     - `supported_pip_packages`: Python packages
 

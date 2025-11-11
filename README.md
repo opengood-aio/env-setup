@@ -83,12 +83,14 @@ cd env-setup
 #### Additional Packages (Optional Tools)
 
 * `docker` - Container platform
+* `docker_compose` - Docker Compose tool for defining multi-container applications
 * `gnused` - GNU implementation of sed
 * `google_chrome` - Google Chrome web browser
 * `kafka` - Distributed streaming platform
 * `minikube` - Local Kubernetes cluster
+* `ollama` - Run large language models locally
 * `os_prefs` - macOS preferences configuration
-* `postgres` - PostgreSQL database
+* `postgres` - PostgresSQL database
 
 ---
 

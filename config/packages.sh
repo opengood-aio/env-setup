@@ -28,6 +28,18 @@ required_packages+=("python")
 required_packages+=("rectangle")
 required_packages+=("uv")
 
+# Optional packages (additional tools)
+optional_packages=()
+optional_packages+=("docker")
+optional_packages+=("docker_compose")
+optional_packages+=("gnused")
+optional_packages+=("google_chrome")
+optional_packages+=("kafka")
+optional_packages+=("minikube")
+optional_packages+=("ollama")
+optional_packages+=("os_prefs")
+optional_packages+=("postgres")
+
 # Supported Node packages (installed via npm)
 supported_node_packages=()
 

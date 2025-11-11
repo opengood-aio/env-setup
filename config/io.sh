@@ -38,6 +38,7 @@ bmad_commands_dir=${claude_commands_dir}/BMad
 
 # Docker application directories
 docker_app=${apps_dir}/Docker.app
+docker_dir=~/.docker
 docker_resources_dir=${docker_app}/Contents/Resources
 
 # Git configuration and hooks
