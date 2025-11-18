@@ -83,10 +83,12 @@ cd env-setup
 #### Additional Packages (Optional Tools)
 
 * `docker` - Container platform
-* `docker_compose` - Docker Compose tool for defining multi-container applications
+* `docker_compose` - Docker Compose tool for defining multi-container
+  applications
 * `gnused` - GNU implementation of sed
 * `google_chrome` - Google Chrome web browser
 * `kafka` - Distributed streaming platform
+* `llama_cpp` - C/C++ implementation for running LLMs locally
 * `minikube` - Local Kubernetes cluster
 * `ollama` - Run large language models locally
 * `os_prefs` - macOS preferences configuration
@@ -186,3 +188,40 @@ bin/sync-bmad-core.sh my-project
 * Copies the new `.bmad-core` to specified installation directory
 * Copies updated BMad commands to `.claude/commands/BMad` (if applicable)
 * Verifies installation directory exists before proceeding
+
+---
+
+## Development
+
+### Run Tests
+
+This project uses BATS (Bash Automated Testing System) for testing.
+
+To run tests:
+
+#### Pre-Requisites
+
+Ensure `bats` is installed:
+
+```bash
+bin/setup-workstation.sh install bats
+```
+
+#### Run All Tests
+
+```bash
+# run commons utility function tests
+bats test/commons.bats
+
+# run package management tests
+bats test/package.bats
+```
+
+#### Test Structure
+
+* `test/commons.bats` - Tests for utility functions in `modules/commons.sh`
+* `test/package.bats` - Tests for package management functions
+* `test/test-helper.bash` - Test setup and utilities
+
+Tests use `bats-support` and `bats-assert` libraries for enhanced assertions and
+output formatting.
