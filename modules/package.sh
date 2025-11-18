@@ -1,18 +1,52 @@
 # Load all package scripts from a directory
 # Arguments:
 #   $1 - Directory path containing package .sh files
-# Sources each .sh file and logs the loaded package name
-load() {
+#   $2 - Optional array of package names to load (without .sh extension)
+#        If not provided, loads all .sh files in the directory
+# Sources each specified .sh file and logs the loaded package name
+load_all() {
     local dir="$1"
+    shift 1
+    local packages=("$@")
 
-    local package
-    for package in "${dir}"/*.sh; do
+    # if no packages specified, load all .sh files in directory
+    if [[ ${#packages[@]} -eq 0 ]]; then
+        local package
+        for package in "${dir}"/*.sh; do
+            if [[ -f "${package}" ]]; then
+                source "${package}"
+                package=$(basename -- "${package}")
+                package="${package%.*}"
+                write_progress "- Loaded package '${package}'"
+            fi
+        done
+        unset package
+    else
+        # load specified packages
+        local package_name
+        for package_name in "${packages[@]}"; do
+            load_one "${dir}" "${package_name}"
+        done
+        unset package_name
+    fi
+}
+
+# Load a single package script from a directory
+# Arguments:
+#   $1 - Directory path containing package .sh files
+#   $2 - Package name (without .sh extension)
+# Sources the specified .sh file and logs the loaded package name
+load_one() {
+    local dir="$1"
+    local package_name="$2"
+
+    local package="${dir}/${package_name}.sh"
+    if [[ -f "${package}" ]]; then
         source "${package}"
-        package=$(basename -- "${package}")
-        package="${package%.*}"
-        write_progress "- Loaded package '${package}'"
-    done
-    unset package
+        write_progress "- Loaded package '${package_name}'"
+    else
+        write_warning "WARNING! Package file '${package}' does not exist"
+    fi
 }
 
 # Install packages and their dependencies recursively
