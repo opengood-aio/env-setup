@@ -42,12 +42,6 @@ EOF
         write_success "Done!"
         write_blank_line
 
-        write_info "Installing Homebrew taps..."
-        brew tap homebrew/cask
-        brew tap homebrew/cask-versions
-        write_success "Done!"
-        write_blank_line
-
         write_info "Upgrading existing brews..."
         brew upgrade
         write_success "Done!"
