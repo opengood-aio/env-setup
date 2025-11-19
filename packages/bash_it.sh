@@ -40,6 +40,7 @@ install_bash_it() {
         export BASH_IT=${bash_it_dir}
         cat "${bash_rc}" "${bash_profile}" > "${bash_rc_temp_file}"
         mv "${bash_rc_temp_file}" "${bash_profile}"
+        source "${bash_profile}"
         write_success "Done!"
         write_blank_line
 
