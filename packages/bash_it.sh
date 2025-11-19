@@ -38,6 +38,7 @@ install_bash_it() {
 
         write_info "Sourcing Bash profile and bash-it..."
         export BASH_IT=${bash_it_dir}
+        source "${bash_rc}"
         source "${bash_profile}"
         source "${bash_it_dir}"/bash_it.sh
         write_success "Done!"
