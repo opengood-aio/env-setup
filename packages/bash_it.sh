@@ -36,11 +36,10 @@ install_bash_it() {
         write_success "Done!"
         write_blank_line
 
-        write_info "Sourcing Bash profile and bash-it..."
+        write_info "Sourcing Bash profile with bash-it..."
         export BASH_IT=${bash_it_dir}
-        source ${bash_rc}
-        source ${bash_profile}
-        source ${bash_it_dir}/bash_it.sh
+        cat "${bash_rc}" "${bash_profile}" > "${bash_rc_temp_file}"
+        mv "${bash_rc_temp_file}" "${bash_profile}"
         write_success "Done!"
         write_blank_line
 

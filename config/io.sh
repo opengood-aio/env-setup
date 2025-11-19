@@ -23,6 +23,7 @@ shells=/etc/shells
 # Shell profile files
 bash_profile=~/.bash_profile
 bash_rc=~/.bashrc
+bash_rc_temp_file=~/.bashrc.tmp
 zsh_profile=~/.zprofile
 
 # Bash-it framework directories
