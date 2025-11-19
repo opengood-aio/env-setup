@@ -12,12 +12,12 @@ install_bash_it() {
         write_blank_line
 
         write_info "Installing Bash 'Solarized Dark' color theme..."
-        cp ${resources_dir}/dircolors.ansi-dark ~/.dircolors
+        cp "${resources_dir}/dircolors.ansi-dark" ~/.dircolors
         write_success "Done!"
         write_blank_line
 
         write_info "Installing Bash 'inputrc' configuration..."
-        cp ${resources_dir}/.inputrc ~/.inputrc
+        cp "${resources_dir}/.inputrc" ~/.inputrc
         write_success "Done!"
         write_blank_line
 

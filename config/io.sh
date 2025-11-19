@@ -13,7 +13,7 @@ preferences_dir=${library_dir}/Preferences
 startup_items_dir=${library_dir}/StartupItems
 
 # Project resources directory
-resources_dir=resources
+resources_dir=${setup_dir}/resources
 
 # Bash shell paths and configuration
 bash_base=/bin/bash

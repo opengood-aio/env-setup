@@ -6,7 +6,7 @@ source "${src_dir}"/modules/package.sh
 
 dir=dir
 
-@test "'load' loads all packages" {
+@test "'load_all' loads all packages" {
     test_create_dir "${dir}"
 
     cat <<EOF >>"${dir}/foo.sh"
@@ -29,13 +29,45 @@ function uninstall_bar() {
 }
 EOF
 
-    run load "${dir}"
+    run load_all "${dir}"
 
     [ "${status}" -eq 0 ]
     [ "$(test_contains_string "${output}" "Loaded package 'foo'")" = "true" ]
     [ "$(test_contains_string "${output}" "Loaded package 'bar'")" = "true" ]
 
     test_remove_dir "${dir}"
+}
+
+@test "'load_one' loads package" {
+  test_create_dir "${dir}"
+
+  cat <<EOF >>"${dir}/foo.sh"
+function install_foo() {
+    echo "package foo installed"
+}
+
+function uninstall_foo() {
+    echo "package foo uninstalled"
+}
+EOF
+
+  cat <<EOF >>"${dir}/bar.sh"
+function install_bar() {
+    echo "package bar installed"
+}
+
+function uninstall_bar() {
+    echo "package bar uninstalled"
+}
+EOF
+
+  run load_one "${dir}" "foo"
+
+  [ "${status}" -eq 0 ]
+  [ "$(test_contains_string "${output}" "Loaded package 'foo'")" = "true" ]
+  [ "$(test_contains_string "${output}" "Loaded package 'bar'")" = "false" ]
+
+  test_remove_dir "${dir}"
 }
 
 @test "'install' installs one package" {
