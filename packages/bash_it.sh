@@ -36,12 +36,8 @@ install_bash_it() {
         write_success "Done!"
         write_blank_line
 
-        write_info "Sourcing Bash profile with bash-it..."
-        export BASH_IT=${bash_it_dir}
-        cat "${bash_rc}" "${bash_profile}" > "${bash_rc_temp_file}"
-        mv "${bash_rc_temp_file}" "${bash_profile}"
-        source "${bash_profile}"
-        source ${bash_it_dir}/bash_it.sh
+        write_info "Sourcing .bashrc for bash-it..."
+        source "${bash_rc}"
         write_success "Done!"
         write_blank_line
 
@@ -90,13 +86,13 @@ uninstall_bash_it() {
     write_success "Done!"
     write_blank_line
 
-    write_info "Uninstalling bash-it..."
-    rm -Rf "${bash_it_dir}"
+    write_info "Uninstalling .bashrc..."
+    rm -f "${bash_rc}"
     write_success "Done!"
     write_blank_line
 
-    write_info "Removing Bash profile..."
-    rm -f "${bash_profile}"
+    write_info "Uninstalling bash-it..."
+    rm -Rf "${bash_it_dir}"
     write_success "Done!"
     write_blank_line
 }

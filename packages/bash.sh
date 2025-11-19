@@ -33,6 +33,10 @@ install_bash() {
         sudo chsh -s "${bash_latest}"
         write_success "Done!"
         write_blank_line
+
+        write_info "Exiting installation..."
+        write_info "Please restart a new terminal to use new Bash installation"
+        write_blank_line
     else
         write_progress "Bash is already installed"
         write_success "Done!"
