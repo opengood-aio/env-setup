@@ -5,16 +5,6 @@ install_vim() {
     brew list vim &>/dev/null || brew install vim
     write_success "Done!"
     write_blank_line
-
-    write_info "Installing vim configuration..."
-    cd_push ~/
-    if [[ ! -d "${vim_dir}" ]]; then
-        git clone https://github.com/pivotal/vim-config "${vim_dir}"
-        "${vim_dir}"/bin/install
-    fi
-    cd_pop
-    write_success "Done!"
-    write_blank_line
 }
 
 uninstall_vim() {
