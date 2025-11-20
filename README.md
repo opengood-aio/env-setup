@@ -74,6 +74,7 @@ cd env-setup
 * `llm_context` - LLM context management tool
 * `maccy` - Clipboard manager
 * `node` - Node.js runtime
+* `os_prefs` - macOS preferences configuration
 * `pip` - Python package installer
 * `pycharm` - JetBrains IDE for Python
 * `python` - Python programming language
@@ -91,7 +92,6 @@ cd env-setup
 * `llama_cpp` - C/C++ implementation for running LLMs locally
 * `minikube` - Local Kubernetes cluster
 * `ollama` - Run large language models locally
-* `os_prefs` - macOS preferences configuration
 * `postgres` - PostgresSQL database
 
 ---
