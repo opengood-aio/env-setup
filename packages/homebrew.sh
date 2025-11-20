@@ -63,7 +63,7 @@ uninstall_homebrew() {
 
     if hash brew 2>/dev/null; then
         write_info "Uninstalling Homebrew..."
-        yes '' | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"
+        yes '' | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
         write_success "Done!"
         write_blank_line
     else
