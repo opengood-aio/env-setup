@@ -42,14 +42,14 @@ install_bash_it() {
         write_blank_line
 
         write_info "Enabling Bash parameter completion for Git and SSH..."
-        bash-it enable completion git
-        bash-it enable completion ssh
+        "${bash_it_dir}"/bash_it.sh enable completion git
+        "${bash_it_dir}"/bash_it.sh enable completion ssh
         write_success "Done!"
         write_blank_line
 
         write_info "Enabling plugins for SSH and rbenv..."
-        bash-it enable plugin ssh
-        bash-it enable plugin rbenv
+        "${bash_it_dir}"/bash_it.sh enable plugin ssh
+        "${bash_it_dir}"/bash_it.sh enable plugin rbenv
         write_success "Done!"
         write_blank_line
 
