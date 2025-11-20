@@ -294,6 +294,18 @@ file=file.txt
     [ "${output}" = "Hello World!" ]
 }
 
+@test "'reverse_items_in_array' reverses the order of items in array and returns modified array" {
+    array=()
+    array+=("foo")
+    array+=("bar")
+    array+=("baz")
+
+    run reverse_items_in_array "${array[@]}"
+
+    [ "${status}" -eq 0 ]
+    [ "${output}" = "baz bar foo" ]
+}
+
 @test "'to_lower_case' lower cases string and returns modified string" {
     run to_lower_case "HELLO WORLD!"
 

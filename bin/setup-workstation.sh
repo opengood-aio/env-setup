@@ -211,7 +211,7 @@ time {
             write_info "Uninstalling base packages..."
             print_items_in_array "${base_packages[@]}"
             write_blank_line
-            uninstall "${base_packages[@]}"
+            uninstall $(reverse_items_in_array "${base_packages[@]}")
             write_success "Done!"
             write_blank_line
         fi

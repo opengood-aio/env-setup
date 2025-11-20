@@ -340,6 +340,23 @@ replace_string_in_file() {
     replace_newline_placeholder_in_file "${file}"
 }
 
+# Reverse the order of items in an array
+# Arguments:
+#   $@ - Array elements
+# Returns: Space-separated string of array elements in reverse order
+reverse_items_in_array() {
+    local array=("$@")
+    local reversed=()
+
+    local i
+    for ((i=${#array[@]}-1; i>=0; i--)); do
+        reversed+=("${array[i]}")
+    done
+    unset i
+
+    echo "${reversed[@]}"
+}
+
 # Convert a string to lowercase
 # Arguments:
 #   $1 - String to convert
