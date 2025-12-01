@@ -20,8 +20,8 @@ install_java() {
 
         write_info "Installing GraalVM Java JDK versions..."
         for version in "${supported_java_versions[@]}"; do
-            brew list "graalvm-ce-java${version}" &>/dev/null || brew install --cask "graalvm/tap/graalvm-ce-java${version}"
-            jvm_dir=$(find "${jvms_dir}" -type d -name "graalvm-ce-java${version}*")
+            brew list "graalvm-jdk@${version}" &>/dev/null || brew install "graalvm-jdk@${version}"
+            jvm_dir=$(find "${jvms_dir}" -type d -name "graalvm-jdk${version}*")
             sudo xattr -r -d com.apple.quarantine "${jvm_dir}"
         done
         unset version
@@ -50,12 +50,12 @@ uninstall_java() {
     write_info "Uninstalling Adoptium Eclipse Temurin Java JDK versions..."
     local version
     for version in "${supported_java_versions[@]}"; do
-        brew uninstall --cask "temurin${version}" || { write_warning "Adoptium Eclipse Temurin Java JDK ${version} is not installed and cannot be uninstalled. Continuing on..."; }
+        brew uninstall "temurin@${version}" || { write_warning "Adoptium Eclipse Temurin Java JDK ${version} is not installed and cannot be uninstalled. Continuing on..."; }
     done
 
     write_info "Uninstalling GraalVM Java JDK versions..."
     for version in "${supported_java_versions[@]}"; do
-        brew uninstall --cask "graalvm-ce-java${version}" || { write_warning "GraalVM Java JDK ${version} is not installed and cannot be uninstalled. Continuing on..."; }
+        brew uninstall --cask "graalvm-jdk@${version}" || { write_warning "GraalVM Java JDK ${version} is not installed and cannot be uninstalled. Continuing on..."; }
     done
     unset version
     write_success "Done!"
