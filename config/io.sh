@@ -48,7 +48,7 @@ git_completion=~/.git-completion.bash
 github_properties=~/.github.properties
 
 # Java Virtual Machines directory
-jvms_dir=${library_dir}/Java/JavaVirtualMachines
+jvms_dir=/Library/Java/JavaVirtualMachines
 
 # jenv (Java environment manager) directory
 jenv_dir=${workspace_dir}/.jenv
