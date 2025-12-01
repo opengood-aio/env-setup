@@ -12,7 +12,7 @@ install_java() {
         write_info "Installing Adoptium Eclipse Temurin Java JDK versions..."
         local version
         for version in "${supported_java_versions[@]}"; do
-            brew list "temurin${version}" &>/dev/null || brew install --cask "temurin${version}"
+            brew list "temurin@${version}" &>/dev/null || brew install "temurin@${version}"
         done
         unset version
         write_success "Done!"
