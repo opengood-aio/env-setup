@@ -74,17 +74,17 @@ install_os_prefs() {
     # Development Tools
     dockutil --add "${apps_dir}/IntelliJ IDEA.app" --no-restart 2>/dev/null || true
     dockutil --add "${apps_dir}/PyCharm.app" --no-restart 2>/dev/null || true
-    dockutil --add "${apps_dir}/Orka Desktop.app" --no-restart 2>/dev/null || true
     dockutil --add "${apps_dir}/iTerm.app" --no-restart 2>/dev/null || true
+    dockutil --add "${apps_dir}/Docker.app" --no-restart 2>/dev/null || true
+    dockutil --add "${apps_dir}/Orka Desktop.app" --no-restart 2>/dev/null || true
 
     # AI & Computing
-    dockutil --add "${apps_dir}/Wolfram.app" --no-restart 2>/dev/null || true
     dockutil --add "${apps_dir}/Claude.app" --no-restart 2>/dev/null || true
     dockutil --add "${apps_dir}/ChatGPT.app" --no-restart 2>/dev/null || true
+    dockutil --add "${apps_dir}/Wolfram.app" --no-restart 2>/dev/null || true
 
-    # Cloud Storage
-    dockutil --add "${apps_dir}/Google Drive.app" --no-restart 2>/dev/null || true
-    dockutil --add "${apps_dir}/pCloud Drive.app" --no-restart 2>/dev/null || true
+    # File Utilities
+    dockutil --add "${apps_dir}/GoodSync.app" --no-restart 2>/dev/null || true
 
     # Media & Entertainment
     dockutil --add /System/Applications/TV.app --no-restart 2>/dev/null || true
@@ -95,12 +95,14 @@ install_os_prefs() {
     # Creative Tools
     dockutil --add "${apps_dir}/Canva.app" --no-restart 2>/dev/null || true
     dockutil --add "${apps_dir}/EaseUS Video Downloader.app" --no-restart 2>/dev/null || true
-    dockutil --add "${apps_dir}/Wondershare UniConverter 16.app" --no-restart 2>/dev/null || true
+    dockutil --add "${apps_dir}/Wondershare UniConverter 17.app" --no-restart 2>/dev/null || true
     dockutil --add "${apps_dir}/Final Cut Pro.app" --no-restart 2>/dev/null || true
 
     # Device Management & Utilities
     dockutil --add "${apps_dir}/iMazing.app" --no-restart 2>/dev/null || true
     dockutil --add /System/Applications/Shortcuts.app --no-restart 2>/dev/null || true
+    dockutil --add "${apps_dir}/CleanMyMac.app" --no-restart 2>/dev/null || true
+    dockutil --add "${apps_dir}/Moonlock.app" --no-restart 2>/dev/null || true
 
     # Home & Location
     dockutil --add /System/Applications/Home.app --no-restart 2>/dev/null || true
