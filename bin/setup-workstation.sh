@@ -67,11 +67,6 @@ time {
     write_success "Done!"
     write_blank_line
 
-    write_info "Loading installation packages..."
-    load "${packages_dir}"
-    write_success "Done!"
-    write_blank_line
-
     write_info "Setup Action: ${action}"
     write_blank_line
 
@@ -85,6 +80,16 @@ time {
 
         case "${args[0]}" in
         "all")
+            write_info "Loading base packages..."
+            load_all "${packages_dir}" "${base_packages[@]}"
+            write_success "Done!"
+            write_blank_line
+
+            write_info "Verifying base packages..."
+            verify "${packages_dir}" "${base_packages[@]}"
+            write_success "Done!"
+            write_blank_line
+
             write_info "Installing base packages..."
             print_items_in_array "${base_packages[@]}"
             write_blank_line
@@ -92,10 +97,25 @@ time {
             write_success "Done!"
             write_blank_line
 
+            write_info "Loading required packages..."
+            load_all "${packages_dir}" "${required_packages[@]}"
+            write_success "Done!"
+            write_blank_line
+
+            write_info "Verifying required packages..."
+            verify "${packages_dir}" "${required_packages[@]}"
+            write_success "Done!"
+            write_blank_line
+
             write_info "Installing required packages..."
             print_items_in_array "${required_packages[@]}"
             write_blank_line
             install "${required_packages[@]}"
+            write_success "Done!"
+            write_blank_line
+
+            write_info "Loading requested packages..."
+            load_all "${packages_dir}" "${args[@]}"
             write_success "Done!"
             write_blank_line
 
@@ -122,6 +142,11 @@ time {
             ;;
 
         *)
+            write_info "Loading requested packages..."
+            load_all "${packages_dir}" "${args[@]}"
+            write_success "Done!"
+            write_blank_line
+
             write_info "Verifying requested packages..."
             verify "${packages_dir}" "${args[@]}"
             write_success "Done!"
@@ -136,11 +161,12 @@ time {
         esac
         ;;
 
-    "update")
-        brew update && brew upgrade
-        ;;
-
     "uninstall")
+        write_info "Loading requested packages..."
+        load_all "${packages_dir}" "${args[@]}"
+        write_success "Done!"
+        write_blank_line
+
         write_info "Verifying requested packages..."
         verify "${packages_dir}" "${args[@]}"
         write_success "Done!"
@@ -152,6 +178,26 @@ time {
         write_blank_line
 
         if [[ "$(contains_item_in_array "all" "${args[@]}")" == "true" ]]; then
+            write_info "Loading base packages..."
+            load_all "${packages_dir}" "${base_packages[@]}"
+            write_success "Done!"
+            write_blank_line
+
+            write_info "Verifying base packages..."
+            verify "${packages_dir}" "${base_packages[@]}"
+            write_success "Done!"
+            write_blank_line
+
+            write_info "Loading required packages..."
+            load_all "${packages_dir}" "${required_packages[@]}"
+            write_success "Done!"
+            write_blank_line
+
+            write_info "Verifying required packages..."
+            verify "${packages_dir}" "${required_packages[@]}"
+            write_success "Done!"
+            write_blank_line
+
             uninstall_os_prefs
             uninstall_dockutil
 
@@ -165,7 +211,7 @@ time {
             write_info "Uninstalling base packages..."
             print_items_in_array "${base_packages[@]}"
             write_blank_line
-            uninstall "${base_packages[@]}"
+            uninstall $(reverse_items_in_array "${base_packages[@]}")
             write_success "Done!"
             write_blank_line
         fi

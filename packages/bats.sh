@@ -14,9 +14,6 @@ install_bats() {
     write_info "Installing BATS package..."
 
     if ! hash bats-core 2>/dev/null; then
-        write_info "Installing BATS Core..."
-        brew list bats-core &>/dev/null || brew install bats-core
-
         write_info "Installing BATS Assert..."
         brew list bats-assert &>/dev/null || brew install kaos/shell/bats-assert
 
@@ -25,6 +22,9 @@ install_bats() {
 
         write_info "Installing BATS Support..."
         brew list bats-support &>/dev/null || brew install kaos/shell/bats-support
+
+        write_info "Installing BATS Core..."
+        brew list bats-core &>/dev/null || brew install bats-core
         write_success "Done!"
         write_blank_line
     else

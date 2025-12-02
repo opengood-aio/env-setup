@@ -1,3 +1,8 @@
+# Check if an item exists in an array
+# Arguments:
+#   $1 - Item to search for
+#   $@ - Array elements
+# Returns: "true" if found, "false" otherwise
 contains_item_in_array() {
     local item="$1"
     shift
@@ -13,6 +18,11 @@ contains_item_in_array() {
     echo "${contains}"
 }
 
+# Check if a string contains a substring (case-insensitive)
+# Arguments:
+#   $1 - String to search in
+#   $2 - Substring to search for
+# Returns: "true" if found, "false" otherwise
 contains_string() {
     local string="$1"
     local search_string="$2"
@@ -24,38 +34,11 @@ contains_string() {
     fi
 }
 
-contains_string_in_file() {
-    local file="$1"
-    local search_string="$2"
-
-    local count
-    count=$(grep -o "${search_string}" "${file}" | wc -l)
-
-    if [[ ${count} -gt 0 ]]; then
-        echo true
-    else
-        echo false
-    fi
-}
-
-create_dir() {
-    local dir="$1"
-
-    if [[ ! -d "${dir}" ]]; then
-        mkdir -p "${dir}"
-    fi
-}
-
-file_not_empty() {
-    local file="$1"
-
-    if [[ -f "${file}" ]] && [[ ! -s "${file}" ]]; then
-        echo false
-    else
-        echo true
-    fi
-}
-
+# Find the first line in a file that contains a search string
+# Arguments:
+#   $1 - File path
+#   $2 - Search string
+# Returns: The first matching line, or empty string if not found
 find_string_in_file() {
     local file="$1"
     local search_string="$2"
@@ -76,6 +59,11 @@ find_string_in_file() {
     echo "${output}"
 }
 
+# Find all lines in a file that contain a search string
+# Arguments:
+#   $1 - File path
+#   $2 - Search string
+# Returns: Comma-separated list of matching lines
 find_strings_in_file() {
     local file="$1"
     local search_string="$2"
@@ -86,6 +74,11 @@ find_strings_in_file() {
     echo "${output}"
 }
 
+# Find all lines in a file that contain a search string with line numbers
+# Arguments:
+#   $1 - File path
+#   $2 - Search string
+# Returns: Comma-separated list of "line_number:matching_line" entries
 find_strings_and_line_numbers_in_file() {
     local file="$1"
     local search_string="$2"
@@ -96,12 +89,21 @@ find_strings_and_line_numbers_in_file() {
     echo "${output}"
 }
 
+# Check if a bash function exists
+# Arguments:
+#   $1 - Function name
+# Returns: Exit code 0 if exists, 1 otherwise
 function_exists() {
     local name="$1"
     declare -f -F "${name}" >/dev/null
     return $?
 }
 
+# Get the value following a specific argument in an array
+# Arguments:
+#   $1 - Argument to find
+#   $@ - Array to search
+# Returns: The value after the argument, or empty string if not found
 get_arg_value() {
     local arg="$1"
     shift
@@ -117,6 +119,11 @@ get_arg_value() {
     echo "${value}"
 }
 
+# Get the index of a value in an array
+# Arguments:
+#   $1 - Value to find
+#   $@ - Array to search
+# Returns: Zero-based index of the value, or empty if not found
 get_array_item_index() {
     local value="$1"
     local array=("$@")
@@ -133,6 +140,11 @@ get_array_item_index() {
     echo "${index}"
 }
 
+# Get an array element by index
+# Arguments:
+#   $1 - Index (zero-based)
+#   $@ - Array
+# Returns: Value at the specified index
 get_array_item_value() {
     local index="$1"
     local array=("$@")
@@ -140,71 +152,19 @@ get_array_item_value() {
     echo "${array[${index}]}"
 }
 
+# Get the number of elements in an array
+# Arguments:
+#   $@ - Array
+# Returns: Integer count of array elements
 get_array_length() {
     local array=("$@")
     echo ${#array[@]}
 }
 
-get_count_of_leading_spaces_in_string() {
-    local string="$1"
-
-    local count
-    count=$(echo "${string}" | awk -F'[^ \t]' '{print length($1)}')
-    echo "${count}"
-}
-
-join_string() {
-    local delimiter="$1"
-    shift 1
-    local array=("$@")
-
-    local output
-    output=$(
-        IFS=${delimiter}
-        echo "${array[*]}"
-    )
-    echo "${output}"
-}
-
-mask_string() {
-    local string="$1"
-    while read -r -n1 character; do
-        value+="x"
-    done < <(echo -n "${string}")
-    echo "${value}"
-}
-
-left_chars() {
-    local string="$1"
-    local chars="$2"
-
-    local value="${string:0:chars}"
-    echo "${value}"
-}
-
-left_pad_string() {
-    local string="$1"
-    local pad_char="$2"
-    local length="$3"
-
-    local output=""
-    while [[ ${#output} -ne ${length} ]]; do
-        output+="${pad_char}"
-    done
-
-    output="${output}${string}"
-    echo "${output}"
-}
-
-left_trim_occurrences() {
-    local string="$1"
-    local count="$2"
-
-    local output
-    output=$(echo "${string}" | cut -c "$((count + 1))"-)
-    echo "${output}"
-}
-
+# Print all key-value pairs in an associative array (map)
+# Arguments:
+#   $1 - Name reference to associative array
+# Output: Formatted list of "- key = value" or "None" if empty
 print_entries_in_map() {
     local -n map=$1
 
@@ -219,6 +179,10 @@ print_entries_in_map() {
     fi
 }
 
+# Print all items in an array
+# Arguments:
+#   $@ - Array elements
+# Output: Formatted list of "- item" or "None" if empty
 print_items_in_array() {
     local array=("$@")
 
@@ -234,6 +198,9 @@ print_items_in_array() {
     fi
 }
 
+# Read password input from user with masked display (asterisks)
+# Supports backspace for corrections
+# Returns: The entered password string
 read_password_input() {
     unset password
     local password=""
@@ -253,12 +220,20 @@ read_password_input() {
     echo "${password}"
 }
 
+# Remove the first character from a string
+# Arguments:
+#   $1 - String to modify
+# Returns: String with first character removed
 remove_leading_char() {
     local string="$1"
     local value=${string#?}
     echo "${value}"
 }
 
+# Remove all special characters from a string (dash, underscore, plus, period, space)
+# Arguments:
+#   $1 - String to modify
+# Returns: String with special characters removed
 remove_special_chars() {
     local string="$1"
 
@@ -267,6 +242,10 @@ remove_special_chars() {
     echo "${value}"
 }
 
+# Remove special characters from a string except periods
+# Arguments:
+#   $1 - String to modify
+# Returns: String with special characters removed (except periods)
 remove_special_chars_but_period() {
     local string="$1"
 
@@ -275,12 +254,20 @@ remove_special_chars_but_period() {
     echo "${value}"
 }
 
+# Remove the last character from a string
+# Arguments:
+#   $1 - String to modify
+# Returns: String with last character removed
 remove_trailing_char() {
     local string="$1"
     local value=${string%?}
     echo "${value}"
 }
 
+# Remove all whitespace characters from a string
+# Arguments:
+#   $1 - String to modify
+# Returns: String with spaces removed
 remove_whitespace_chars() {
     local string="$1"
 
@@ -289,6 +276,19 @@ remove_whitespace_chars() {
     echo "${value}"
 }
 
+# Replace [newline] placeholders with actual newline characters in a file
+# Arguments:
+#   $1 - File path to modify
+# Note: Modifies file in place
+replace_newline_placeholder_in_file() {
+    local file="$1"
+    sed -i '' $'s/\[newline\]/\\\n/g' "${file}"
+}
+
+# Replace special characters with dashes (underscore, plus, period, space)
+# Arguments:
+#   $1 - String to modify
+# Returns: String with special characters replaced by dashes
 replace_special_chars_with_dash() {
     local string="$1"
 
@@ -297,6 +297,10 @@ replace_special_chars_with_dash() {
     echo "${value}"
 }
 
+# Replace special characters with spaces (dash, underscore, plus, period)
+# Arguments:
+#   $1 - String to modify
+# Returns: String with special characters replaced by spaces
 replace_special_chars_with_whitespace() {
     local string="$1"
 
@@ -305,11 +309,12 @@ replace_special_chars_with_whitespace() {
     echo "${value}"
 }
 
-replace_newline_placeholder_in_file() {
-    local file="$1"
-    sed -i '' $'s/\[newline\]/\\\n/g' "${file}"
-}
-
+# Replace all occurrences of a string with another string
+# Arguments:
+#   $1 - Original string
+#   $2 - Search string
+#   $3 - Replacement string
+# Returns: Modified string
 replace_string() {
     local string="$1"
     local search_string="$2"
@@ -320,6 +325,12 @@ replace_string() {
     echo "${value}"
 }
 
+# Replace all occurrences of a string in a file
+# Arguments:
+#   $1 - File path
+#   $2 - Search string
+#   $3 - Replacement string
+# Note: Modifies file in place and processes newline placeholders
 replace_string_in_file() {
     local file="$1"
     local search_string="$2"
@@ -329,40 +340,27 @@ replace_string_in_file() {
     replace_newline_placeholder_in_file "${file}"
 }
 
-split_string_into_array() {
-    local string="$1"
-    local delimiter="$2"
+# Reverse the order of items in an array
+# Arguments:
+#   $@ - Array elements
+# Returns: Space-separated string of array elements in reverse order
+reverse_items_in_array() {
+    local array=("$@")
+    local reversed=()
 
-    IFS="${delimiter}" read -ra items <<<"${string}"
+    local i
+    for ((i=${#array[@]}-1; i>=0; i--)); do
+        reversed+=("${array[i]}")
+    done
+    unset i
 
-    local array
-    array="$(declare -p items)"
-    local IFS=$'\v'
-    echo "${array#*=}"
+    echo "${reversed[@]}"
 }
 
-string_ends_with() {
-    local string="$1"
-    local character="$2"
-
-    if [[ "${string: -1}" == "${character}" ]]; then
-        echo true
-    else
-        echo false
-    fi
-}
-
-string_starts_with() {
-    local string="$1"
-    local character="$2"
-
-    if [[ "${string}" == ${character}* ]]; then
-        echo true
-    else
-        echo false
-    fi
-}
-
+# Convert a string to lowercase
+# Arguments:
+#   $1 - String to convert
+# Returns: Lowercase version of the string
 to_lower_case() {
     local string="$1"
 
@@ -371,6 +369,10 @@ to_lower_case() {
     echo "${value}"
 }
 
+# Convert a string to title case (first letter of each word capitalized)
+# Arguments:
+#   $1 - String to convert
+# Returns: Title case version of the string
 to_title_case() {
     local string="$1"
 
@@ -380,6 +382,10 @@ to_title_case() {
     echo "${value}"
 }
 
+# Convert a string to uppercase
+# Arguments:
+#   $1 - String to convert
+# Returns: Uppercase version of the string
 to_upper_case() {
     local string="$1"
 
@@ -388,45 +394,54 @@ to_upper_case() {
     echo "${value}"
 }
 
-var_is_defined() {
-    local name="$1"
-
-    if [[ -n ${!name:-} ]]; then
-        echo true
-    else
-        echo false
-    fi
-}
-
+# Write a blank line to stderr
 write_blank_line() {
     echo "" 1>&2
 }
 
+# Write an error message in red color to stderr
+# Arguments:
+#   $1 - Error message to display
 write_error() {
     local msg="$1"
     echo -e "${red_color}${msg}${no_color}" >&2
 }
 
+# Write an informational message in cyan color to stderr
+# Arguments:
+#   $1 - Info message to display
 write_info() {
     local msg="$1"
     echo -e "${cyan_color}${msg}${no_color}" 1>&2
 }
 
+# Write a plain message to stderr (no color)
+# Arguments:
+#   $1 - Message to display
 write_message() {
     local msg="$1"
     echo -e "${msg}" 1>&2
 }
 
+# Write a progress message in purple color to stderr
+# Arguments:
+#   $1 - Progress message to display
 write_progress() {
     local msg="$1"
     echo -e "${purple_color}${msg}${no_color}" 1>&2
 }
 
+# Write a success message in green color to stderr
+# Arguments:
+#   $1 - Success message to display
 write_success() {
     local msg="$1"
     echo -e "${green_color}${msg}${no_color}" 1>&2
 }
 
+# Write a warning message in yellow color to stderr
+# Arguments:
+#   $1 - Warning message to display
 write_warning() {
     local msg="$1"
     echo -e "${yellow_color}${msg}${no_color}" 1>&2

@@ -26,13 +26,8 @@ install_bash_it() {
         write_success "Done!"
         write_blank_line
 
-        write_info "Adding user initials to Git prompt info..."
-        cp "${resources_dir}/add_user_initials_to_git_prompt_info.bash" ${bash_it_dir}/custom
-        write_success "Done!"
-        write_blank_line
-
-        write_info "Installing Pivotal Bobby Bash theme..."
-        cp "${resources_dir}/bobby_pivotal.theme.bash" ${bash_it_dir}/themes/bobby/bobby.theme.bash
+        write_info "Installing Bobby Bash theme..."
+        cp "${resources_dir}/bobby.theme.bash" ${bash_it_dir}/themes/bobby/bobby.theme.bash
         write_success "Done!"
         write_blank_line
 
@@ -41,22 +36,20 @@ install_bash_it() {
         write_success "Done!"
         write_blank_line
 
-        write_info "Sourcing Bash profile and bash-it..."
-        export BASH_IT=${bash_it_dir}
-        source "${bash_profile}"
-        source "${bash_it_dir}"/bash_it.sh
+        write_info "Sourcing .bashrc for bash-it..."
+        source "${bash_rc}"
         write_success "Done!"
         write_blank_line
 
         write_info "Enabling Bash parameter completion for Git and SSH..."
-        bash-it enable completion git
-        bash-it enable completion ssh
+        "${bash_it_dir}"/bash_it.sh enable completion git
+        "${bash_it_dir}"/bash_it.sh enable completion ssh
         write_success "Done!"
         write_blank_line
 
         write_info "Enabling plugins for SSH and rbenv..."
-        bash-it enable plugin ssh
-        bash-it enable plugin rbenv
+        "${bash_it_dir}"/bash_it.sh enable plugin ssh
+        "${bash_it_dir}"/bash_it.sh enable plugin rbenv
         write_success "Done!"
         write_blank_line
 
@@ -93,13 +86,13 @@ uninstall_bash_it() {
     write_success "Done!"
     write_blank_line
 
-    write_info "Uninstalling bash-it..."
-    rm -Rf "${bash_it_dir}"
+    write_info "Uninstalling .bashrc..."
+    rm -f "${bash_rc}"
     write_success "Done!"
     write_blank_line
 
-    write_info "Removing Bash profile..."
-    rm -f "${bash_profile}"
+    write_info "Uninstalling bash-it..."
+    rm -Rf "${bash_it_dir}"
     write_success "Done!"
     write_blank_line
 }

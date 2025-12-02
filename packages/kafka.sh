@@ -6,7 +6,7 @@ install_kafka() {
     write_success "Done!"
     write_blank_line
 
-    write_info "Configuring Postgres service to start on system boot..."
+    write_info "Configuring Kafka service to start on system boot..."
     brew services start kafka
     write_success "Done!"
     write_blank_line

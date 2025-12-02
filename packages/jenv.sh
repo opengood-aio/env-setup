@@ -1,5 +1,5 @@
 get_jenv_dependencies() {
-    write_info "Getting jEnv package dependencies to install..."
+    write_info "Getting jenv package dependencies to install..."
 
     local dependencies=()
     dependencies+=("java")
@@ -11,17 +11,17 @@ get_jenv_dependencies() {
 }
 
 install_jenv() {
-    write_info "Installing jEnv package..."
+    write_info "Installing jenv package..."
 
-    write_info "Installing jEnv..."
+    write_info "Installing jenv..."
     brew list jenv &>/dev/null || brew install jenv
     write_success "Done!"
     write_blank_line
 
-    write_info "Configuring jEnv shims and auto completion in Bash profile..."
+    write_info "Configuring jenv shims and auto completion in Bash profile..."
     cat <<EOF >>"${bash_profile}"
 
-# jEnv enable shims and auto completion
+# jenv enable shims and auto completion
 if which jenv > /dev/null; then eval "\$(jenv init -)"; fi
 
 EOF
@@ -29,12 +29,12 @@ EOF
     write_success "Done!"
     write_blank_line
 
-    write_info "Creating jEnv directory '${jenv_dir}'..."
+    write_info "Creating jenv directory '${jenv_dir}'..."
     mkdir -p "${jenv_dir}"
     write_success "Done!"
     write_blank_line
 
-    write_info "Adding Java installations to jEnv..."
+    write_info "Adding Java installations to jenv..."
     local version
     for version in "${supported_java_versions[@]}"; do
         jenv add "/Library/Java/JavaVirtualMachines/temurin-${version}.jdk/Contents/Home"
@@ -43,17 +43,17 @@ EOF
     write_success "Done!"
     write_blank_line
 
-    write_info "Configuring jEnv with Java default version '${default_java_version}'..."
+    write_info "Configuring jenv with Java default version '${default_java_version}'..."
     jenv global "${default_java_version}"
     write_success "Done!"
     write_blank_line
 }
 
 uninstall_jenv() {
-    write_info "Uninstalling jEnv package..."
+    write_info "Uninstalling jenv package..."
 
-    write_info "Uninstalling jEnv..."
-    brew uninstall jenv || { write_warning "WARNING! jEnv is not installed and cannot be uninstalled. Continuing on."; }
+    write_info "Uninstalling jenv..."
+    brew uninstall jenv || { write_warning "WARNING! jenv is not installed and cannot be uninstalled. Continuing on."; }
     write_success "Done!"
     write_blank_line
 }
